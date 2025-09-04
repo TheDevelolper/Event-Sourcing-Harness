@@ -1,51 +1,16 @@
 using MassTransit;
-using SaasFactory.Data;
-using SaasFactory.Events;
-using SaasFactory.Models;
+using SaasFactory.WebApi.Data;
+using SaasFactory.WebApi.Events;
+using SaasFactory.WebApi.Models;
 
-namespace SaasFactory.Consumers;
+namespace SaasFactory.WebApi.Consumers;
 
-public class DepositConsumer : IConsumer<DepositEvent>
+public class DepositConsumer(IEventStore eventStore) : IConsumer<DepositModel>
 {
-    private readonly EventDbContext _dbContext;
-
-    public DepositConsumer(EventDbContext dbContext) => _dbContext = dbContext;
-
-    public async Task Consume(ConsumeContext<DepositEvent> context)
+    public async Task Consume(ConsumeContext<DepositModel> context)
     {
         var deposit = context.Message;
-
-        try
-        {
-            await _dbContext.TransactionStatus.AddAsync(new TransactionStatus(
-                Guid.NewGuid(),
-                deposit.AccountId,
-                StatusEnum.Completed,
-                deposit.Amount,
-                true,
-                string.Empty,
-                TransactionTypeEnum.Deposit,
-                DateTime.Now)
-            );
-
-            await _dbContext.Deposits.AddAsync(deposit);
-
-            await _dbContext.SaveChangesAsync();
-        }
-        catch (Exception ex)
-        {
-            await _dbContext.TransactionStatus.AddAsync(new TransactionStatus(
-                Guid.NewGuid(),
-                deposit.AccountId,
-                StatusEnum.Failed,
-                deposit.Amount,
-                true,
-                ex.Message,
-                TransactionTypeEnum.Deposit,
-                DateTime.Now)
-            );
-            await _dbContext.SaveChangesAsync();
-            throw;
-        }
+        var eventModel = DepositCompletedEvent.From(deposit);
+        await eventStore.AddEventCompletedAsync(eventModel);
     }
 }
