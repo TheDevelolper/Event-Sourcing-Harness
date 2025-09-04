@@ -482,3 +482,6 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+BankStream/events.db
+BankStream/events.db-shm
+BankStream/events.db-wal
