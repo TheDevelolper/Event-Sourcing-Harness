@@ -10,11 +10,15 @@
     <UserSecretsId>1d37bf3d-dd3a-4a41-860f-615222b7fe0d</UserSecretsId>
   </PropertyGroup>
 
+
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AppHost" Version="9.4.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SaasFactory.Shared.Config\SaasFactory.Shared.Config.csproj"
+      IsAspireProjectResource="false" />
+
     <ProjectReference Include="..\SaasFactory.ServiceDefaults\SaasFactory.ServiceDefaults.csproj" />
     <ProjectReference Include="..\SaasFactory.WebApi\SaasFactory.WebApi.csproj" />
   </ItemGroup>
