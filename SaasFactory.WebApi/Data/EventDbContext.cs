@@ -1,8 +1,8 @@
-using BankStream.Events;
-using BankStream.Models;
 using Microsoft.EntityFrameworkCore;
+using SaasFactory.Events;
+using SaasFactory.Models;
 
-namespace BankStream.Data;
+namespace SaasFactory.Data;
 
 public class EventDbContext : DbContext
 {

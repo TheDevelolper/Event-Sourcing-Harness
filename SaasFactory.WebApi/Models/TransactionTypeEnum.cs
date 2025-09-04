@@ -1,4 +1,4 @@
-namespace BankStream.Models;
+namespace SaasFactory.Models;
 
 public enum TransactionTypeEnum
 {

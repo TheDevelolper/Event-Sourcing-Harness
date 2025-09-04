@@ -1,10 +1,10 @@
-using BankStream.Data;
-using BankStream.Events;
-using BankStream.Models;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
+using SaasFactory.Data;
+using SaasFactory.Events;
+using SaasFactory.Models;
 
-namespace BankStream.Controllers;
+namespace SaasFactory.Controllers;
 
 [ApiController]
 [Route("api/accounts")]

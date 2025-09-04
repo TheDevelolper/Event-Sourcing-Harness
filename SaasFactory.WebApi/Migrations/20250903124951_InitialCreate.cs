@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BankStream.Migrations
+namespace SaasFactory.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

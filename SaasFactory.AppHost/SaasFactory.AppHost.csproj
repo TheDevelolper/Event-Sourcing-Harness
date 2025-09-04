@@ -15,8 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BankStream.ServiceDefaults\BankStream.ServiceDefaults.csproj" />
-    <ProjectReference Include="..\BankStream\BankStream.csproj" />
+    <ProjectReference Include="..\SaasFactory.ServiceDefaults\SaasFactory.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\SaasFactory.WebApi\SaasFactory.WebApi.csproj" />
   </ItemGroup>
+
 
 </Project>
