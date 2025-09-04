@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SaasFactory.Data;
+using SaasFactory.WebApi.Data.EntityFramework;
 
 #nullable disable
 
-namespace SaasFactory.Migrations
+namespace SaasFactory.WebApi.Migrations
 {
     [DbContext(typeof(EventDbContext))]
-    [Migration("20250903124951_InitialCreate")]
+    [Migration("20250904211232_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace SaasFactory.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.8");
 
-            modelBuilder.Entity("SaasFactory.WebApi.Events.DepositEvent", b =>
+            modelBuilder.Entity("SaasFactory.WebApi.Events.DepositEventPayload", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -77,6 +77,10 @@ namespace SaasFactory.Migrations
 
                     b.Property<bool>("IsSuccess")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Payload")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("StatusEnum")
                         .HasColumnType("INTEGER");

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace SaasFactory.Migrations
+namespace SaasFactory.WebApi.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -32,6 +32,7 @@ namespace SaasFactory.Migrations
                     AccountId = table.Column<string>(type: "TEXT", nullable: false),
                     StatusEnum = table.Column<int>(type: "INTEGER", nullable: false),
                     Amount = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Payload = table.Column<string>(type: "TEXT", nullable: false),
                     IsSuccess = table.Column<bool>(type: "INTEGER", nullable: false),
                     ErrorMessage = table.Column<string>(type: "TEXT", nullable: true),
                     Type = table.Column<int>(type: "INTEGER", nullable: false),

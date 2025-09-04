@@ -23,4 +23,8 @@
     <ProjectReference Include="..\SaasFactory.Shared.Config\SaasFactory.Shared.Config.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

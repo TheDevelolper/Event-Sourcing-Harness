@@ -1,61 +1,44 @@
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
-using SaasFactory.Data;
-using SaasFactory.Events;
-using SaasFactory.Models;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using SaasFactory.WebApi.Data;
+using SaasFactory.WebApi.Data.EntityFramework;
+using SaasFactory.WebApi.Events;
+using SaasFactory.WebApi.Models;
 
-namespace SaasFactory.Controllers;
+namespace SaasFactory.WebApi.Controllers;
 
 [ApiController]
 [Route("api/accounts")]
 public class AccountController : ControllerBase
 {
     private readonly IBus _bus;
-    private readonly EventDbContext _dbContext;
 
-    public AccountController(IBus bus, EventDbContext dbContext)
+    private readonly IEventStore _eventStore;
+    // this is used for the projections
+    // todo: perhaps wrap this up in a separate projections service. 
+    private readonly EventDbContext _dbContext; 
+
+    public AccountController(IBus bus, 
+        IEventStore  eventStore, 
+        EventDbContext dbContext
+        )
     {
         _bus = bus;
         _dbContext = dbContext;
+        _eventStore = eventStore;
+        // _dbContext = dbContext;
     }
 
     [HttpPost("deposit")]
-    public async Task<IActionResult> Deposit([FromBody] DepositEvent deposit)
+    public async Task<IActionResult> Deposit([FromBody] DepositEventPayload deposit)
     {
-        await _dbContext.TransactionStatus.AddAsync(new TransactionStatus(
-            Guid.NewGuid(),
-            deposit.AccountId,
-            StatusEnum.Pending,
-            deposit.Amount,
-            false,
-            string.Empty,
-            TransactionTypeEnum.Deposit,
-            DateTime.Now)
-        );
-        await _dbContext.SaveChangesAsync();
-
+        await _eventStore.AddDepositEventAsync(deposit, StatusEnum.InProgress);
         await _bus.Publish(deposit);
         return Accepted();
     }
 
-    [HttpPost("withdrawal")]
-    public async Task<IActionResult> Withdraw([FromBody] WithdrawalEvent withdrawal)
-    {
-        await _dbContext.TransactionStatus.AddAsync(new TransactionStatus(
-            Guid.NewGuid(),
-            withdrawal.AccountId,
-            StatusEnum.Pending,
-            withdrawal.Amount,
-            false,
-            string.Empty,
-            TransactionTypeEnum.Withdrawal,
-            DateTime.Now)
-         );
-        await _dbContext.SaveChangesAsync();
-
-        await _bus.Publish(withdrawal);
-        return Accepted();
-    }
 
     [HttpGet("{accountId}/balance")]
     public IActionResult GetBalance(string accountId)
@@ -64,12 +47,8 @@ public class AccountController : ControllerBase
             Deposits.
             Where(d => d.AccountId == accountId)
             .Sum(d => d.Amount);
-
-        var withdrawals = _dbContext
-            .Withdrawals
-            .Where(w => w.AccountId == accountId)
-            .Sum(w => w.Amount);
-
-        return Ok(deposits - withdrawals);
+  
+        return Ok(deposits); 
     }
 }
+

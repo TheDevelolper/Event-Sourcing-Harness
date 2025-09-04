@@ -3,11 +3,11 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SaasFactory.Data;
+using SaasFactory.WebApi.Data.EntityFramework;
 
 #nullable disable
 
-namespace SaasFactory.Migrations
+namespace SaasFactory.WebApi.Migrations
 {
     [DbContext(typeof(EventDbContext))]
     partial class EventDbContextModelSnapshot : ModelSnapshot
@@ -17,7 +17,7 @@ namespace SaasFactory.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.8");
 
-            modelBuilder.Entity("SaasFactory.WebApi.Events.DepositEvent", b =>
+            modelBuilder.Entity("SaasFactory.WebApi.Events.DepositEventPayload", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -74,6 +74,10 @@ namespace SaasFactory.Migrations
 
                     b.Property<bool>("IsSuccess")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Payload")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("StatusEnum")
                         .HasColumnType("INTEGER");

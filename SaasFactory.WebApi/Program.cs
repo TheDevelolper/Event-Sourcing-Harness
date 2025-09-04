@@ -1,9 +1,10 @@
-using SaasFactory.Consumers;
-using SaasFactory.Data;
 using SaasFactory.ServiceDefaults;
 using SaasFactory.Shared.Config;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using SaasFactory.WebApi.Consumers;
+using SaasFactory.WebApi.Data.EntityFramework;
+using SaasFactory.WebApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,29 +13,18 @@ var configuration = builder.Configuration
     .AddJsonFile("appsettings.json", optional: true)
     .Build();
 
-var featureToggles = new FeatureToggles();
-configuration.GetSection("toggles").Bind(featureToggles);
+var featureToggles = FeatureToggles.FromConfig(configuration);
 
-builder
-    .Services
-    .AddDbContext<EventDbContext>(options => options.UseSqlite("Data Source=events.db"));
-
-// builder.AddDefaultHealthChecks();
-builder.AddServiceDefaults();
-
-
-
+builder.Services.AddDbContext<EventDbContext>(options => options.UseSqlite("Data Source=events.db"));
+builder.AddEventStore(featureToggles.UseEventStore);
 
 if (featureToggles.UseRabbitMq)
 {
-    builder
-        .Services
+    builder.Services
         .AddMassTransit(x =>
         {
             x.AddConsumer<DepositConsumer>();
-            x.AddConsumer<WithdrawalConsumer>();
-            x.UsingRabbitMq(
-                (context, cfg) =>
+            x.UsingRabbitMq((context, cfg) =>
                 {
                     cfg.Host("rabbitmq://localhost");
                     cfg.ReceiveEndpoint(
@@ -43,7 +33,6 @@ if (featureToggles.UseRabbitMq)
                         {
                             e.SetQueueArgument("x-message-ttl", 500000);
                             e.ConfigureConsumer<DepositConsumer>(context);
-                            e.ConfigureConsumer<WithdrawalConsumer>(context);
                         }
                     );
                 }
@@ -51,11 +40,14 @@ if (featureToggles.UseRabbitMq)
         });
 }
 
-
+builder.AddServiceDefaults();
 builder.Services.AddControllers();
 
 var app = builder.Build();
 
-app.MapControllers();
+await using var scope = app.Services.CreateAsyncScope();
+var eventDbContext = scope.ServiceProvider.GetRequiredService<EventDbContext>();
+await eventDbContext.Database.MigrateAsync();
 
+app.MapControllers();
 app.Run();

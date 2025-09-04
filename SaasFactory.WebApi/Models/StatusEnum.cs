@@ -1,4 +1,4 @@
-namespace SaasFactory.Models;
+namespace SaasFactory.WebApi.Models;
 
 public enum StatusEnum
 {
