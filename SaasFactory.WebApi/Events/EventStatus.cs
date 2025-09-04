@@ -1,6 +1,6 @@
-namespace SaasFactory.Models;
+﻿namespace SaasFactory.WebApi.Events;
 
-public enum StatusEnum
+public enum EventStatus
 {
     Pending,
     Completed,

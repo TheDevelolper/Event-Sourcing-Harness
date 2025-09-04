@@ -30,6 +30,7 @@ Add a service defaults which provides Open Telemetry:
 ```
 
 Then add this to the apphost:
+
 ```csharp 
 // apphost.cs
 builder.AddServiceDefaults();
