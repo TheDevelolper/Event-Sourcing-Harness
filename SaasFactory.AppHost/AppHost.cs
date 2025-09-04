@@ -5,8 +5,8 @@ using SaasFactory.Shared.Config;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-// Explicitly tell Aspire to load the shared library
-var healthChecks = builder.Services.AddHealthChecks();
+builder.Services.AddHealthChecks();
+
 var configuration = builder.Configuration
     .UseSharedConfiguration()
     .AddJsonFile("appsettings.json", optional: true)
@@ -15,14 +15,16 @@ var configuration = builder.Configuration
 var featureToggles = new FeatureToggles();
 configuration.GetSection("toggles").Bind(featureToggles);
 
-var project = builder.AddProject<SaasFactory_WebApi>("WebApi");
+var webApiProject = builder.AddProject<SaasFactory_WebApi>("WebApi");
 
 if (featureToggles.UseRabbitMq)
 {
-    builder.AddContainer("rabbitmq", "rabbitmq", "3-management")
-        .WithEndpoint( 5672, 5672, name: "AMPQ")
-        .WithEndpoint(15672, 15672, name: "ManagementUI")
-        .WithContainerName("RabbitMQ");
+    var rabbitMq = builder.AddContainer("rabbitmq", "rabbitmq", "3-management")
+        .WithEndpoint(5672, 5672, name: "AMPQ")
+        .WithEndpoint(15672, 15672, name: "ManagementUI", scheme: "http")
+        .WithContainerName("RabbitMQ")
+        .WithHttpHealthCheck("/api/index.html", endpointName: "ManagementUI");
+    webApiProject.WaitFor(rabbitMq);
 }
 
-builder.Build().Run();
+await builder.Build().RunAsync();
