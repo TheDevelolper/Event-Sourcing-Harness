@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankStream", "BankStream\BankStream.csproj", "{1671CFD4-6EAA-4B93-8D1C-A5247536BBB2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.WebApi", "SaasFactory.WebApi\SaasFactory.WebApi.csproj", "{1671CFD4-6EAA-4B93-8D1C-A5247536BBB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankStream.AppHost", "BankStream.AppHost\BankStream.AppHost.csproj", "{FB42A1C7-DFF3-47AC-83E8-C0509DBEB312}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.AppHost", "SaasFactory.AppHost\SaasFactory.AppHost.csproj", "{FB42A1C7-DFF3-47AC-83E8-C0509DBEB312}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankStream.ServiceDefaults", "BankStream.ServiceDefaults\BankStream.ServiceDefaults.csproj", "{2F5B643C-8291-4E6C-AD09-3F9AEA2F550B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.ServiceDefaults", "SaasFactory.ServiceDefaults\SaasFactory.ServiceDefaults.csproj", "{2F5B643C-8291-4E6C-AD09-3F9AEA2F550B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

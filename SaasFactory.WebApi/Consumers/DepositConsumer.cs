@@ -1,9 +1,9 @@
-using BankStream.Data;
-using BankStream.Events;
-using BankStream.Models;
 using MassTransit;
+using SaasFactory.Data;
+using SaasFactory.Events;
+using SaasFactory.Models;
 
-namespace BankStream.Consumers;
+namespace SaasFactory.Consumers;
 
 public class DepositConsumer : IConsumer<DepositEvent>
 {
