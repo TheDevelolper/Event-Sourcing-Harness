@@ -1,13 +1,16 @@
 ﻿using Marten;
-using SaasFactory.WebApi.Events;
+using SaasFactory.EventSourcing.Contracts;
 
-namespace SaasFactory.WebApi.Data.Marten;
+namespace SaasFactory.EventSourcing.Marten;
 
 public class MartenStore(IDocumentStore store) : IEventStore
 {
     public async Task AddEventPendingAsync(PendingEvent eventModel) 
         => await AddEventAsync(eventModel);
     public async Task AddEventCompletedAsync(CompletedEvent eventModel)
+        => await AddEventAsync(eventModel);
+
+    public async Task AddEventFailedAsync(FailedEvent eventModel) 
         => await AddEventAsync(eventModel);
 
     private async Task AddEventAsync(IEvent eventModel)

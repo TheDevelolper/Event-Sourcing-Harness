@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Marten" Version="8.10.0" />
+      <PackageReference Include="MassTransit" Version="8.5.2" />
+      <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\..\Event Sourcing\SaasFactory.EventSourcing.Contracts\SaasFactory.EventSourcing.Contracts.csproj" />
+      <ProjectReference Include="..\..\..\..\Event Sourcing\SaasFactory.EventSourcing.Marten\SaasFactory.EventSourcing.Marten.csproj" />
+    </ItemGroup>
+
+</Project>

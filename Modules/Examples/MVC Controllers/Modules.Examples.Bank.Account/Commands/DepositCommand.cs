@@ -1,6 +1,6 @@
-﻿namespace SaasFactory.WebApi.Models;
+﻿namespace Modules.Examples.Bank.Account.Commands;
 
-public record DepositModel()
+public record DepositCommand()
 {
     public required string AccountId { get; set; }
     public required decimal Amount { get; set; }

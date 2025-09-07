@@ -1,18 +1,9 @@
-﻿using SaasFactory.WebApi.Events;
-using Marten.Events.Projections;
+﻿using Marten.Events.Projections;
+using Modules.Examples.Bank.Account.Events;
+using Modules.Examples.Bank.Account.Models;
 
-namespace SaasFactory.WebApi.Projections;
+namespace Modules.Examples.Bank.Account.Projections;
 
-// This will be a Marten document, stored in a separate table.
-public class AccountState
-{
-    public string Id { get; set; } // The AccountId serves as the primary key
-    public decimal Balance { get; set; }
-    public int NumberOfDeposits { get; set; }
-}
-
-// The key here is to inherit from MultiStreamProjection, and specify your
-// aggregate type.
 public class AccountStateProjection : MultiStreamProjection<AccountState, string>
 {
     public AccountStateProjection()

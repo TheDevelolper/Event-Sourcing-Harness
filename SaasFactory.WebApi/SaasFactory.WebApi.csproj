@@ -11,6 +11,7 @@
     <PackageReference Include="MassTransit" Version="8.5.2" />
     <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="8.5.2" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="4.14.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.8">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -20,8 +21,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SaasFactory.ServiceDefaults\SaasFactory.ServiceDefaults.csproj" />
-    <ProjectReference Include="..\SaasFactory.Shared.Config\SaasFactory.Shared.Config.csproj" />
+    <ProjectReference Include="..\Aspire\SaasFactory.ServiceDefaults\SaasFactory.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Event Sourcing\SaasFactory.EventSourcing.Contracts\SaasFactory.EventSourcing.Contracts.csproj" />
+    <ProjectReference Include="..\Event Sourcing\SaasFactory.EventSourcing.Marten\SaasFactory.EventSourcing.Marten.csproj" />
+    <ProjectReference Include="..\Messaging\SaasFactory.Messaging.MasTransit\SaasFactory.Messaging.MasTransit.csproj" />
+    <ProjectReference Include="..\Modules\Examples\Feature Slicing\Modules.Examples.Restaurant.Menu\Modules.Examples.Restaurant.Menu.csproj" />
+    <ProjectReference Include="..\Modules\Examples\MVC Controllers\Modules.Examples.Bank.Account\Modules.Examples.Bank.Account.csproj" />
+    <ProjectReference Include="..\Shared\SaasFactory.Shared.Config\SaasFactory.Shared.Config.csproj" />
   </ItemGroup>
 
 </Project>
