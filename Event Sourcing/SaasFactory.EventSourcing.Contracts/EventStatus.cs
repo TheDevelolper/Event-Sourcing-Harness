@@ -1,4 +1,4 @@
-﻿namespace SaasFactory.WebApi.Events;
+﻿namespace SaasFactory.EventSourcing.Contracts;
 
 public enum EventStatus
 {

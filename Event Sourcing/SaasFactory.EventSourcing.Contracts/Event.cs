@@ -1,4 +1,4 @@
-namespace SaasFactory.WebApi.Events;
+namespace SaasFactory.EventSourcing.Contracts;
 
 public interface IEvent
 {
@@ -13,4 +13,9 @@ public record PendingEvent() : IEvent
 public class CompletedEvent : IEvent
 {
     public EventStatus Status { get; } =  EventStatus.Completed;
+}
+
+public class FailedEvent : IEvent
+{
+    public EventStatus Status { get; } =  EventStatus.Failed;
 }

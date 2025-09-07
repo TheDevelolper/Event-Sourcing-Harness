@@ -1,13 +1,14 @@
-﻿using SaasFactory.WebApi.Models;
+﻿using Modules.Examples.Bank.Account.Commands;
+using SaasFactory.EventSourcing.Contracts;
 
-namespace SaasFactory.WebApi.Events;
+namespace Modules.Examples.Bank.Account.Events;
 
 public class DepositCompletedEvent: CompletedEvent
 {
     public required decimal Amount { get; init; }
     public required string AccountId { get; init; }
     
-    public static DepositCompletedEvent From(DepositModel deposit)
+    public static DepositCompletedEvent From(DepositCommand deposit)
     {
         return new DepositCompletedEvent
         {
