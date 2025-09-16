@@ -26,6 +26,8 @@ public class AccountController : ControllerBase
     [HttpPost("deposit")]
     public async Task<IActionResult> Deposit([FromBody] DepositCommand command)
     {
+        if (!BankAccountModule.IsEnabled) return NotFound();
+        
         // Log an event to store the action
         var eventModel = DepositPendingEvent.From(command);
         await _eventStore.AddEventPendingAsync(eventModel);
@@ -41,7 +43,23 @@ public class AccountController : ControllerBase
         // return
         return Accepted();
     }
-
+    
+    [HttpGet("{accountId}/balance")]
+    public async Task<IActionResult> GetBalance(string accountId)
+    {
+        if (!BankAccountModule.IsEnabled) return NotFound();
+        
+        // access the pre-built AccountState document directly
+        await using var session = _documentStore.QuerySession();
+        var model = await session.LoadAsync<AccountState>(accountId);
+        
+        // validate 
+        if(model == null) return NotFound();
+        
+        // return
+        return Ok(model);
+    }
+    
     private IActionResult CreateBadRequest(string message, DepositCommand command)
     {
         var eventModel = DepositFailedEvent.From(command);
@@ -64,17 +82,4 @@ public class AccountController : ControllerBase
         return BadRequest(message);
     }
 
-    [HttpGet("{accountId}/balance")]
-    public async Task<IActionResult> GetBalance(string accountId)
-    {
-        // access the pre-built AccountState document directly
-        await using var session = _documentStore.QuerySession();
-        var model = await session.LoadAsync<AccountState>(accountId);
-        
-        // validate 
-        if(model == null) return NotFound();
-        
-        // return
-        return Ok(model);
-    }
 }

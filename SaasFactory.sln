@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.EventSourcing.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.Messaging.MasTransit", "Messaging\SaasFactory.Messaging.MasTransit\SaasFactory.Messaging.MasTransit.csproj", "{53D8D9E2-3592-4CBA-83ED-DC11B9FD9CBA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Feature Toggling", "Feature Toggling", "{B975BDF1-A085-4669-A1CF-753366C01D99}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

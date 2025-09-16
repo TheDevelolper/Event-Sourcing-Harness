@@ -11,7 +11,8 @@ public static class BuilderExtensions
 {
     public static IHostApplicationBuilder AddEventStore(
         this IHostApplicationBuilder builder, 
-        string connectionString
+        string connectionString,
+        bool enableLogging = false
         )
     {
         builder.Services.AddScoped<IEventStore, MartenStore>();
@@ -22,6 +23,7 @@ public static class BuilderExtensions
             options.Events.AddEventType(typeof(IEvent));
             options.UseSystemTextJsonForSerialization();
             options.AutoCreateSchemaObjects = AutoCreate.All;
+            options.DisableNpgsqlLogging = !enableLogging;
 
         }).AddAsyncDaemon(DaemonMode.Solo);
 

@@ -10,7 +10,27 @@ namespace Modules.Examples.Bank.Account;
 
 public static class BankAccountModule
 {
-    
+    public static event EventHandler<bool>? OnIsEnabledChanged;
+    private static bool _isEnabled = false;
+    public static bool IsEnabled
+    {
+        get => _isEnabled;
+        set
+        {
+            _isEnabled = value;
+            OnIsEnabledChanged?.Invoke(null, value);
+        }
+    }
+
+    public static void AddMessageConsumers(IBusRegistrationConfigurator configurator)
+    {
+        configurator.AddConsumer<DepositConsumer>();
+    }
+
+}
+
+public static class HostApplicationBuilderExtensions
+{
     public static IHostApplicationBuilder AddBankAccountModule(this IHostApplicationBuilder builder)
     {
         builder.Services.ConfigureMarten(options =>
@@ -18,12 +38,7 @@ public static class BankAccountModule
             options.Projections.Add<AccountStateProjection>(ProjectionLifecycle.Async);
             options.Events.AddEventType(typeof(DepositCompletedEvent));
         });
-     
+
         return builder;
-    }
-    
-    public static void AddMessageConsumers(IBusRegistrationConfigurator x)
-    {
-        x.AddConsumer<DepositConsumer>();
     }
 }

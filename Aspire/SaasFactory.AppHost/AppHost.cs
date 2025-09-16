@@ -1,7 +1,9 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Projects;
 using SaasFactory.Shared.Config;
+
 
 var builder = DistributedApplication.CreateBuilder(args);
 
@@ -18,26 +20,68 @@ var rabbitMq = builder.AddContainer("rabbitmq", "rabbitmq", "3-management")
      .WithContainerName("RabbitMQ")
      .WithHttpHealthCheck("/api/index.html", endpointName: "ManagementUI");
 
-var postgres = builder.AddPostgres("postgres")
+var pgUsername = "postgres";
+var pgPassword =  "postgres";
+
+var postgres = builder.AddPostgres("postgres", 
+        userName: builder.AddParameter("username", pgUsername, secret: true),
+        password: builder.AddParameter("password", pgPassword, secret: true))
     .WithDataVolume() // persists data between runs
-    .WithPgAdmin(pgAdminBuilder => 
-        pgAdminBuilder.WithHostPort(8081))   
-    .WithEndpoint(port: 50451, targetPort: 5432, scheme: "tcp", name: "postgres-tcp")
-    .AddDatabase("events");
+    .WithPgAdmin(pgAdminBuilder => pgAdminBuilder.WithHostPort(8081))
+    .WithEndpoint(port: 54320, targetPort: 5432, scheme: "tcp", name: "postgres-tcp");
 
-var webApiProject = builder.AddProject<SaasFactory_WebApi>("WebApi");
+// ======================
+// Create databases
+// ======================
+var eventsDb = postgres.AddDatabase("events");
+var unleashDb = postgres.AddDatabase("unleash");
+var featureHubDb = postgres.AddDatabase("featurehub");
 
-postgres.OnConnectionStringAvailable<PostgresDatabaseResource>(async (db, evt, ct) =>
-{
-    var constr = await postgres.Resource.ConnectionStringExpression.GetValueAsync(ct);
+// ======================
+// Create containers
+// ======================
+
+var featureHubPort = 4242;
+
+var featurehub = builder.AddContainer("featurehub-server", "featurehub/party-server")
+    // .WithVolume( "featurehub-server-data", "/var/featurehub/data") // persists data between runs
     
-    webApiProject
-        .WithEnvironment("EVENTS_DB_CONNECTION", constr)
+    .WithEnvironment("FEATUREHUB_HTTP_PORT", "8085")
+    .WithEnvironment("FEATUREHUB_JWT_SECRET", "supersecretkey") //todo change in production
+    .WithEnvironment("FEATUREHUB_EDGE_URL", $"http://featurehub-server:{featureHubPort.ToString()}")
+    .WithEnvironment("FEATUREHUB_API_KEY", "")
+    .WithEndpoint(port: featureHubPort, targetPort: 8085, scheme: "http") // default HTTP port
+    
+    // Database connection
+    .WithEnvironment("DB_URL",
+        $"jdbc:postgresql://{postgres.Resource.Name}:5432/{featureHubDb.Resource.DatabaseName}")
+    .WithEnvironment("DB_USERNAME", pgUsername)
+    .WithEnvironment("DB_PASSWORD", pgPassword)
+    .WithReference(postgres)
+    .WaitFor(postgres);
+    
+var featureHubUrl = new Uri($"http://{featurehub.Resource.Name}:{featureHubPort}");
+
+var webApiProjectBuilder = builder.AddProject<SaasFactory_WebApi>("WebApi")
+    .WithReference("featurehub", featureHubUrl);
+
+
+eventsDb.OnConnectionStringAvailable(async (db, evt, ct) =>
+{
+    var connStr = await postgres.Resource.ConnectionStringExpression.GetValueAsync(ct);
+    
+    webApiProjectBuilder
+        .WithEnvironment("EVENTS_DB_CONNECTION", connStr)
         .WithReference(postgres);
 });
 
-webApiProject
+webApiProjectBuilder
+
     .WaitFor(postgres)
     .WaitFor(rabbitMq);
 
 await builder.Build().RunAsync();
+
+
+
+public record PostgresCredentials(string Username, string Password);
