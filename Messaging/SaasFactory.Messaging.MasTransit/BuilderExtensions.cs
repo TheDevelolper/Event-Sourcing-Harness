@@ -1,20 +1,26 @@
 ﻿using MassTransit;
 using Microsoft.Extensions.Hosting;
+using SaasFactory.Modules.Common;
 
 namespace SaasFactory.Messaging.MasTransit;
 
 public static class BuilderExtensions
 {
-    public static IHostApplicationBuilder AddMessaging(this IHostApplicationBuilder builder,Action<IBusRegistrationConfigurator> configure)
+    public static IHostApplicationBuilder AddMessaging(
+        this IHostApplicationBuilder builder, 
+        IEnumerable<IFeatureModule> featureModules)
     {
-        builder.Services.AddMassTransit(x =>
+        builder.Services.AddMassTransit(options =>
         {
-            configure(x);
+            foreach (var messageConsumerModule in featureModules)
+            {
+                messageConsumerModule.RegisterMessageConsumers(options);
+            }
             
-            x.SetKebabCaseEndpointNameFormatter();
+            options.SetKebabCaseEndpointNameFormatter();
 
             // Core transport setup
-            x.UsingRabbitMq((context, cfg) =>
+            options.UsingRabbitMq((context, cfg) =>
             {
                 cfg.Host("rabbitmq://localhost");
 

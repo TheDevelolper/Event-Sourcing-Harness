@@ -1,9 +1,12 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Projects;
 using SaasFactory.Shared.Config;
 
+
+var pgUsername = "postgres";
+var pgPassword =  "postgres";
+var featureHubPort = 4242;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
@@ -20,9 +23,6 @@ var rabbitMq = builder.AddContainer("rabbitmq", "rabbitmq", "3-management")
      .WithContainerName("RabbitMQ")
      .WithHttpHealthCheck("/api/index.html", endpointName: "ManagementUI");
 
-var pgUsername = "postgres";
-var pgPassword =  "postgres";
-
 var postgres = builder.AddPostgres("postgres", 
         userName: builder.AddParameter("username", pgUsername, secret: true),
         password: builder.AddParameter("password", pgPassword, secret: true))
@@ -34,20 +34,14 @@ var postgres = builder.AddPostgres("postgres",
 // Create databases
 // ======================
 var eventsDb = postgres.AddDatabase("events");
-var unleashDb = postgres.AddDatabase("unleash");
 var featureHubDb = postgres.AddDatabase("featurehub");
 
 // ======================
 // Create containers
 // ======================
-
-var featureHubPort = 4242;
-
 var featurehub = builder.AddContainer("featurehub-server", "featurehub/party-server")
-    // .WithVolume( "featurehub-server-data", "/var/featurehub/data") // persists data between runs
-    
     .WithEnvironment("FEATUREHUB_HTTP_PORT", "8085")
-    .WithEnvironment("FEATUREHUB_JWT_SECRET", "supersecretkey") //todo change in production
+    .WithEnvironment("FEATUREHUB_JWT_SECRET", "supersecretkey") //TODO(PROD): change in production
     .WithEnvironment("FEATUREHUB_EDGE_URL", $"http://featurehub-server:{featureHubPort.ToString()}")
     .WithEnvironment("FEATUREHUB_API_KEY", "")
     .WithEndpoint(port: featureHubPort, targetPort: 8085, scheme: "http") // default HTTP port
@@ -60,11 +54,12 @@ var featurehub = builder.AddContainer("featurehub-server", "featurehub/party-ser
     .WithReference(postgres)
     .WaitFor(postgres);
     
-var featureHubUrl = new Uri($"http://{featurehub.Resource.Name}:{featureHubPort}");
+var featureHubUrl = new Uri($"http://{featurehub.Resource.Name}:{featureHubPort.ToString()}");
 
 var webApiProjectBuilder = builder.AddProject<SaasFactory_WebApi>("WebApi")
+    .WithEnvironment("FEATUREHUB_API_KEY", "1c7229e2-a796-496f-8beb-0a19dbcfc684/7RaU5SQnFbP5KGFblCZeVI277tyBFidnWp6bGbfK")
+    .WithEnvironment("FEATUREHUB_EDGE_URL", $"http://localhost:{featureHubPort.ToString()}")
     .WithReference("featurehub", featureHubUrl);
-
 
 eventsDb.OnConnectionStringAvailable(async (db, evt, ct) =>
 {
@@ -76,12 +71,8 @@ eventsDb.OnConnectionStringAvailable(async (db, evt, ct) =>
 });
 
 webApiProjectBuilder
-
     .WaitFor(postgres)
     .WaitFor(rabbitMq);
 
 await builder.Build().RunAsync();
-
-
-
-public record PostgresCredentials(string Username, string Password);
+ 

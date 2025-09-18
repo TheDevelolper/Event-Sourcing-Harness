@@ -1,19 +1,21 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using FeatureHubSDK;
+using MassTransit;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Hosting;
 using Modules.Examples.Restaurant.Menu.Features.Menu;
+using SaasFactory.Modules.Common;
 
 namespace Modules.Examples.Restaurant.Menu;
 
-public static class RestaurantMenuModuleExample
+public class RestaurantMenuModule(IClientContext featureHubCtx) : IFeatureModule
 {
-    public static IHostApplicationBuilder AddRestaurantMenuModuleExample(this IHostApplicationBuilder app)
-    {
-        // registrations for other services go here...
-        return app;
-    }
+    public Task<IHostApplicationBuilder> AddModule(IHostApplicationBuilder builder) => Task.FromResult(builder);
 
-    public static void UseRestaurantMenuModuleExample(this WebApplication app)
+    public Task<WebApplication> AddModuleMiddleware(WebApplication app)
     {
         app.AddGetMenuItemByIdEndpoint();
+        return Task.FromResult(app);
     }
+
+    public void RegisterMessageConsumers(IBusRegistrationConfigurator config) { }
 }

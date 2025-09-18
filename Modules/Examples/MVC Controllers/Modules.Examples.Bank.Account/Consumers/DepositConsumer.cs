@@ -5,6 +5,7 @@ using SaasFactory.EventSourcing.Contracts;
 
 namespace Modules.Examples.Bank.Account.Consumers;
 
+// ReSharper disable once ClassNeverInstantiated.Global
 public class DepositConsumer(IEventStore eventStore) : IConsumer<DepositCommand>
 {
     public async Task Consume(ConsumeContext<DepositCommand> context)
