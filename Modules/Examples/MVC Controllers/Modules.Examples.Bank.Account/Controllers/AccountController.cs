@@ -1,5 +1,6 @@
 using Marten;
 using MassTransit;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Modules.Examples.Bank.Account.Commands;
@@ -18,6 +19,7 @@ public class AccountController(
     ILogger<AccountController> logger) : ControllerBase
 {
     [HttpPost("deposit")]
+    [AllowAnonymous]
     public async Task<IActionResult> Deposit([FromBody] DepositCommand command)
     {
         logger.LogDebug("Deposit command received");
@@ -29,7 +31,6 @@ public class AccountController(
         }
 
         // Log an event to store the action
-
         var eventModel = DepositPendingEvent.From(command);
         await eventStore.AddEventPendingAsync(eventModel);
         logger.LogDebug("Deposit pending");
@@ -47,6 +48,7 @@ public class AccountController(
     }
 
     [HttpGet("{accountId}/balance")]
+    [Authorize]
     public async Task<IActionResult> GetBalance(string accountId)
     {
         logger.LogDebug("Getting account balance.");

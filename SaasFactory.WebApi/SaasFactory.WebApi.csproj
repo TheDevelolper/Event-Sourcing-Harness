@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Aspire\SaasFactory.ServiceDefaults\SaasFactory.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Authentication\SaasFactory.Authentication\SaasFactory.Authentication.csproj" />
     <ProjectReference Include="..\Event Sourcing\SaasFactory.EventSourcing.Contracts\SaasFactory.EventSourcing.Contracts.csproj" />
     <ProjectReference Include="..\Event Sourcing\SaasFactory.EventSourcing.Marten\SaasFactory.EventSourcing.Marten.csproj" />
     <ProjectReference Include="..\Messaging\SaasFactory.Messaging.MasTransit\SaasFactory.Messaging.MasTransit.csproj" />

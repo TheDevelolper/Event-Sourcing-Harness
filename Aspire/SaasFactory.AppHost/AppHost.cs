@@ -1,14 +1,18 @@
+using crypto;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Projects;
 using SaasFactory.Shared.Config;
-
+using SaasFactory.Authentication;
 
 var pgUsername = "postgres";
 var pgPassword =  "postgres";
 var featureHubPort = 4242;
 
 var builder = DistributedApplication.CreateBuilder(args);
+using var loggerFactory = LoggerFactory.Create(logging => logging.AddConsole());
+var logger = loggerFactory.CreateLogger("Aspire logger");
 
 builder.Services.AddHealthChecks();
 
@@ -39,6 +43,11 @@ var featureHubDb = postgres.AddDatabase("featurehub");
 // ======================
 // Create containers
 // ======================
+
+string authClientSecret = Environment.GetEnvironmentVariable("AUTH_CLIENT_SECRET") ?? Security.GenerateText(128);
+
+var keycloak = builder.AddKeycloakAuthServer(logger, authClientSecret);
+
 var featurehub = builder.AddContainer("featurehub-server", "featurehub/party-server")
     .WithEnvironment("FEATUREHUB_HTTP_PORT", "8085")
     .WithEnvironment("FEATUREHUB_JWT_SECRET", "supersecretkey") //TODO(PROD): change in production
@@ -56,10 +65,11 @@ var featurehub = builder.AddContainer("featurehub-server", "featurehub/party-ser
     
 var featureHubUrl = new Uri($"http://{featurehub.Resource.Name}:{featureHubPort.ToString()}");
 
-var webApiProjectBuilder = builder.AddProject<SaasFactory_WebApi>("WebApi")
-    .WithEnvironment("FEATUREHUB_API_KEY", "1c7229e2-a796-496f-8beb-0a19dbcfc684/7RaU5SQnFbP5KGFblCZeVI277tyBFidnWp6bGbfK")
+var webApiProjectBuilder = builder.AddProject<SaasFactory_WebApi>("WebApi") 
+    .WithEnvironment("FEATUREHUB_API_KEY", "3ba59a66-b00d-459d-af2a-4b46cfcfa66d/x9a7Q8BZ12GnKLQttv14UcpAfEt9ceI6DmbJotS2")
     .WithEnvironment("FEATUREHUB_EDGE_URL", $"http://localhost:{featureHubPort.ToString()}")
-    .WithReference("featurehub", featureHubUrl);
+    .WithReference("featurehub", featureHubUrl)
+    .WithReference(keycloak);
 
 eventsDb.OnConnectionStringAvailable(async (db, evt, ct) =>
 {

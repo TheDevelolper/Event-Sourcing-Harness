@@ -14,7 +14,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Modules\Common\SaasFactory.Modules.Common\SaasFactory.Modules.Common.csproj" />
-      <ProjectReference Include="..\BankAccount.Module.Example\BankAccount.Module.Example.csproj" />
     </ItemGroup>
 
 </Project>

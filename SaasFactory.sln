@@ -37,13 +37,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.EventSourcing.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.Messaging.MasTransit", "Messaging\SaasFactory.Messaging.MasTransit\SaasFactory.Messaging.MasTransit.csproj", "{53D8D9E2-3592-4CBA-83ED-DC11B9FD9CBA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Feature Toggling", "Feature Toggling", "{B975BDF1-A085-4669-A1CF-753366C01D99}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{837D400F-4891-419D-8F37-0D54D759716C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{5636C77B-77A9-4E7E-BBA5-C6DFD307953D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.Modules.Common", "Modules\Common\SaasFactory.Modules.Common\SaasFactory.Modules.Common.csproj", "{248B7FD2-350A-4D99-8CB2-3990D6FA7F36}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{8FFCF2A6-0AF2-4BE0-8901-AE4663295422}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.Authentication", "Authentication\SaasFactory.Authentication\SaasFactory.Authentication.csproj", "{62F0B4C8-B49C-454B-A19B-ACE32FA88324}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Examples.Bank.Account.Tests", "Modules\Examples\MVC Controllers\Modules.Examples.Bank.Account.Tests\Modules.Examples.Bank.Account.Tests.csproj", "{E093FB77-E11B-406A-A6DC-04DC217A98F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -175,6 +177,30 @@ Global
 		{248B7FD2-350A-4D99-8CB2-3990D6FA7F36}.Release|x64.Build.0 = Release|Any CPU
 		{248B7FD2-350A-4D99-8CB2-3990D6FA7F36}.Release|x86.ActiveCfg = Release|Any CPU
 		{248B7FD2-350A-4D99-8CB2-3990D6FA7F36}.Release|x86.Build.0 = Release|Any CPU
+		{62F0B4C8-B49C-454B-A19B-ACE32FA88324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62F0B4C8-B49C-454B-A19B-ACE32FA88324}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62F0B4C8-B49C-454B-A19B-ACE32FA88324}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{62F0B4C8-B49C-454B-A19B-ACE32FA88324}.Debug|x64.Build.0 = Debug|Any CPU
+		{62F0B4C8-B49C-454B-A19B-ACE32FA88324}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{62F0B4C8-B49C-454B-A19B-ACE32FA88324}.Debug|x86.Build.0 = Debug|Any CPU
+		{62F0B4C8-B49C-454B-A19B-ACE32FA88324}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62F0B4C8-B49C-454B-A19B-ACE32FA88324}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62F0B4C8-B49C-454B-A19B-ACE32FA88324}.Release|x64.ActiveCfg = Release|Any CPU
+		{62F0B4C8-B49C-454B-A19B-ACE32FA88324}.Release|x64.Build.0 = Release|Any CPU
+		{62F0B4C8-B49C-454B-A19B-ACE32FA88324}.Release|x86.ActiveCfg = Release|Any CPU
+		{62F0B4C8-B49C-454B-A19B-ACE32FA88324}.Release|x86.Build.0 = Release|Any CPU
+		{E093FB77-E11B-406A-A6DC-04DC217A98F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E093FB77-E11B-406A-A6DC-04DC217A98F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E093FB77-E11B-406A-A6DC-04DC217A98F9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E093FB77-E11B-406A-A6DC-04DC217A98F9}.Debug|x64.Build.0 = Debug|Any CPU
+		{E093FB77-E11B-406A-A6DC-04DC217A98F9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E093FB77-E11B-406A-A6DC-04DC217A98F9}.Debug|x86.Build.0 = Debug|Any CPU
+		{E093FB77-E11B-406A-A6DC-04DC217A98F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E093FB77-E11B-406A-A6DC-04DC217A98F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E093FB77-E11B-406A-A6DC-04DC217A98F9}.Release|x64.ActiveCfg = Release|Any CPU
+		{E093FB77-E11B-406A-A6DC-04DC217A98F9}.Release|x64.Build.0 = Release|Any CPU
+		{E093FB77-E11B-406A-A6DC-04DC217A98F9}.Release|x86.ActiveCfg = Release|Any CPU
+		{E093FB77-E11B-406A-A6DC-04DC217A98F9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -193,5 +219,7 @@ Global
 		{53D8D9E2-3592-4CBA-83ED-DC11B9FD9CBA} = {BCF68B97-D016-491D-92F7-7FBCAAEFE9DE}
 		{837D400F-4891-419D-8F37-0D54D759716C} = {87736412-D045-4242-9874-ADD1A57DEC83}
 		{248B7FD2-350A-4D99-8CB2-3990D6FA7F36} = {837D400F-4891-419D-8F37-0D54D759716C}
+		{62F0B4C8-B49C-454B-A19B-ACE32FA88324} = {8FFCF2A6-0AF2-4BE0-8901-AE4663295422}
+		{E093FB77-E11B-406A-A6DC-04DC217A98F9} = {202EF6DF-5C30-4DF8-A94B-C4B4E5143FF5}
 	EndGlobalSection
 EndGlobal

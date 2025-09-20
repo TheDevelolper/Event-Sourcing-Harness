@@ -14,10 +14,14 @@
     <ItemGroup>
         <PackageReference Include="Aspire.Hosting.AppHost" Version="9.4.2"/>
         <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="9.4.2"/>
+        <PackageReference Include="BouncyCastle.Crypto.dll" Version="1.8.1" />
+        <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
     </ItemGroup>
 
 
     <ItemGroup>
+        <ProjectReference Include="..\..\Authentication\SaasFactory.Authentication\SaasFactory.Authentication.csproj" 
+                          IsAspireProjectResource="false" />
         <ProjectReference Include="..\..\Shared\SaasFactory.Shared.Config\SaasFactory.Shared.Config.csproj"
                           IsAspireProjectResource="false">
             <Private>true</Private>
