@@ -21,12 +21,12 @@ public class CredentialsGenerator
     {
         if (length <= 0) throw new ArgumentException("Length must be positive", nameof(length));
         var result = new char[length];
-        byte[] buffer = new byte[length];
+        var buffer = new byte[length];
 
         using (var rng = RandomNumberGenerator.Create())
         {
             rng.GetBytes(buffer);
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 result[i] = allowedChars[buffer[i] % allowedChars.Length];
             }
