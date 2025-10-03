@@ -3,7 +3,6 @@ using Modules.Examples.Bank.Account;
 using Modules.Examples.Restaurant.Menu;
 using SaasFactory.Features.Authentication;
 using SaasFactory.EventSourcing.Marten;
-using SaasFactory.Messaging.MasTransit;
 using SaasFactory.Modules.Common;
 using SaasFactory.ServiceDefaults;
 using SaasFactory.Shared.Config;
@@ -46,7 +45,6 @@ await builder
     .AddServiceDefaults()
     .AddAuthentication()
     .AddEventStore(eventsDbConnectionString)
-    .AddMessaging(featureModules)
     .AddFeatureModules(featureModules);
 
 builder.Services.AddControllers();

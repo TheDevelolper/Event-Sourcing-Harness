@@ -1,14 +1,11 @@
 ﻿using FeatureHubSDK;
 using JasperFx.Events.Projections;
 using Marten;
-using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Hosting;
-using Modules.Examples.Bank.Account.Consumers;
 using Modules.Examples.Bank.Account.Events;
 using Modules.Examples.Bank.Account.Projections;
 using SaasFactory.Modules.Common;
-
 
 namespace Modules.Examples.Bank.Account;
 
@@ -50,8 +47,4 @@ public class BankAccountModule(IClientContext featureHubCtx): IFeatureModule
 
     public Task<WebApplication> AddModuleMiddleware(WebApplication app) => Task.FromResult(app);
 
-    public void RegisterMessageConsumers(IBusRegistrationConfigurator config)
-    { 
-             config.AddConsumer<DepositConsumer>();
-    }
 }

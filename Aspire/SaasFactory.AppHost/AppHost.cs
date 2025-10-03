@@ -21,12 +21,6 @@ builder.Configuration
     .AddJsonFile("appsettings.json", optional: true)
     .Build();
 
-var rabbitMq = builder.AddContainer("rabbitmq", "rabbitmq", "3-management")
-     .WithEndpoint(5672, 5672, name: "AMPQ")
-     .WithEndpoint(15672, 15672, name: "ManagementUI", scheme: "http")
-     .WithContainerName("RabbitMQ")
-     .WithHttpHealthCheck("/api/index.html", endpointName: "ManagementUI");
-
 var postgres = builder.AddPostgres("postgres", 
         userName: builder.AddParameter("username", pgUsername, secret: true),
         password: builder.AddParameter("password", pgPassword, secret: true))
@@ -81,8 +75,7 @@ eventsDb.OnConnectionStringAvailable(async (db, evt, ct) =>
 });
 
 webApiProjectBuilder
-    .WaitFor(postgres)
-    .WaitFor(rabbitMq);
+    .WaitFor(postgres);
 
 await builder.Build().RunAsync();
  

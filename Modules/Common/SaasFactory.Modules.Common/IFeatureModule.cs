@@ -8,5 +8,5 @@ public interface IFeatureModule
 {
     Task<IHostApplicationBuilder> AddModule(IHostApplicationBuilder builder);
     Task<WebApplication> AddModuleMiddleware(WebApplication app);
-    void RegisterMessageConsumers(IBusRegistrationConfigurator config);
+
 }

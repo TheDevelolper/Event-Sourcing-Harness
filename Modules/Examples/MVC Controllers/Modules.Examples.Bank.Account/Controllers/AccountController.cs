@@ -1,5 +1,4 @@
 using Marten;
-using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,7 +12,6 @@ namespace Modules.Examples.Bank.Account.Controllers;
 [ApiController]
 [Route("api/accounts")]
 public class AccountController(
-    IBus bus,
     IEventStore eventStore,
     IDocumentStore documentStore,
     ILogger<AccountController> logger) : ControllerBase
@@ -31,18 +29,18 @@ public class AccountController(
         }
 
         // Log an event to store the action
-        var eventModel = DepositPendingEvent.From(command);
-        await eventStore.AddEventPendingAsync(eventModel);
-        logger.LogDebug("Deposit pending");
-
+        var eventPendingModel = DepositPendingEvent.From(command);
+        await eventStore.AddEventPendingAsync(eventPendingModel);
+        
         if (string.IsNullOrWhiteSpace(command.AccountId))
             return CreateBadRequest("No account id provided", command);
 
         if (command.Amount <= 0)
             return CreateBadRequest("Deposit amount must be positive", command);
-
-        await bus.Publish(command);
-
+        
+        var eventModel = DepositCompletedEvent.From(command);
+        await eventStore.AddEventCompletedAsync(eventModel);
+        
         // return
         return Accepted();
     }

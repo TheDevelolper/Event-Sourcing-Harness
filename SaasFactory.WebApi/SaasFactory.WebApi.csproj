@@ -9,9 +9,6 @@
   <ItemGroup>
     <PackageReference Include="FeatureHub.SDK" Version="2.5.1" />
     <PackageReference Include="Marten.AspNetCore" Version="8.10.0" />
-    <PackageReference Include="MassTransit" Version="8.5.3" />
-    <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
-    <PackageReference Include="MassTransit.RabbitMQ" Version="8.5.3" />
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="4.14.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.8">
@@ -26,7 +23,6 @@
     <ProjectReference Include="..\Features\Authentication\SaasFactory.Features.Authentication\SaasFactory.Features.Authentication.csproj" />
     <ProjectReference Include="..\Features\Event Sourcing\SaasFactory.EventSourcing.Contracts\SaasFactory.EventSourcing.Contracts.csproj" />
     <ProjectReference Include="..\Features\Event Sourcing\SaasFactory.EventSourcing.Marten\SaasFactory.EventSourcing.Marten.csproj" />
-    <ProjectReference Include="..\Features\Messaging\SaasFactory.Messaging.MasTransit\SaasFactory.Messaging.MasTransit.csproj" />
     <ProjectReference Include="..\Modules\Examples\Feature Slicing\Modules.Examples.Restaurant.Menu\Modules.Examples.Restaurant.Menu.csproj" />
     <ProjectReference Include="..\Modules\Examples\MVC Controllers\Modules.Examples.Bank.Account\Modules.Examples.Bank.Account.csproj" />
     <ProjectReference Include="..\Shared\SaasFactory.Shared.Config\SaasFactory.Shared.Config.csproj" />
