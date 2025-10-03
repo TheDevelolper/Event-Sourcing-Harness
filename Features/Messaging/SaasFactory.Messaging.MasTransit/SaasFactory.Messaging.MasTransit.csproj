@@ -13,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Modules\Common\SaasFactory.Modules.Common\SaasFactory.Modules.Common.csproj" />
+      <ProjectReference Include="..\..\..\Modules\Common\SaasFactory.Modules.Common\SaasFactory.Modules.Common.csproj" />
     </ItemGroup>
 
 </Project>

@@ -15,9 +15,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\..\Event Sourcing\SaasFactory.EventSourcing.Contracts\SaasFactory.EventSourcing.Contracts.csproj" />
-      <ProjectReference Include="..\..\..\..\Event Sourcing\SaasFactory.EventSourcing.Marten\SaasFactory.EventSourcing.Marten.csproj" />
-      <ProjectReference Include="..\..\..\..\Messaging\SaasFactory.Messaging.MasTransit\SaasFactory.Messaging.MasTransit.csproj" />
+      <ProjectReference Include="..\..\..\..\Features\Event Sourcing\SaasFactory.EventSourcing.Contracts\SaasFactory.EventSourcing.Contracts.csproj" />
+      <ProjectReference Include="..\..\..\..\Features\Event Sourcing\SaasFactory.EventSourcing.Marten\SaasFactory.EventSourcing.Marten.csproj" />
+      <ProjectReference Include="..\..\..\..\Features\Messaging\SaasFactory.Messaging.MasTransit\SaasFactory.Messaging.MasTransit.csproj" />
       <ProjectReference Include="..\..\..\Common\SaasFactory.Modules.Common\SaasFactory.Modules.Common.csproj" />
     </ItemGroup>
 

@@ -23,10 +23,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Aspire\SaasFactory.ServiceDefaults\SaasFactory.ServiceDefaults.csproj" />
-    <ProjectReference Include="..\Authentication\SaasFactory.Authentication\SaasFactory.Authentication.csproj" />
-    <ProjectReference Include="..\Event Sourcing\SaasFactory.EventSourcing.Contracts\SaasFactory.EventSourcing.Contracts.csproj" />
-    <ProjectReference Include="..\Event Sourcing\SaasFactory.EventSourcing.Marten\SaasFactory.EventSourcing.Marten.csproj" />
-    <ProjectReference Include="..\Messaging\SaasFactory.Messaging.MasTransit\SaasFactory.Messaging.MasTransit.csproj" />
+    <ProjectReference Include="..\Features\Authentication\SaasFactory.Features.Authentication\SaasFactory.Features.Authentication.csproj" />
+    <ProjectReference Include="..\Features\Event Sourcing\SaasFactory.EventSourcing.Contracts\SaasFactory.EventSourcing.Contracts.csproj" />
+    <ProjectReference Include="..\Features\Event Sourcing\SaasFactory.EventSourcing.Marten\SaasFactory.EventSourcing.Marten.csproj" />
+    <ProjectReference Include="..\Features\Messaging\SaasFactory.Messaging.MasTransit\SaasFactory.Messaging.MasTransit.csproj" />
     <ProjectReference Include="..\Modules\Examples\Feature Slicing\Modules.Examples.Restaurant.Menu\Modules.Examples.Restaurant.Menu.csproj" />
     <ProjectReference Include="..\Modules\Examples\MVC Controllers\Modules.Examples.Bank.Account\Modules.Examples.Bank.Account.csproj" />
     <ProjectReference Include="..\Shared\SaasFactory.Shared.Config\SaasFactory.Shared.Config.csproj" />

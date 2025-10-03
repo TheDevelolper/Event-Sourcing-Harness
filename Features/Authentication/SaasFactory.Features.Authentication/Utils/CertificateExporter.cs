@@ -3,7 +3,7 @@ using System.Security.Cryptography.X509Certificates;
 using Org.BouncyCastle.OpenSsl;
 using Org.BouncyCastle.Pkcs;
 
-namespace SaasFactory.Authentication.Utils;
+namespace SaasFactory.Features.Authentication.Utils;
 
 public static class CertificateExporter
 {

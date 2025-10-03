@@ -1,7 +1,7 @@
 using FeatureHubSDK;
 using Modules.Examples.Bank.Account;
 using Modules.Examples.Restaurant.Menu;
-using SaasFactory.Authentication;
+using SaasFactory.Features.Authentication;
 using SaasFactory.EventSourcing.Marten;
 using SaasFactory.Messaging.MasTransit;
 using SaasFactory.Modules.Common;

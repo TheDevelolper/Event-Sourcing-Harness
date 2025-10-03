@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <Sdk Name="Aspire.AppHost.Sdk" Version="9.4.2"/>
+    <Sdk Name="Aspire.AppHost.Sdk" Version="9.4.2" />
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
@@ -12,27 +12,33 @@
 
 
     <ItemGroup>
-        <PackageReference Include="Aspire.Hosting.AppHost" Version="9.4.2"/>
-        <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="9.4.2"/>
+        <PackageReference Include="Aspire.Hosting.AppHost" Version="9.4.2" />
+        <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="9.4.2" />
         <PackageReference Include="BouncyCastle.Crypto.dll" Version="1.8.1" />
         <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
     </ItemGroup>
 
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Authentication\SaasFactory.Authentication\SaasFactory.Authentication.csproj" 
-                          IsAspireProjectResource="false" />
-        <ProjectReference Include="..\..\Shared\SaasFactory.Shared.Config\SaasFactory.Shared.Config.csproj"
-                          IsAspireProjectResource="false">
+        <ProjectReference
+            Include="..\..\Features\Authentication\SaasFactory.Features.Authentication\SaasFactory.Features.Authentication.csproj"
+            IsAspireProjectResource="false" />
+        <ProjectReference
+            Include="..\..\Modules\Common\SaasFactory.Modules.Common\SaasFactory.Modules.Common.csproj"
+            IsAspireProjectResource="false" />
+        <ProjectReference
+            Include="..\..\Shared\SaasFactory.Shared.Config\SaasFactory.Shared.Config.csproj"
+            IsAspireProjectResource="false">
             <Private>true</Private>
         </ProjectReference>
-
-        <ProjectReference Include="..\SaasFactory.ServiceDefaults\SaasFactory.ServiceDefaults.csproj" IsAspireProjectResource="false"/>
+        <ProjectReference
+            Include="..\SaasFactory.ServiceDefaults\SaasFactory.ServiceDefaults.csproj"
+            IsAspireProjectResource="false" />
 
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\SaasFactory.WebApi\SaasFactory.WebApi.csproj"/>
+        <ProjectReference Include="..\..\SaasFactory.WebApi\SaasFactory.WebApi.csproj" />
     </ItemGroup>
-    
+
 </Project>

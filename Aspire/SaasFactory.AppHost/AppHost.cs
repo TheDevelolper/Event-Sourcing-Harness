@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Projects;
 using SaasFactory.Shared.Config;
-using SaasFactory.Authentication;
+using SaasFactory.Features.Authentication;
 
 var pgUsername = "postgres";
 var pgPassword =  "postgres";

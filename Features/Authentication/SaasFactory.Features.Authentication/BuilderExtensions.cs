@@ -2,10 +2,9 @@
 using Aspire.Hosting.ApplicationModel;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using SaasFactory.Authentication.Utils;
+using SaasFactory.Features.Authentication.Utils;
 
-namespace SaasFactory.Authentication;
+namespace SaasFactory.Features.Authentication;
 
 public static class BuilderExtensions
 {

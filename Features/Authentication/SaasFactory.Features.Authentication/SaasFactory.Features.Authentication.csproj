@@ -5,6 +5,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <OutputType>Library</OutputType>
     <Nullable>enable</Nullable>
+    <AssemblyName>SaasFactory.Features.Authentication</AssemblyName>
+    <RootNamespace>SaasFactory.Features.Authentication</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
