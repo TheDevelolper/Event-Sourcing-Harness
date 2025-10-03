@@ -21,12 +21,6 @@ public class AccountController(
     public async Task<IActionResult> Deposit([FromBody] DepositCommand command)
     {
         logger.LogDebug("Deposit command received");
-       
-        if (!BankAccountModule.IsEnabled)
-        {
-            logger.LogWarning("Bank account module is not enabled");
-            return NotFound();
-        }
 
         // Log an event to store the action
         var eventPendingModel = DepositPendingEvent.From(command);
@@ -50,12 +44,6 @@ public class AccountController(
     public async Task<IActionResult> GetBalance(string accountId)
     {
         logger.LogDebug("Getting account balance.");
-        
-        if (!BankAccountModule.IsEnabled)
-        {
-            logger.LogWarning("Bank account module is not enabled");
-            return NotFound();
-        }
         
         // access the pre-built AccountState document directly
         await using var session = documentStore.QuerySession();

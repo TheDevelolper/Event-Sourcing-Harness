@@ -11,10 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="FeatureHub.SDK" Version="2.5.1" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\..\Common\SaasFactory.Modules.Common\SaasFactory.Modules.Common.csproj" />
     </ItemGroup>
     

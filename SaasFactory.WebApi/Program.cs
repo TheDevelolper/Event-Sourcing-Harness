@@ -1,4 +1,3 @@
-using FeatureHubSDK;
 using Modules.Examples.Bank.Account;
 using Modules.Examples.Restaurant.Menu;
 using SaasFactory.Features.Authentication;
@@ -18,10 +17,6 @@ builder.Configuration
     .AddJsonFile("appsettings.json", optional: true)
     .Build();
 
-var featureHubConfig = new EdgeFeatureHubConfig(
-    Environment.GetEnvironmentVariable("FEATUREHUB_EDGE_URL"), 
-    Environment.GetEnvironmentVariable("FEATUREHUB_API_KEY")
-); 
 
 var eventsDbConnectionString = 
     Environment.GetEnvironmentVariable("EVENTS_DB_CONNECTION") 
@@ -30,14 +25,14 @@ var eventsDbConnectionString =
 // TODO: Document as known issue (awaiting docFx Task completion)
 // connect and start listening, if this line hangs it's likely connectivity issues.
 // It could also be that the featurehub volume was cleared and so the API key is not correct. 
-logger.LogDebug("Connecting to featureHub");
-await featureHubConfig.Init(); // Connect and start listening
-var featureHubCtx = await featureHubConfig.NewContext().Build();
-logger.LogDebug("Connecting to featureHub connected");
+// logger.LogDebug("Connecting to featureHub");
+// await featureHubConfig.Init(); // Connect and start listening
+// var featureHubCtx = await featureHubConfig.NewContext().Build();
+// logger.LogDebug("Connecting to featureHub connected");
 
 List<IFeatureModule> featureModules = [
-    new BankAccountModule(featureHubCtx),
-    new RestaurantMenuModule(featureHubCtx)
+    new BankAccountModule(),
+    new RestaurantMenuModule()
 ];
 
 await builder
