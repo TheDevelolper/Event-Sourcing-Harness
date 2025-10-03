@@ -14,8 +14,8 @@
     <ItemGroup>
         <PackageReference Include="Aspire.Hosting.AppHost" Version="9.4.2" />
         <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="9.4.2" />
-        <PackageReference Include="BouncyCastle.Crypto.dll" Version="1.8.1" />
         <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
+        <PackageReference Include="Semver" Version="3.0.0" />
     </ItemGroup>
 
 

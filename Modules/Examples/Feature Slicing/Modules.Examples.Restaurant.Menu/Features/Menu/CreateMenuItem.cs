@@ -8,7 +8,7 @@ public static class CreateMenuItem
 {
     public static void AddGetMenuItemByIdEndpoint(this IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapGet("api/menu/by-id/{menuId}", async (int menuId) =>
+        endpoints.MapGet("api/menu/by-id/{menuId}", (int menuId) =>
         {
             var result = $"You requested menu id '{menuId}'";
             return Results.Ok(result);

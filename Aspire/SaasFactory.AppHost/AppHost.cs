@@ -1,10 +1,10 @@
-using crypto;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Projects;
 using SaasFactory.Shared.Config;
 using SaasFactory.Features.Authentication;
+using SaasFactory.AppHost;
 
 var pgUsername = "postgres";
 var pgPassword =  "postgres";
@@ -44,7 +44,7 @@ var featureHubDb = postgres.AddDatabase("featurehub");
 // Create containers
 // ======================
 
-string authClientSecret = Environment.GetEnvironmentVariable("AUTH_CLIENT_SECRET") ?? Security.GenerateText(128);
+string authClientSecret = Environment.GetEnvironmentVariable("AUTH_CLIENT_SECRET") ?? new Crypto().GenerateText(128);
 
 var keycloak = builder.AddKeycloakAuthServer(logger, authClientSecret);
 
