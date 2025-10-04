@@ -3,6 +3,14 @@
   "compileOnSave": false,
   "files": [],
   "references": [
-
+    {
+      "path": "./apps/SaasFactory-e2e"
+    },
+    {
+      "path": "./apps/SaasFactory"
+    },
+    {
+      "path": "./ui-components"
+    }
   ]
 }

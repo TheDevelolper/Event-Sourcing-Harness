@@ -13,7 +13,7 @@
     ],
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
   },
-  "nxCloudId": "68e00330058c4a1ed18233d8",
+  "nxCloudId": "68e187e919b7872ef97eb433",
   "plugins": [
     {
       "plugin": "@nx/js/typescript",
@@ -66,20 +66,19 @@
         "targetName": "e2e"
       }
     },
-    "@nx-dotnet/core"
+    {
+      "plugin": "@nx/storybook/plugin",
+      "options": {
+        "serveStorybookTargetName": "storybook",
+        "buildStorybookTargetName": "build-storybook",
+        "testStorybookTargetName": "test-storybook",
+        "staticStorybookTargetName": "static-storybook"
+      }
+    }
   ],
   "targetDefaults": {
     "test": {
       "dependsOn": ["^build"]
-    },
-    "build": {
-      "dependsOn": ["^build", "codegen", "^codegen"]
-    },
-    "codegen": {
-      "cache": true
-    },
-    "swagger": {
-      "cache": true
     }
   },
   "generators": {
@@ -95,7 +94,8 @@
       },
       "library": {
         "style": "tailwind",
-        "linter": "eslint"
+        "linter": "eslint",
+        "unitTestRunner": "vitest"
       }
     }
   }
