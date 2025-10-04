@@ -1,9 +1,8 @@
 packages:
-  - 'apps/*'
-  - 'libs/generated/*'
-autoInstallPeers: true
+  - apps/*
+  - libs/*
+
 onlyBuiltDependencies:
   - '@swc/core'
-  - 'esbuild'
-  - 'nx'
-strictPeerDependencies: false
+  - '@tailwindcss/oxide'
+  - esbuild
