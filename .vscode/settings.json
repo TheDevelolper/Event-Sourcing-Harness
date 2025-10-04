@@ -1,0 +1,11 @@
+{
+  "conventionalCommits.scopes": [
+    "structure",
+    "feature-toggling",
+    "sln",
+    "auth",
+    "modularization",
+    "aspire",
+    "ignore"
+  ]
+}
