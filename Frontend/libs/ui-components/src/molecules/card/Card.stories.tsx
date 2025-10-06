@@ -1,10 +1,10 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Card, CardProps } from "./Card";
-import { Button } from "../../atoms/button/Button";
+import { Button } from "../../atoms/Button/Button";
 
 const meta: Meta<typeof Card> = {
-  title: "Organisms/Card",
+  title: "Molecules/Card",
   component: Card,
   tags: ["autodocs"],
 };
