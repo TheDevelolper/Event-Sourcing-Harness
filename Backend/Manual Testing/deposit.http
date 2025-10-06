@@ -1,0 +1,10 @@
+POST http://localhost:5005/api/accounts/deposit
+Content-Type: application/json
+
+{
+  "id": "11d0cfe1-7718-4bb1-9316-972a60a0fa91",
+  "accountId": "1234567891",
+  "amount": 1400.91
+}
+
+
