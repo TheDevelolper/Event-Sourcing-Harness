@@ -1,7 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { CardLayout, CardLayoutProps } from "./CardLayout";
-import { Card } from "../../molecules/card/Card";
+import { Card } from "../../molecules/Card/Card";
 import { Button } from "../../atoms/Button/Button";
 
 const meta: Meta<typeof CardLayout> = {
@@ -30,7 +30,7 @@ const ProductCardExample = () => (
     <div className="p-4 pb-0">
       <div className="flex items-center justify-between">
         <h3 className="text-xl font-bold">Romana Chicken Pizza</h3>
-        <span className="text-lg font-semibold text-gray-800">12.99</span>
+        <span className="text-lg font-semibold text-gray-800 self-start">12.99</span>
       </div>
     </div>
     <div className="p-4">
