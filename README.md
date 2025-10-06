@@ -83,6 +83,14 @@ Common components can be put into the Saas Factory base project and domain speci
 As a general rule of thumb test common components in your own clone before you contribute them into this repo.
 
 
-
 #### Syncing the project
 
+Add this to your package.json: 
+
+```json
+"scripts" {
+    "merge:factory": "git checkout saas-factory && git pull && git checkout - && git merge -X ours saas-factory"
+}
+```
+
+Now you can simply run `pnpm run merge:factory` to sync the factory repo with your current branch.
