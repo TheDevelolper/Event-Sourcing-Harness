@@ -1,9 +1,8 @@
-import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { RestaurantMenu } from "./RestaurantMenu";
 
 const meta: Meta<typeof RestaurantMenu> = {
-  title: "Organisms/RestaurantMenu",
+  title: "Organisms/Restaurant Menu",
   component: RestaurantMenu,
   tags: ["autodocs"],
 };
