@@ -30,7 +30,7 @@ const ProductCardExample = () => (
     <div className="p-4 pb-0">
       <div className="flex items-center justify-between">
         <h3 className="text-xl font-bold">Romana Chicken Pizza</h3>
-        <span className="text-lg font-semibold text-gray-800">12.99</span>
+        <span className="text-lg font-semibold text-gray-800 self-start">12.99</span>
       </div>
     </div>
     <div className="p-4">
