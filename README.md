@@ -1,41 +1,72 @@
-# SaasFactory
+# SaaS Factory
 
-This is just a quick example of how to use Event Sourcing without DDD. I just wanted something simple where I can try 
-out different transport layers and tooling. 
+A starter project for building SaaS applications with: 
+- A component library built with Tailwind, and Storybook integrations.
+- A Modular Dotnet backend with 
+    - Event Sourcing
+    - Aspire
+    - Keycloak Authentication Set up and ready to go
 
 ## Getting Started
 
-Run the Aspire Host Application, this will start the project and any required containers. 
+### 1. Clone the repo
 
-There's a .http file in the ./Http diectory, use it to deposit money into an account
-Then go to: `api/accounts/<account id>/balance` to view the balance of that account. 
-
-If you wish to deposit more money into that account then ensure you change the transaction ID in the http file.
-
-## Notes and Scribbles: 
-
-### Add An Aspire Project
-```powershell 
-> dotnet new install Aspire.ProjectTemplates
-> dotnet new aspire-apphost -o SaasFactory.AppHost
-> dotnet sln add SaasFactory.AppHost
-> dotnet add .\SaasFactory.AppHost\SaasFactory.AppHost.csproj reference .\SaasFactory\SaasFactory.csproj
-```
-Add a service defaults which provides Open Telemetry: 
-
-``` powershell
-> dotnet new aspire-servicedefaults -o SaasFactory.ServiceDefaults
-> dotnet sln add SaasFactory.ServiceDefaults
-> dotnet add .\SaasFactory.AppHost\SaasFactory.AppHost.csproj reference .\SaasFactory.ServiceDefaults\SaasFactory.ServiceDefaults.csproj
+```bash
+git clone https://github.com/TheDevelolper/Saas-Factory.git
+cd saas-factory
 ```
 
-Then add this to the apphost:
-
-```csharp 
-// apphost.cs
-builder.AddServiceDefaults();
+### 2. Install dependencies
+```bash
+pnpm install
 ```
 
-## References
+### 4. Run Storybook
+```bash
+pnpm storybook
+```
 
-[Telerik Blog - event sourcing aspnet core how store changes events](https://www.telerik.com/blogs/event-sourcing-aspnet-core-how-store-changes-events?ref=dailydev#creating-the-controller-class)
+### Building Your App
+
+Create your own application and set SaaS Factory as an upstream to pull updates and stay in sync with the starter project.
+
+#### 1. Create a new repository
+
+Go to GitHub and create a new repository for your project, e.g., `my-saas-app`.
+
+#### 2. Clone your new repository
+
+```bash
+git clone https://github.com/your-username/my-saas-app.git
+cd my-saas-app
+```
+
+3. Add SaaS Factory as an upstream remote
+```bash
+git remote add upstream https://github.com/TheDevelolper/Saas-Factory.git
+```
+
+4. Fetch upstream branches
+```bash
+git fetch upstream
+```
+
+5. Create a branch for syncing upstream (optional)
+```bash
+git checkout -b upstream-sync upstream/main
+```
+
+6. Merge or rebase upstream changes into your main branch
+
+```bash
+git merge upstream-sync
+```
+
+
+#### Creating API Modules
+You can create api modules in the .NET backend see the example banking module for more details
+
+#### Building Frontend Applications
+Common components can be put into the Saas Factory base project and domain specific ones should be placed in your own project.
+
+As a general rule of thumb test common components in your own clone before you contribute them into this repo.
