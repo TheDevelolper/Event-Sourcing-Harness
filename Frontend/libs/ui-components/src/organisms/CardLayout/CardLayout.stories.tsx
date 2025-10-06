@@ -1,7 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { CardLayout, CardLayoutProps } from "./CardLayout";
-import { Card } from "../../molecules/card/Card";
+import { Card } from "../../molecules/Card/Card";
 import { Button } from "../../atoms/Button/Button";
 
 const meta: Meta<typeof CardLayout> = {
