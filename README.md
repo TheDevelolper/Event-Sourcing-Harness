@@ -43,25 +43,36 @@ cd my-saas-app
 
 3. Add SaaS Factory as an upstream remote
 ```bash
-git remote add upstream https://github.com/TheDevelolper/Saas-Factory.git
+git remote add saas-factory https://github.com/TheDevelolper/Saas-Factory.git
 ```
 
 4. Fetch upstream branches
 ```bash
-git fetch upstream
+git fetch saas-factory
 ```
 
 5. Create a branch for syncing upstream (optional)
 ```bash
-git checkout -b upstream-sync upstream/main
+git checkout -b saas-factory saas-factory/main
+git switch main
 ```
 
 6. Merge or rebase upstream changes into your main branch
 
 ```bash
-git merge upstream-sync
+git merge -X ours saas-factory --allow-unrelated-histories
 ```
 
+7. Install frontend dependencies
+```bash
+cd Frontend
+pnpm install
+```
+
+8. Run Storybook
+```bash
+pnpm run storybook
+```
 
 #### Creating API Modules
 You can create api modules in the .NET backend see the example banking module for more details
@@ -70,3 +81,8 @@ You can create api modules in the .NET backend see the example banking module fo
 Common components can be put into the Saas Factory base project and domain specific ones should be placed in your own project.
 
 As a general rule of thumb test common components in your own clone before you contribute them into this repo.
+
+
+
+#### Syncing the project
+
