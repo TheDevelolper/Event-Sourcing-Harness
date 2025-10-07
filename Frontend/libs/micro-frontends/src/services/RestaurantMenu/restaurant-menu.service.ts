@@ -1,5 +1,5 @@
+import { MenuItem } from "@ui-models";
 import axios from "axios";
-import { MenuItem } from "../../../../ui-models/src";
 
 export class RestaurantMenuService {
   constructor(private readonly menuUrl: string) {}
@@ -21,7 +21,6 @@ export class RestaurantMenuService {
           ? JSON.parse(response.data)
           : response.data;
 
-  
       return this.menuItems as Record<string, MenuItem[]>;
     } catch (error) {
       console.error("Error fetching menu items:", error);
