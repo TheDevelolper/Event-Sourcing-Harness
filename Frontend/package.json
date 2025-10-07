@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "pnpm run dev:web",
     "dev": "concurrently \"pnpm run storybook\" \"pnpm run dev:web\" ",
     "storybook": "pnpm --filter ui-components storybook",
     "dev:web": "pnpm --filter web dev",
@@ -19,7 +20,9 @@
     "@tailwindcss/vite": "^4.1.14",
     "concurrently": "^9.2.1",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "ui-components": "workspace:*",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
