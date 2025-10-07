@@ -63,7 +63,7 @@ builder.AddNpmApp("Storybook", workingDirectory: @"..\..\..\Frontend\", scriptNa
     .WithExternalHttpEndpoints()
     .PublishAsDockerFile();
 
-builder.AddNpmApp("Website", workingDirectory: @"..\..\..\Frontend\", scriptName: "dev:web")
+builder.AddNpmApp("QRCodeSite", workingDirectory: @"..\..\..\Frontend\", scriptName: "dev:web")
     .WithHttpEndpoint(env: "PORT", port: 4200, targetPort: 5173)
     .WithExternalHttpEndpoints()
     .PublishAsDockerFile();
