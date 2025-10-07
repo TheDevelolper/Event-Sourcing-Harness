@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "pnpm run dev:web",
+    "test": "npx jest",
     "dev": "concurrently \"pnpm run storybook\" \"pnpm run dev:web\" ",
     "storybook": "pnpm --filter ui-components storybook",
     "dev:web": "pnpm --filter web dev",
