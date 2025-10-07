@@ -14,4 +14,12 @@ export default defineConfig({
       "@ui-components": path.resolve(__dirname, "libs/ui-components/src"),
     },
   },
+  optimizeDeps: {
+    exclude: [
+      "@swc/core",
+      "@swc/core-win32-x64-msvc",
+      "@swc/wasm",
+      "lightningcss",
+    ],
+  },
 });
