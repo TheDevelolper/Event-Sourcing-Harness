@@ -28,5 +28,5 @@
   "include": [
     "apps/**/*.ts",
     "libs/**/*.ts"
-  ]
+, "apps/web/src/auth/authentication-service.ts", "apps/web/src/auth/keycloak-provider.tsx"  ]
 }
