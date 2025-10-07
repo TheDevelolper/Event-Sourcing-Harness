@@ -1,11 +1,30 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@ui-models": [
+        "./libs/ui-models/src/"
+      ],
+      "@micro-frontends": [
+        "./libs/micro-frontends/src/"
+      ],
+      "@ui-components": [
+        "./libs/ui-components/src/"
+      ]
     },
-    {
-      "path": "./tsconfig.node.json"
-    }
+    "jsx": "react-jsx",
+    "module": "commonjs",
+    "target": "ES6",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "types": [
+      "node",
+      "jest"
+    ]
+  },
+  "include": [
+    "apps/**/*.ts",
+    "libs/**/*.ts"
   ]
 }
