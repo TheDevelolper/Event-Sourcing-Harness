@@ -22,31 +22,29 @@ export const KeycloakProvider = ({ children }: KeycloakProviderProps) => {
         window.history.replaceState(
           {},
           document.title,
-          window.location.origin + "/"
+          window.location.origin + window.location.pathname
         );
       }
 
       keycloak
         .init({
-          onLoad: "login-required",
+          onLoad: "check-sso",
           checkLoginIframe: false,
-          redirectUri: window.location.origin + "/",
+          // redirectUri: window.location.href,
           flow: "implicit",
         })
-        .then((auth) => {
-          console.log("Keycloak auth:", auth, keycloak.authenticated);
+        .then(() => {
           setAuthenticated(keycloak.authenticated ?? false);
           setInitialized(true);
         })
-        .catch((err) => {
+        .catch((err: Error) => {
           console.error("Keycloak init failed:", err);
           setInitialized(true);
         });
     }
   }, []);
 
-  if (!initialized) return <div>Loading authentication...</div>;
-  if (!authenticated) return <div>Not authenticated</div>;
+  if (!initialized) return <div></div>;
 
   return (
     <KeycloakContext.Provider value={keycloak}>
