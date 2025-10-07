@@ -1,14 +1,23 @@
 import { useState } from "react";
+import { useContext } from "react";
+import { KeycloakContext } from "./auth/keycloak-provider";
+
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
+
 import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
+  const keycloak = useContext(KeycloakContext);
+
+  if (!keycloak) return null;
 
   return (
     <>
-      <h1 className="text-3xl font-bold underline bg-blue-600">Hello world!</h1>
+      <h1 className="text-3xl font-bold underline bg-blue-600">
+        Hello Tailwind
+      </h1>
 
       <div>
         <a href="https://vite.dev" target="_blank">
