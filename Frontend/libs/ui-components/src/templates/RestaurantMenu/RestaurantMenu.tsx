@@ -2,14 +2,7 @@ import React, { useState } from "react";
 import { Button } from "../../atoms/Button/Button";
 import { CardLayout } from "../../organisms/CardLayout/CardLayout";
 import { Card } from "../../molecules/Card/Card";
-
-export interface MenuItem {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-}
+import { MenuItem } from "../../models/MenuItem";
 
 const sampleMenu: Record<string, MenuItem[]> = {
   Mains: [
@@ -18,7 +11,8 @@ const sampleMenu: Record<string, MenuItem[]> = {
       name: "Romana Chicken Pizza",
       description: "Classic Italian pizza with fresh tomatoes and mozzarella.",
       price: 12.99,
-      image: "https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg",
+      image:
+        "https://images.pexels.com/photos/29839587/pexels-photo-29839587.jpeg",
     },
     {
       id: 2,
@@ -27,10 +21,58 @@ const sampleMenu: Record<string, MenuItem[]> = {
       price: 13.99,
       image: "https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg",
     },
+    {
+      id: 3,
+      name: "Pepperoni Feast Pizza",
+      description: "Loaded with spicy pepperoni and mozzarella cheese.",
+      price: 14.49,
+      image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg",
+    },
+
+    {
+      id: 4,
+      name: "BBQ Chicken Pizza",
+      description: "Grilled chicken, BBQ sauce, and red onions. ",
+      price: 14.99,
+      image:
+        "https://images.pexels.com/photos/5639548/pexels-photo-5639548.jpeg",
+    },
+    {
+      id: 5,
+      name: "Margherita Pizza",
+      description: "Fresh basil, tomatoes, and mozzarella on a thin crust.",
+      price: 12.49,
+      image:
+        "https://images.pexels.com/photos/13814644/pexels-photo-13814644.jpeg",
+    },
+    {
+      id: 6,
+      name: "Four Cheese Pizza",
+      description: "A blend of mozzarella, cheddar, parmesan, and blue cheese.",
+      price: 15.49,
+      image:
+        "https://images.pexels.com/photos/33592983/pexels-photo-33592983.jpeg",
+    },
+    {
+      id: 7,
+      name: "Spicy Sausage Pizza",
+      description: "Italian sausage, jalapeños, and mozzarella.",
+      price: 14.99,
+      image:
+        "https://images.pexels.com/photos/27600445/pexels-photo-27600445.jpeg",
+    },
+    {
+      id: 8,
+      name: "Hawaiian Pizza",
+      description: "Ham, pineapple, and mozzarella cheese.",
+      price: 13.99,
+      image:
+        "https://images.pexels.com/photos/14334060/pexels-photo-14334060.jpeg",
+    },
   ],
   Drinks: [
     {
-      id: 3,
+      id: 10,
       name: "Coca Cola",
       description: "Refreshing soda drink.",
       price: 2.99,
@@ -39,13 +81,54 @@ const sampleMenu: Record<string, MenuItem[]> = {
   ],
   Desserts: [
     {
-      id: 4,
+      id: 11,
       name: "Tiramisu",
       description: "Classic Italian dessert.",
       price: 5.99,
       image: "https://images.pexels.com/photos/302680/pexels-photo-302680.jpeg",
     },
   ],
+};
+
+export interface RestaurantMenuCardProps {
+  item: MenuItem;
+}
+
+export const RestaurantMenuCard: React.FC<RestaurantMenuCardProps> = ({
+  item,
+}) => {
+  return (
+    <Card
+      key={item.id}
+      padding="none"
+      shadow
+      className="overflow-hidden relative"
+    >
+      <div
+        className="w-full h-60 bg-cover bg-center"
+        style={{ backgroundImage: `url('${item.image}')` }}
+      />
+
+      <div className="p-4 pb-1">
+        <div className="flex items-center justify-between">
+          <h3 className="text-xl font-bold line-clamp-2">{item.name}</h3>
+          <span className="text-lg font-semibold text-gray-800 self-start">
+            {item.price.toFixed(2)}
+          </span>
+        </div>
+      </div>
+
+      <div className="p-4 pb-12 mb-4">
+        <p className="text-gray-700 text-left line-clamp-2">
+          {item.description}
+        </p>
+      </div>
+
+      <div className="absolute right-4 bottom-4">
+        <Button variant="primary">More</Button>
+      </div>
+    </Card>
+  );
 };
 
 export const RestaurantMenu: React.FC = () => {
@@ -98,36 +181,10 @@ export const RestaurantMenu: React.FC = () => {
       {/* Item grid */}
       <CardLayout className="max-w-300">
         {sampleMenu[selectedCategory].map((item) => (
-          <Card
-            key={item.id}
-            padding="none"
-            shadow
-            className="overflow-hidden relative" // <-- add relative
-          >
-            <div
-              className="w-full h-40 bg-cover bg-center"
-              style={{ backgroundImage: `url('${item.image}')` }}
-            />
-
-            <div className="p-4 mb-2 h-12">
-              <div className="flex items-center justify-between">
-                <h3 className="text-xl font-bold">{item.name}</h3>
-                <span className="text-lg font-semibold text-gray-800 self-start">
-                  {item.price.toFixed(2)}
-                </span>
-              </div>
-            </div>
-
-            {/* give content extra bottom padding so the absolute button won't overlap */}
-            <div className="p-4 pb-12 mb-4">
-              <p className="text-gray-700">{item.description}</p>
-            </div>
-
-            {/* absolutely-placed button in bottom-right */}
-            <div className="absolute right-4 bottom-4">
-              <Button variant="primary">More</Button>
-            </div>
-          </Card>
+          <RestaurantMenuCard
+            key={`menu-item-${item.id}`}
+            item={item}
+          ></RestaurantMenuCard>
         ))}
       </CardLayout>
     </div>
