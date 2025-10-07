@@ -12,6 +12,39 @@ const meta: Meta<typeof Card> = {
 export default meta;
 type Story = StoryObj<typeof Card>;
 
+export const ProductCardExample = (args: CardProps) => (
+  <Card {...args} padding="none" shadow className="overflow-hidden relative">
+    <div
+      className="w-full h-40 bg-cover bg-center"
+      style={{
+        backgroundImage:
+          "url('https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg')",
+      }}
+    />
+
+    <div className="p-4 mb-2 h-12">
+      <div className="flex items-center justify-between">
+        <h3 className="text-xl font-bold">Romana Chicken Pizza</h3>
+        <span className="text-lg font-semibold text-gray-800 self-start">
+          12.99
+        </span>
+      </div>
+    </div>
+
+    {/* give content extra bottom padding so the absolute button won't overlap */}
+    <div className="p-4 pb-12 mb-4">
+      <p className="text-gray-700">
+        Classic Italian pizza with fresh tomatoes, mozzarella cheese, and basil.
+      </p>
+    </div>
+
+    {/* absolutely-placed button in bottom-right */}
+    <div className="absolute right-4 bottom-4">
+      <Button variant="primary">More</Button>
+    </div>
+  </Card>
+);
+
 export const Default: Story = {
   args: {
     children: "This is a simple card content.",
@@ -44,36 +77,5 @@ export const ProductCard: Story = {
     padding: "none",
   },
 
-  render: (args) => (
-    <Card {...args} className="overflow-hidden w-90 h-100">
-      {/* Image section */}
-      <div
-        className="w-full h-1/2 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg')",
-        }}
-      ></div>
-
-      {/* Text section */}
-      <div className="p-4 pb-0">
-        <div className="flex items-center justify-between">
-          <h3 className="text-xl font-bold">Romana Chicken Pizza</h3>
-          <span className="text-lg font-semibold text-gray-800 self-start">
-            12.99
-          </span>
-        </div>
-      </div>
-      <div className="p-4">
-        <p className="text-gray-700">
-          Classic Italian pizza with fresh tomatoes, mozzarella cheese, and
-          basil. Perfectly baked with a thin, crispy crust.
-        </p>
-
-        <div className="flex justify-end">
-          <Button variant="primary">More</Button>
-        </div>
-      </div>
-    </Card>
-  ),
+  render: (args) => ProductCardExample(args),
 };
