@@ -18,7 +18,7 @@ import Team from "./Admin/Team";
 
 const navigation = [
   { name: "Dashboard", href: "/admin", icon: HomeIcon, current: true },
-  { name: "Team", href: "/admin/world", icon: UsersIcon, current: false },
+  { name: "Team", href: "/admin/team", icon: UsersIcon, current: false },
   { name: "Projects", href: "#", icon: FolderIcon, current: false },
   { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
   { name: "Documents", href: "#", icon: DocumentDuplicateIcon, current: false },
@@ -44,7 +44,7 @@ export default function Admin() {
 
         <Routes>
           <Route path="" element={<Dashboard />} />
-          <Route path="world" element={<Team />} />
+          <Route path="team" element={<Team />} />
         </Routes>
       </div>
     </div>
