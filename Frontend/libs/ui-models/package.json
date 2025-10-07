@@ -1,0 +1,5 @@
+{
+  "name": "ui-models",
+  "private": true,
+  "main": "src/index.ts"
+}
