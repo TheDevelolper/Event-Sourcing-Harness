@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "../../atoms/Button/Button";
 import { CardLayout } from "../../organisms/CardLayout/CardLayout";
 import { Card } from "../../molecules/Card/Card";
-import { MenuItem } from "../../models/MenuItem";
+import { MenuItem } from "../../../../ui-models/src";
 
 const sampleMenu: Record<string, MenuItem[]> = {
   Mains: [

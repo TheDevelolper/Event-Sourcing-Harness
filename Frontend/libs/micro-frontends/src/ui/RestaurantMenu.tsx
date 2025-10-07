@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { RestaurantMenu as UiRestaurantMenu } from "../../../ui-components/src";
+import { RestaurantMenu as UiRestaurantMenu } from "@ui-components";
 import { RestaurantMenuService } from "../services/RestaurantMenu/restaurant-menu.service";
 import { MenuItem } from "../../../ui-models/src";
 

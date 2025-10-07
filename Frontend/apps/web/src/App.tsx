@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
-import { RestaurantMenu } from "ui-components";
+import { RestaurantMenu } from "@micro-frontends";
+
 function App() {
   return (
     <div>
