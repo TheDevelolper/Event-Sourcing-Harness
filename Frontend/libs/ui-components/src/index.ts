@@ -1,1 +1,1 @@
-export * from "./Button";
+export { RestaurantMenu } from "./templates/RestaurantMenu/RestaurantMenu";
