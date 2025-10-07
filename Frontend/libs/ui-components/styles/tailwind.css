@@ -1,0 +1,33 @@
+@import "tailwindcss";
+@source "../../../node_modules/ui-components";
+
+:root {
+    --color-primary-hue: 178;
+    --color-secondary-hue: 300.18;
+}
+
+@theme {
+
+    --color-primary-50: oklch(0.95 0.05 var(--color-primary-hue));
+    --color-primary-100: oklch(0.88 0.07 var(--color-primary-hue));
+    --color-primary-200: oklch(0.80 0.09 var(--color-primary-hue));
+    --color-primary-300: oklch(0.74 0.10 var(--color-primary-hue));
+    --color-primary-400: oklch(0.72 0.11 var(--color-primary-hue));
+    --color-primary-500: oklch(0.65 0.12 var(--color-primary-hue));
+    --color-primary-600: oklch(0.58 0.12 var(--color-primary-hue));
+    --color-primary-700: oklch(0.50 0.13 var(--color-primary-hue));
+    --color-primary-800: oklch(0.42 0.14 var(--color-primary-hue));
+    --color-primary-900: oklch(0.35 0.15 var(--color-primary-hue));
+
+    --color-secondary-50: oklch(0.95 0.05 var(--color-secondary-hue));
+    --color-secondary-100: oklch(0.88 0.07 var(--color-secondary-hue));
+    --color-secondary-200: oklch(0.80 0.09 var(--color-secondary-hue));
+    --color-secondary-300: oklch(0.74 0.10 var(--color-secondary-hue));
+    --color-secondary-400: oklch(0.72 0.11 var(--color-secondary-hue));
+    --color-secondary-500: oklch(0.65 0.12 var(--color-secondary-hue));
+    --color-secondary-600: oklch(0.58 0.12 var(--color-secondary-hue));
+    --color-secondary-700: oklch(0.50 0.13 var(--color-secondary-hue));
+    --color-secondary-800: oklch(0.42 0.14 var(--color-secondary-hue));
+    --color-secondary-900: oklch(0.35 0.15 var(--color-secondary-hue));
+
+}
