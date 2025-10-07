@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "../../atoms/Button/Button";
 import { CardLayout } from "../../organisms/CardLayout/CardLayout";
-import { Card } from "../../molecules/card/Card";
+import { Card } from "../../molecules/Card/Card";
 
 export interface MenuItem {
   id: number;
@@ -53,7 +53,7 @@ export const RestaurantMenu: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 
   return (
-    <div className="space-y-4 ">
+    <div className="space-y-4">
       {/* Category selector */}
       <div className="flex justify-end mb-8">
         <label className="align-center p-2 pr-4" htmlFor="select-menu">
