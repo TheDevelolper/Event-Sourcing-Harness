@@ -1,11 +1,18 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.node.json"
-    }
+  "compilerOptions": {
+    "types": [
+      "node",
+      "jest"
+    ],
+    "module": "commonjs",
+    "target": "ES6",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true
+  },
+  "include": [
+    "apps/**/*.ts",
+    "libs/**/*.ts",
+    "libs/**/*.test.ts"
   ]
 }

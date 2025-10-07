@@ -9,9 +9,11 @@ export default defineConfig({
   plugins: [react(), tailwindcss(), tsconfigPaths()],
   resolve: {
     alias: {
+      "micro-frontends": path.resolve(__dirname, "libs/micro-frontends/src"),
+      "ui-models": path.resolve(__dirname, "libs/ui-components/src"),
       "ui-components": path.resolve(__dirname, "libs/ui-components/src"),
-      react: path.resolve(__dirname, "node_modules/react"),
-      "react-dom": path.resolve(__dirname, "node_modules/react-dom"),
+      // react: path.resolve(__dirname, "node_modules/react"),
+      // "react-dom": path.resolve(__dirname, "node_modules/react-dom"),
     },
   },
 });
