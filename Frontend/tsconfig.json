@@ -13,9 +13,11 @@
       ]
     },
     "jsx": "react-jsx",
-    "module": "commonjs",
-    "target": "ES6",
+    "module": "esnext",
+    "target": "esnext",
     "esModuleInterop": true,
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "types": [
