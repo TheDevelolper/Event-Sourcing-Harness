@@ -1,3 +1,4 @@
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -54,5 +55,17 @@ eventsDb.OnConnectionStringAvailable(async (db, evt, ct) =>
 
 webApiProjectBuilder
     .WaitFor(postgres);
+
+
+builder.AddNpmApp("Storybook", workingDirectory: @"..\..\..\Frontend\", scriptName: "storybook")
+    .WithEnvironment("BROWSER", "none") // Disable opening browser on npm start
+    .WithHttpEndpoint(env: "PORT", port: 4300, targetPort: 6006)
+    .WithExternalHttpEndpoints()
+    .PublishAsDockerFile();
+
+builder.AddNpmApp("Website", workingDirectory: @"..\..\..\Frontend\", scriptName: "dev:web")
+    .WithHttpEndpoint(env: "PORT", port: 4200, targetPort: 5173)
+    .WithExternalHttpEndpoints()
+    .PublishAsDockerFile();
 
 await builder.Build().RunAsync();
