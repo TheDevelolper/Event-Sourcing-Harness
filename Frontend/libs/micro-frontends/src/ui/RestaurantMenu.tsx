@@ -4,8 +4,6 @@ import { RestaurantMenuService } from "../services/RestaurantMenu/restaurant-men
 import { MenuItem } from "../../../ui-models/src";
 
 export const RestaurantMenu: React.FC = () => {
-  console.log("RestaurantMenu rendered");
-
   const [menu, setMenu] = useState<Record<string, MenuItem[]> | null>();
 
   const service: RestaurantMenuService = new RestaurantMenuService(
