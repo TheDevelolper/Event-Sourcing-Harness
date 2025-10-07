@@ -13,8 +13,8 @@ import {
 } from "@heroicons/react/24/outline";
 import Sidebar from "./Admin/Sidebar";
 
-import Hello from "./Admin/Dashboard";
-import World from "./Admin/World";
+import Dashboard from "./Admin/Dashboard";
+import Team from "./Admin/Team";
 
 const navigation = [
   { name: "Dashboard", href: "/admin", icon: HomeIcon, current: true },
@@ -43,8 +43,8 @@ export default function Admin() {
         <Sidebar navigation={navigation}></Sidebar>
 
         <Routes>
-          <Route path="" element={<Hello />} />
-          <Route path="world" element={<World />} />
+          <Route path="" element={<Dashboard />} />
+          <Route path="world" element={<Team />} />
         </Routes>
       </div>
     </div>
