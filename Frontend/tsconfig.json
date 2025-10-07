@@ -1,18 +1,30 @@
 {
   "compilerOptions": {
-    "types": [
-      "node",
-      "jest"
-    ],
+    "baseUrl": ".",
+    "paths": {
+      "@ui-models": [
+        "./libs/ui-models/src/"
+      ],
+      "@micro-frontends": [
+        "./libs/micro-frontends/src/"
+      ],
+      "@ui-components": [
+        "./libs/ui-components/src/"
+      ]
+    },
+    "jsx": "react-jsx",
     "module": "commonjs",
     "target": "ES6",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true
+    "strict": true,
+    "types": [
+      "node",
+      "jest"
+    ]
   },
   "include": [
     "apps/**/*.ts",
-    "libs/**/*.ts",
-    "libs/**/*.test.ts"
+    "libs/**/*.ts"
   ]
 }
