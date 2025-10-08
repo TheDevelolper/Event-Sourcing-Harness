@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { useAuthStore } from "../store/useAuthStore";
 import { KeycloakContext } from "./keycloak-provider";
 
 export function ProtectedRoute({ children }) {
@@ -13,6 +13,7 @@ export function ProtectedRoute({ children }) {
     return <p>Redirecting to login...</p>;
   }
 
-  // Authenticated → render the protected content
+  // Authenticated → update store and render the protected content
+  useAuthStore.getState().setUser(keycloak.idToken);
   return children;
 }

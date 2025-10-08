@@ -1,17 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import { useAdminDashboardStore } from "../store/useAdminDashboardStore";
 
-import {
-  CalendarIcon,
-  ChartPieIcon,
-  DocumentDuplicateIcon,
-  FolderIcon,
-  HomeIcon,
-  UsersIcon,
-} from "@heroicons/react/24/outline";
+import { useAdminDashboardStore } from "../store/useAdminDashboardStore";
+import { useAuthStore } from "../store/useAuthStore";
+
 import Sidebar from "./Admin/Sidebar";
 
 import Dashboard from "./Admin/Dashboard";
@@ -29,6 +23,7 @@ function classNames(...classes) {
 export default function Admin() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { currentPage, setCurrentPage } = useAdminDashboardStore();
+  const { user } = useAuthStore();
 
   useEffect(() => {
     const routes: Record<string, string> = {
@@ -46,7 +41,11 @@ export default function Admin() {
   return (
     <div>
       <div className="flex w-full">
-        <Sidebar navigation={navigation} currentPage={currentPage}></Sidebar>
+        <Sidebar
+          navigation={navigation}
+          user={user}
+          currentPage={currentPage}
+        ></Sidebar>
 
         <Routes>
           <Route path="" element={<Dashboard />} />

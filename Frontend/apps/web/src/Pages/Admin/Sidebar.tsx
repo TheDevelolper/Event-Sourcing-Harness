@@ -1,33 +1,25 @@
 "use client";
 
-import { useState } from "react";
 import {
   Dialog,
   DialogBackdrop,
   DialogPanel,
   TransitionChild,
 } from "@headlessui/react";
-import {
-  Bars3Icon,
-  CalendarIcon,
-  ChartPieIcon,
-  DocumentDuplicateIcon,
-  FolderIcon,
-  HomeIcon,
-  UsersIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useState } from "react";
+import { UserData } from "../../store/useAuthStore";
 
 export interface NavigationItem {
   name: string;
   href: string;
   icon: any;
-  current: boolean;
 }
 
 export interface SidebarProps {
   navigation: NavigationItem[];
   currentPage: string;
+  user: UserData;
 }
 
 const teams = [
@@ -250,11 +242,13 @@ export default function Sidebar(props: SidebarProps) {
                   >
                     <img
                       alt=""
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      src="/profile.webp"
                       className="size-8 rounded-full bg-gray-50 outline -outline-offset-1 outline-black/5"
                     />
                     <span className="sr-only">Your profile</span>
-                    <span aria-hidden="true">Tom Cook</span>
+                    <span aria-hidden="true">
+                      {props.user.given_name} {props.user.family_name}
+                    </span>
                   </a>
                 </li>
               </ul>
