@@ -7,14 +7,11 @@ import Home from "./Pages/Home";
 
 import "./App.css";
 
-
 function App() {
   const keycloak = useContext(KeycloakContext);
 
   if (!keycloak) return null;
 
-
-     
   return (
     <div>
       <Routes>
