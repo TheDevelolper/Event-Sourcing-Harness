@@ -27,6 +27,7 @@ export interface NavigationItem {
 
 export interface SidebarProps {
   navigation: NavigationItem[];
+  currentPage: string;
 }
 
 const teams = [
@@ -102,7 +103,8 @@ export default function Sidebar(props: SidebarProps) {
                             <a
                               href={item.href}
                               className={classNames(
-                                item.current
+                                props.currentPage?.toLowerCase() ===
+                                  item.name.toLowerCase()
                                   ? "bg-gray-50 text-indigo-600"
                                   : "text-gray-700 hover:bg-gray-50 hover:text-indigo-600",
                                 "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold"
@@ -111,7 +113,7 @@ export default function Sidebar(props: SidebarProps) {
                               <item.icon
                                 aria-hidden="true"
                                 className={classNames(
-                                  item.current
+                                  props.currentPage === item.name.toLowerCase()
                                     ? "text-indigo-600"
                                     : "text-gray-400 group-hover:text-indigo-600",
                                   "size-6 shrink-0"
@@ -184,7 +186,8 @@ export default function Sidebar(props: SidebarProps) {
                             <a
                               href={item.href}
                               className={classNames(
-                                item.current
+                                props.currentPage?.toLowerCase() ===
+                                  item.name.toLowerCase()
                                   ? "bg-gray-50 text-indigo-600"
                                   : "text-gray-700 hover:bg-gray-50 hover:text-indigo-600",
                                 "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold"
@@ -193,7 +196,8 @@ export default function Sidebar(props: SidebarProps) {
                               <item.icon
                                 aria-hidden="true"
                                 className={classNames(
-                                  item.current
+                                  props.currentPage?.toLowerCase() ===
+                                    item.name.toLowerCase()
                                     ? "text-indigo-600"
                                     : "text-gray-400 group-hover:text-indigo-600",
                                   "size-6 shrink-0"

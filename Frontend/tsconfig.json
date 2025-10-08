@@ -13,8 +13,9 @@
       ]
     },
     "jsx": "react-jsx",
-    "module": "esnext",
-    "target": "esnext",
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
@@ -27,6 +28,8 @@
   },
   "include": [
     "apps/**/*.ts",
-    "libs/**/*.ts"
-, "apps/web/src/auth/authentication-service.ts", "apps/web/src/auth/keycloak-provider.tsx"  ]
+    "libs/**/*.ts",
+    "apps/web/src/auth/authentication-service.ts",
+    "apps/web/src/auth/keycloak-provider.tsx"
+  ]
 }

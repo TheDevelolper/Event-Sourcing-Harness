@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import { useAdminDashboardStore } from "../store/useAdminDashboardStore";
 
 import {
   CalendarIcon,
@@ -17,17 +18,8 @@ import Dashboard from "./Admin/Dashboard";
 import Team from "./Admin/Team";
 
 const navigation = [
-  { name: "Dashboard", href: "/admin", icon: HomeIcon, current: true },
-  { name: "Team", href: "/admin/team", icon: UsersIcon, current: false },
-  { name: "Projects", href: "#", icon: FolderIcon, current: false },
-  { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
-  { name: "Documents", href: "#", icon: DocumentDuplicateIcon, current: false },
-  { name: "Reports", href: "#", icon: ChartPieIcon, current: false },
-];
-const teams = [
-  { id: 1, name: "Heroicons", href: "#", initial: "H", current: false },
-  { id: 2, name: "Tailwind Labs", href: "#", initial: "T", current: false },
-  { id: 3, name: "Workcation", href: "#", initial: "W", current: false },
+  { name: "Dashboard", href: "/admin", icon: HomeIcon },
+  { name: "Team", href: "/admin/team", icon: UsersIcon },
 ];
 
 function classNames(...classes) {
@@ -36,11 +28,25 @@ function classNames(...classes) {
 
 export default function Admin() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { currentPage, setCurrentPage } = useAdminDashboardStore();
+
+  useEffect(() => {
+    const routes: Record<string, string> = {
+      "/admin": "dashboard",
+      "/admin/team": "team",
+      "/admin/projects": "projects",
+      "/admin/calendar": "calendar",
+      "/admin/documents": "documents",
+      "/admin/reports": "reports",
+    };
+
+    setCurrentPage(routes[location.pathname] ?? "dashboard");
+  }, [location.pathname, setCurrentPage]);
 
   return (
     <div>
       <div className="flex w-full">
-        <Sidebar navigation={navigation}></Sidebar>
+        <Sidebar navigation={navigation} currentPage={currentPage}></Sidebar>
 
         <Routes>
           <Route path="" element={<Dashboard />} />
