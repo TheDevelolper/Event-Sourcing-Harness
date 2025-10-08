@@ -1,4 +1,3 @@
-// src/store/useAdminDashboardStore.js
 import { create } from "zustand";
 import { decodeToken } from "../auth/authentication-service";
 
@@ -27,4 +26,3 @@ export const useAuthStore = create<AuthStore>((set) => ({
   setUser: (token: string) => set({ user: decodeToken(token) }),
   clearUser: () => set({ user: null }),
 }));
-
