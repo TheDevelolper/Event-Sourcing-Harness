@@ -6,19 +6,20 @@ import { Route, Routes } from "react-router-dom";
 import { useAdminDashboardStore } from "../store/useAdminDashboardStore";
 import { useAuthStore } from "../store/useAuthStore";
 
+import { HomeIcon, UsersIcon } from "@heroicons/react/24/outline";
 import Sidebar from "./Admin/Sidebar";
 
 import Dashboard from "./Admin/Dashboard";
-import Team from "./Admin/Team";
+import Media from "./Admin/Media";
+import MenuItems from "./Admin/MenuItems";
+import Menus from "./Admin/Menus";
 
 const navigation = [
   { name: "Dashboard", href: "/admin", icon: HomeIcon },
-  { name: "Team", href: "/admin/team", icon: UsersIcon },
+  { name: "Menu Items", href: "/admin/menu-items", icon: UsersIcon },
+  { name: "Menus", href: "/admin/menus", icon: UsersIcon },
+  { name: "Media", href: "/admin/media", icon: UsersIcon },
 ];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function Admin() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -28,11 +29,9 @@ export default function Admin() {
   useEffect(() => {
     const routes: Record<string, string> = {
       "/admin": "dashboard",
-      "/admin/team": "team",
-      "/admin/projects": "projects",
-      "/admin/calendar": "calendar",
-      "/admin/documents": "documents",
-      "/admin/reports": "reports",
+      "/admin/menu-items": "menu items",
+      "/admin/menus": "menu",
+      "/admin/media": "media",
     };
 
     setCurrentPage(routes[location.pathname] ?? "dashboard");
@@ -49,7 +48,9 @@ export default function Admin() {
 
         <Routes>
           <Route path="" element={<Dashboard />} />
-          <Route path="team" element={<Team />} />
+          <Route path="menu-items" element={<MenuItems />} />
+          <Route path="menus" element={<Menus />} />
+          <Route path="media" element={<Media />} />
         </Routes>
       </div>
     </div>
