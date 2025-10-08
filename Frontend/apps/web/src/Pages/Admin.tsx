@@ -10,6 +10,7 @@ import Sidebar from "./Admin/Sidebar";
 
 import Dashboard from "./Admin/Dashboard";
 import Team from "./Admin/Team";
+import { HomeIcon, UsersIcon } from "@heroicons/react/24/outline";
 
 const navigation = [
   { name: "Dashboard", href: "/admin", icon: HomeIcon },
