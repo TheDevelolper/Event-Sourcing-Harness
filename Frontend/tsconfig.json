@@ -13,8 +13,9 @@
       ]
     },
     "jsx": "react-jsx",
-    "module": "commonjs",
-    "target": "ES6",
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -25,6 +26,8 @@
   },
   "include": [
     "apps/**/*.ts",
-    "libs/**/*.ts"
-, "apps/web/src/auth/authentication-service.ts", "apps/web/src/auth/keycloak-provider.tsx"  ]
+    "libs/**/*.ts",
+    "apps/web/src/auth/authentication-service.ts",
+    "apps/web/src/auth/keycloak-provider.tsx"
+  ]
 }
