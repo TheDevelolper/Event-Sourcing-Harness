@@ -15,7 +15,8 @@
         "react": "^19.2.0",
         "react-dom": "^19.2.0",
         "react-router-dom": "^7.9.3",
-        "tailwindcss": "^4.1.14"
+        "tailwindcss": "^4.1.14",
+        "zustand": "^5.0.8"
     },
     "devDependencies": {
         "@chromatic-com/storybook": "4.1.1",
