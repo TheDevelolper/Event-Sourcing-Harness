@@ -83,8 +83,6 @@ public static class BuilderExtensions
         return (crtPath, keyPath);
     }
     
-
-    
     public static IHostApplicationBuilder AddAuthentication(this IHostApplicationBuilder builder)
     {
     

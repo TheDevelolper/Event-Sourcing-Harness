@@ -52,6 +52,10 @@ eventsDb.OnConnectionStringAvailable(async (db, evt, ct) =>
         .WithReference(postgres);
 });
 
+builder.AddExecutable("docfx-site", "docfx", "../../../DocFx")
+    .WithArgs("build", "--serve", "-p", "4004")
+    .WithExternalHttpEndpoints();
+
 webApiProjectBuilder
     .WaitFor(postgres);
 
