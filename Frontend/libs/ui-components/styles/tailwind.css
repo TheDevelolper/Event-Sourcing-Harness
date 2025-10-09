@@ -1,0 +1,51 @@
+@import "tailwindcss";
+@source "../../../node_modules/ui-components";
+
+:root {
+    /* color-scheme: light dark;  <= switch on dark themes when ready! */
+
+    color-scheme: light;
+    --color-primary-hue: ;
+    --color-secondary-hue: 304.99 background-color: var(--color-body-bg);
+    color: var(--color-fg)
+}
+
+@theme {
+
+
+    --color-fg: light-dark(oklch(0.2033 0.0401 285.76), white);
+    --color-body-bg: light-dark(oklch(0.8947 0.0401 285.76), oklch(0.2033 0.0401 285.76));
+
+
+    --card-bg: light-dark(oklch(0.985 0.02 304.99), oklch(0.3247 0.0493 316.28));
+    --card-border: light-dark(oklch(0.85 0.02 304.99), oklch(0.45 0.14 304.99));
+
+    --card-primary-bg: light-dark(oklch(0.3588 0.1436 278.81), oklch(0.45 0.14 304.99));
+    --card-primary-text: light-dark(white, black);
+    --card-primary-border: light-dark(oklch(0.88 0.02 304.99), oklch(0.45 0.14 304.99));
+
+
+
+    --color-primary-50: oklch(0.985 0.02 var(--color-primary-hue));
+    --color-primary-100: oklch(0.97 0.04 var(--color-primary-hue));
+    --color-primary-200: oklch(0.93 0.06 var(--color-primary-hue));
+    --color-primary-300: oklch(0.88 0.08 var(--color-primary-hue));
+    --color-primary-400: oklch(0.82 0.09 var(--color-primary-hue));
+    --color-primary-500: oklch(0.75 0.10 var(--color-primary-hue));
+    --color-primary-600: oklch(0.65 0.12 var(--color-primary-hue));
+    --color-primary-700: oklch(0.55 0.13 var(--color-primary-hue));
+    --color-primary-800: oklch(0.45 0.14 var(--color-primary-hue));
+    --color-primary-900: oklch(0.35 0.15 var(--color-primary-hue));
+
+    --color-secondary-50: oklch(0.95 0.05 var(--color-secondary-hue));
+    --color-secondary-100: oklch(0.88 0.07 var(--color-secondary-hue));
+    --color-secondary-200: oklch(0.80 0.09 var(--color-secondary-hue));
+    --color-secondary-300: oklch(0.74 0.10 var(--color-secondary-hue));
+    --color-secondary-400: oklch(0.72 0.11 var(--color-secondary-hue));
+    --color-secondary-500: oklch(0.65 0.12 var(--color-secondary-hue));
+    --color-secondary-600: oklch(0.58 0.12 var(--color-secondary-hue));
+    --color-secondary-700: oklch(0.50 0.13 var(--color-secondary-hue));
+    --color-secondary-800: oklch(0.42 0.14 var(--color-secondary-hue));
+    --color-secondary-900: oklch(0.35 0.15 var(--color-secondary-hue));
+
+}

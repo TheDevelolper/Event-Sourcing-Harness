@@ -19,9 +19,11 @@ export const Card: React.FC<CardProps> = ({
   const baseStyles = "rounded-lg border transition-shadow duration-200";
 
   const variantStyles = {
-    default: "bg-white border-gray-200",
-    primary: "bg-primary-50 border-primary-200",
+    default: "bg-[var(--card-bg)]  border-[var(--card-border)]",
+    primary:
+      "bg-[var(--card-primary-bg)] text-white border-[var(--card-primary-border)]",
     accent: "bg-accent-50 border-accent-200",
+    custom: "",
   };
 
   const paddingStyles = {
