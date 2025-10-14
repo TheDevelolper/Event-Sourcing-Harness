@@ -1,0 +1,11 @@
+<Project>
+    <PropertyGroup>
+        <!-- Target framework for all projects -->
+        <TargetFramework>net9.0</TargetFramework>
+        <AssetTargetFallback>net8.0;net7.0;net6.0</AssetTargetFallback>
+
+        <!-- Optional restore flags to avoid stale CPM cache issues -->
+        <RestoreIgnoreFailedSources>true</RestoreIgnoreFailedSources>
+        <RestoreNoCache>true</RestoreNoCache>
+    </PropertyGroup>
+</Project>

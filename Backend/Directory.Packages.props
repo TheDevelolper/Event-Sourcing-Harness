@@ -1,0 +1,73 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- Enable central package management,
+    https://learn.microsoft.com/en-us/nuget/consume-packages/Central-Package-Management -->
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup>
+
+    <PackageVersion Include="Aspire.Hosting.AppHost" Version="9.4.2" />
+    <PackageVersion Include="Aspire.Hosting.NodeJs" Version="9.5.1" />
+    <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="9.4.2" />
+
+    <!-- these conflict Remove NETCORE SDK -->
+    <PackageVersion Include="Portable.BouncyCastle" Version="1.9.0" />
+    <PackageVersion Include="BouncyCastle.NetCoreSdk" Version="1.9.7" />
+
+    <PackageVersion Include="Semver" Version="3.0.0" />
+
+    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="9.7.0" />
+    <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="9.4.2" />
+    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.12.0" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.12.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.12.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.12.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.12.0" />
+
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="9.0.9" />
+    <PackageVersion Include="Aspire.Hosting.Keycloak" Version="9.4.2-preview.1.25428.12" />
+
+
+    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions"
+      Version="10.0.0-preview.7.25380.108" />
+
+    <!-- todo Remove MasTransit From Modules.Common and here -->
+    <PackageVersion Include="MassTransit" Version="8.5.3" />
+    <PackageVersion Include="MassTransit.Abstractions" Version="8.5.3" />
+
+
+    <PackageVersion Include="Marten" Version="8.13.1" />
+    <PackageVersion Include="Marten.AspNetCore" Version="8.13.1" />
+
+
+    <PackageVersion Include="coverlet.collector" Version="6.0.2" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageVersion Include="Microsoft.Playwright.NUnit" Version="1.49.0" />
+    <PackageVersion Include="TestStack.BDDfy.Xunit" Version="2.0.1" />
+    <PackageVersion Include="xunit" Version="2.9.3" />
+
+
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.8">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageVersion>
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.8" />
+
+
+    <PackageVersion Include="Aspire.Hosting" Version="9.4.2" />
+    <PackageVersion Include="Aspire.Hosting.RabbitMQ" Version="9.4.2" />
+
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.8" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration"
+      Version="10.0.0-preview.7.25380.108" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.FileExtensions"
+      Version="10.0.0-preview.7.25380.108" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json"
+      Version="10.0.0-preview.7.25380.108" />
+
+  </ItemGroup>
+
+</Project>
