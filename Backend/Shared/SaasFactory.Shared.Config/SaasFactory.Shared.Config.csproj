@@ -1,24 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
+  <PropertyGroup>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
 
-    <ItemGroup>
-      <None Update="appsettings.shared.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
+  <ItemGroup>
+    <None Update="appsettings.shared.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="Aspire.Hosting" Version="9.4.2" />
-      <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="9.4.2" />
-      <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.0-preview.7.25380.108" />
-      <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="10.0.0-preview.7.25380.108" />
-      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.0-preview.7.25380.108" />
-      <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.0-preview.7.25380.108" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting" />
+    <PackageReference Include="Aspire.Hosting.RabbitMQ" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
+  </ItemGroup>
 
 </Project>
