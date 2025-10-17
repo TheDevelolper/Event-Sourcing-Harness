@@ -37,6 +37,30 @@ export const Secondary: Story = {
   },
 };
 
+export const Info: Story = {
+  args: {
+    children: "Info Button",
+    variant: "info",
+    size: "md",
+  },
+};
+
+export const Success: Story = {
+  args: {
+    children: "Success Button",
+    variant: "success",
+    size: "md",
+  },
+};
+
+export const Warning: Story = {
+  args: {
+    children: "Warning Button",
+    variant: "warning",
+    size: "md",
+  },
+};
+
 export const Danger: Story = {
   args: {
     children: "Danger Button",
