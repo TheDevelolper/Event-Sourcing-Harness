@@ -23,76 +23,59 @@
     --color-bg: light-dark(oklch(0.95 0.02 300), oklch(0.10 0.04 300));
     --color-fg: light-dark(oklch(0.20 0.04 300), oklch(0.95 0.02 300));
 
+    --brand-hue: 350;
+    --brand-chroma-bg: 0.3;
+    --brand-chroma-fg: 0;
+    --brand-lightness-bg: 0.5;
+    --brand-lightness-fg: 1;
 
-    --primary-hue: 350;
-    --primary-chroma-bg: 0.3;
-    --primary-chroma-fg: 0;
-    --primary-lightness-bg: 0.47;
-    --primary-lightness-fg: 1;
+    --brand-hover-chroma-bg: 0.3;
+    --brand-hover-chroma-fg: 0;
+    --brand-hover-lightness-bg: 0.5;
+    --brand-hover-lightness-fg: 1;
 
-    --primary-hover-chroma-bg: 0.3;
-    --primary-hover-chroma-fg: 0;
-    --primary-hover-lightness-bg: 0.4;
-    --primary-hover-lightness-fg: 1;
+    --color-brand-bg: light-dark(oklch(var(--brand-lightness-bg) var(--brand-chroma-bg) var(--brand-hue)), oklch(var(--brand-lightness-bg) var(--brand-chroma-bg) var(--brand-hue)));
+    --color-brand-fg: light-dark(oklch(var(--brand-lightness-fg) var(--brand-chroma-fg) var(--brand-hue)), oklch(var(--brand-lightness-fg) var(--brand-chroma-fg) var(--brand-hue)));
+    --color-brand-hover-bg: light-dark(oklch(var(--brand-hover-lightness-bg) var(--brand-hover-chroma-bg) var(--brand-hue)), oklch(var(--brand-hover-lightness-bg) var(--brand-chroma-bg) var(--brand-hue)));
+    --color-brand-hover-fg: light-dark(oklch(var(--brand-hover-lightness-fg) var(--brand-hover-chroma-fg) var(--brand-hue)), oklch(var(--brand-hover-lightness-fg) var(--brand-hover-chroma-fg) var(--brand-hue)));
 
-    --color-primary-bg: light-dark(oklch(var(--primary-lightness-bg) var(--primary-chroma-bg) var(--primary-hue)), oklch(var(--primary-lightness-bg) var(--primary-chroma-bg) var(--primary-hue)));
-    --color-primary-fg: light-dark(oklch(var(--primary-lightness-fg) var(--primary-chroma-fg) var(--primary-hue)), oklch(var(--primary-lightness-fg) var(--primary-chroma-fg) var(--primary-hue)));
-    --color-primary-hover-bg: light-dark(oklch(var(--primary-hover-lightness-bg)var(--primary-chroma-bg) var(--primary-hue)), oklch(var(--primary-hover-lightness-bg) var(--primary-chroma-bg) var(--primary-hue)));
-    --color-primary-hover-fg: light-dark(oklch(var(--primary-hover-lightness-fg) var(--primary-hover-chroma-fg) var(--primary-hue)), oklch(var(--primary-hover-lightness-fg) var(--primary-hover-chroma-fg) var(--primary-hue)));
-
-    --secondary-hue: 400;
-    --secondary-chroma-bg: 0;
-    --secondary-chroma-fg: 0;
-    --secondary-lightness-bg: 0.4;
-    --secondary-lightness-fg: 1;
-
-    --secondary-hover-chroma-bg: 0.2;
-    --secondary-hover-chroma-fg: 0;
-    --secondary-hover-lightness-bg: 0.2;
-    --secondary-hover-lightness-fg: 1;
-
-    --color-secondary-bg: light-dark(oklch(var(--secondary-lightness-bg) var(--secondary-chroma-bg) var(--secondary-hue)), oklch(var(--secondary-lightness-bg) var(--secondary-chroma-bg) var(--secondary-hue)));
-    --color-secondary-fg: light-dark(oklch(var(--secondary-lightness-fg) var(--secondary-chroma-fg) var(--secondary-hue)), oklch(var(--secondary-lightness-fg) var(--secondary-chroma-fg) var(--secondary-hue)));
-    --color-secondary-hover-bg: light-dark(oklch(var(--secondary-hover-lightness-bg)var(--secondary-chroma-bg) var(--secondary-hue)), oklch(var(--secondary-hover-lightness-bg) var(--secondary-chroma-bg) var(--secondary-hue)));
-    --color-secondary-hover-fg: light-dark(oklch(var(--secondary-hover-lightness-fg) var(--secondary-hover-chroma-fg) var(--secondary-hue)), oklch(var(--secondary-hover-lightness-fg) var(--secondary-hover-chroma-fg) var(--secondary-hue)));
 
     /*  Semantic Colors */
 
     --lightness-bg: 0.8;
-    --lightness-fg: 0.2;
+    --lightness-fg: 0.005;
 
     --chroma-bg: 0.12;
-    --chroma-fg: 0.1;
+    --chroma-fg: 0.2;
 
     --hover-lightness-bg: 0.95;
-    --hover-lightness-fg: 0;
+    --hover-lightness-fg: 0.01;
 
     --hover-chroma-bg: 0.12;
-    --hover-chroma-fg: 0;
-
+    --hover-chroma-fg: 0.4;
 
     --info-hue: 250;
-    --color-info-bg: oklch(var(--lightness-bg) var(--chroma-bg) var(--info-hue));
+    --color-info-bg: light-dark(oklch(var(--lightness-bg) var(--chroma-bg) var(--info-hue)), oklch(var(--lightness-bg) var(--chroma-bg) var(--info-hue)));
     --color-info-fg: light-dark(oklch(var(--lightness-fg) var(--chroma-fg) var(--info-hue)), oklch(var(--lightness-fg) var(--chroma-fg) var(--info-hue)));
-    --color-info-hover-bg: light-dark(oklch(var(--hover-lightness-bg) var(--hover-chroma-bg) var(--info-hue)), oklch(var(--hover-lightness-bg) var(--hover-chroma-bg) var(--info-hue)));
+    --color-info-hover-bg: light-dark(oklch(calc(var(--hover-lightness-bg) - 0.25) var(--hover-chroma-bg) var(--info-hue)), oklch(var(--hover-lightness-bg) var(--hover-chroma-bg) var(--info-hue)));
     --color-info-hover-fg: light-dark(oklch(var(--hover-lightness-fg) var(--hover-chroma-fg) var(--info-hue)), oklch(var(--hover-lightness-fg) var(--hover-chroma-fg) var(--info-hue)));
 
     --success-hue: 130;
     --color-success-bg: light-dark(oklch(var(--lightness-bg) var(--chroma-bg) var(--success-hue)), oklch(var(--lightness-bg) var(--chroma-bg) var(--success-hue)));
     --color-success-fg: light-dark(oklch(var(--lightness-fg) var(--chroma-fg) var(--success-hue)), oklch(var(--lightness-fg) var(--chroma-fg) var(--success-hue)));
-    --color-success-hover-bg: light-dark(oklch(var(--hover-lightness-bg) var(--hover-chroma-bg) var(--success-hue)), oklch(var(--hover-lightness-bg) var(--hover-chroma-bg) var(--success-hue)));
+    --color-success-hover-bg: light-dark(oklch(calc(var(--hover-lightness-bg) - 0.25) var(--hover-chroma-bg) var(--success-hue)), oklch(var(--hover-lightness-bg) var(--hover-chroma-bg) var(--success-hue)));
     --color-success-hover-fg: light-dark(oklch(var(--hover-lightness-fg) var(--hover-chroma-fg) var(--success-hue)), oklch(var(--hover-lightness-fg) var(--hover-chroma-fg) var(--success-hue)));
 
     --warning-hue: 70;
     --color-warning-bg: light-dark(oklch(var(--lightness-bg) var(--chroma-bg) var(--warning-hue)), oklch(var(--lightness-bg) var(--chroma-bg) var(--warning-hue)));
     --color-warning-fg: light-dark(oklch(var(--lightness-fg) var(--chroma-fg) var(--warning-hue)), oklch(var(--lightness-fg) var(--chroma-fg) var(--warning-hue)));
-    --color-warning-hover-bg: light-dark(oklch(var(--hover-lightness-bg) var(--hover-chroma-bg) var(--warning-hue)), oklch(var(--hover-lightness-bg) var(--hover-chroma-bg) var(--warning-hue)));
+    --color-warning-hover-bg: light-dark(oklch(calc(var(--hover-lightness-bg) - 0.25) var(--hover-chroma-bg) var(--warning-hue)), oklch(var(--hover-lightness-bg) var(--hover-chroma-bg) var(--warning-hue)));
     --color-warning-hover-fg: light-dark(oklch(var(--hover-lightness-fg) var(--hover-chroma-fg) var(--warning-hue)), oklch(var(--hover-lightness-fg) var(--hover-chroma-fg) var(--warning-hue)));
 
     --danger-hue: 20;
     --color-danger-bg: light-dark(oklch(var(--lightness-bg) var(--chroma-bg) var(--danger-hue)), oklch(var(--lightness-bg) var(--chroma-bg) var(--danger-hue)));
     --color-danger-fg: light-dark(oklch(var(--lightness-fg) var(--chroma-fg) var(--danger-hue)), oklch(var(--lightness-fg) var(--chroma-fg) var(--danger-hue)));
-    --color-danger-hover-bg: light-dark(oklch(var(--hover-lightness-bg) var(--hover-chroma-bg) var(--danger-hue)), oklch(var(--hover-lightness-bg) var(--hover-chroma-bg) var(--danger-hue)));
+    --color-danger-hover-bg: light-dark(oklch(calc(var(--hover-lightness-bg) - 0.25) var(--hover-chroma-bg) var(--danger-hue)), oklch(var(--hover-lightness-bg) var(--hover-chroma-bg) var(--danger-hue)));
     --color-danger-hover-fg: light-dark(oklch(var(--hover-lightness-fg) var(--hover-chroma-fg) var(--danger-hue)), oklch(var(--hover-lightness-fg) var(--hover-chroma-fg) var(--danger-hue)));
 
 
