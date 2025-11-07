@@ -22,6 +22,15 @@ public static class Extensions
     {
         builder.ConfigureOpenTelemetry();
 
+        // Use builder.Services to configure logging if you want custom sinks:
+        builder.Services.AddLogging(logging =>
+        {
+            logging.ClearProviders(); // optional: if you want to remove defaults
+            logging.AddConsole();
+            logging.SetMinimumLevel(LogLevel.Information);
+        });
+
+
         builder.AddDefaultHealthChecks();
 
         builder.Services.AddServiceDiscovery();

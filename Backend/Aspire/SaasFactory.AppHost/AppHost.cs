@@ -1,11 +1,9 @@
-
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Projects;
-using SaasFactory.Shared.Config;
 using SaasFactory.Features.Authentication;
-using SaasFactory.AppHost;
+using SaasFactory.Shared.Config;
 
 var pgUsername = "postgres";
 var pgPassword = "postgres";
@@ -37,7 +35,8 @@ var eventsDb = postgres.AddDatabase("events");
 // Create containers
 // ======================
 
-string authClientSecret = Environment.GetEnvironmentVariable("AUTH_CLIENT_SECRET") ?? new Crypto().GenerateText(128);
+var clientSecretEnvVar = builder.Configuration["Authentication:ClientSecretEnvironmentVar"] ?? string.Empty;
+var authClientSecret = Environment.GetEnvironmentVariable(clientSecretEnvVar) ?? string.Empty;
 
 var keycloak = builder.AddKeycloakAuthServer(logger, authClientSecret);
 
@@ -52,6 +51,11 @@ eventsDb.OnConnectionStringAvailable(async (db, evt, ct) =>
         .WithEnvironment("EVENTS_DB_CONNECTION", connStr)
         .WithReference(postgres);
 });
+
+
+
+builder.AddExecutable("Documentation-PDF", "docfx", "../../../DocFx")
+    .WithArgs("pdf");
 
 builder.AddExecutable("Documentation-Site", "docfx", "../../../DocFx")
     .WithArgs("build", "--serve", "-p", "4400")
@@ -73,3 +77,4 @@ builder.AddNpmApp("Website", workingDirectory: @"..\..\..\Frontend\", scriptName
     .PublishAsDockerFile();
 
 await builder.Build().RunAsync();
+

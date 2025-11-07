@@ -41,4 +41,8 @@
         <ProjectReference Include="..\..\SaasFactory.WebApi\SaasFactory.WebApi.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Constants\" />
+    </ItemGroup>
+
 </Project>
