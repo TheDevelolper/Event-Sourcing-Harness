@@ -5,7 +5,7 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   color?: "brand" | "success" | "warning" | "danger" | "info";
   size?: "sm" | "md" | "lg";
-  rounded: "na" | "sm" | "md" | "lg";
+  rounded: "none" | "sm" | "md" | "lg";
   variant?: "solid" | "outline" | "ghost" | "semiOpaque";
 }
 
@@ -14,7 +14,7 @@ export const Button: React.FC<ButtonProps> = ({
   color = "brand",
   size = "md",
   variant = "solid",
-  rounded = "na",
+  rounded = "none",
   className,
   ...props
 }) => {
@@ -47,19 +47,19 @@ export const Button: React.FC<ButtonProps> = ({
 
   const semiOpaqueStyles: Record<string, string> = {
     brand:
-      "bg-[var(--color-brand-bg)]/20 hover:bg-[var(--color-brand-hover-bg)] border-[var(--color-brand-bg)] text-[var(--color-brand-fg)] dark:text-[var(--color-brand-hover-fg)] hover:text-[var(--color-brand-hover-fg)]",
+      "bg-[var(--color-brand-bg)]/80 hover:bg-[var(--color-brand-hover-bg)] border-[var(--color-brand-bg)] text-[var(--color-brand-fg)] dark:text-[var(--color-brand-hover-fg)] hover:text-[var(--color-brand-hover-fg)]",
     success:
-      "bg-[var(--color-success-bg)]/20 hover:bg-[var(--color-success-hover-bg)] border-[var(--color-success-bg) text-[var(--color-success-fg)] dark:text-[var(--color-success-bg)] hover:text-[var(--color-success-hover-fg)]",
-    info: "bg-[var(--color-info-bg)]/20 hover:bg-[var(--color-info-hover-bg)] border-[var(--color-info-bg)] text-[var(--color-info-fg)] dark:text-[var(--color-info-bg)] hover:text-[var(--color-info-hover-fg)]",
+      "bg-[var(--color-success-bg)]/40 dark:bg-[var(--color-success-bg)]/30 hover:bg-[var(--color-success-hover-bg)] border-[var(--color-success-bg) text-[var(--color-success-fg)] dark:text-[var(--color-success-bg)] hover:text-[var(--color-success-hover-fg)]",
+    info: "bg-[var(--color-info-bg)]/40 dark:bg-[var(--color-info-bg)]/30  hover:bg-[var(--color-info-hover-bg)] border-[var(--color-info-bg)] text-[var(--color-info-fg)] dark:text-[var(--color-info-bg)] hover:text-[var(--color-info-hover-fg)]",
     warning:
-      "bg-[var(--color-warning-bg)]/20 hover:bg-[var(--color-warning-hover-bg)] border-[var(--color-warning-bg)] text-[var(--color-warning-fg)] dark:text-[var(--color-warning-bg)] hover:text-[var(--color-warning-hover-fg)]",
+      "bg-[var(--color-warning-bg)]/40 dark:bg-[var(--color-warning-bg)]/30 hover:bg-[var(--color-warning-hover-bg)] border-[var(--color-warning-bg)] text-[var(--color-warning-fg)] dark:text-[var(--color-warning-bg)] hover:text-[var(--color-warning-hover-fg)]",
     danger:
-      "bg-[var(--color-danger-bg)]/20 hover:bg-[var(--color-danger-hover-bg)] border-[var(--color-danger-bg)] text-[var(--color-danger-fg)] dark:text-[var(--color-danger-bg)] hover:text-[var(--color-danger-hover-fg)]",
+      "bg-[var(--color-danger-bg)]/40 dark:bg-[var(--color-danger-bg)]/30 hover:bg-[var(--color-danger-hover-bg)] border-[var(--color-danger-bg)] text-[var(--color-danger-fg)] dark:text-[var(--color-danger-bg)] hover:text-[var(--color-danger-hover-fg)]",
   };
 
   const outlineStyles: Record<string, string> = {
     brand:
-      "border-[0.1rem] border-[var(--color-brand-bg)] text-[var(--color-brand-bg)] dark:text-[var(--color-brand-bg)] hover:bg-[var(--color-brand-bg)] hover:text-[var(--color-brand-fg)]",
+      "border-[0.1rem] bg-[var(--color-brand-bg)]/20 border-[var(--color-brand-bg)] text-[var(--color-brand-fg)] dark:text-[var(--color-brand-fg)] hover:bg-[var(--color-brand-bg)] hover:text-[var(--color-brand-fg)]",
     success:
       "border-[0.1rem] border-[var(--color-success-bg)] text-[var(--color-success-fg)] dark:text-[var(--color-success-bg)] hover:bg-[var(--color-success-bg)] hover:text-[var(--color-success-fg)]",
     info: "border-[0.1rem] border-[var(--color-info-bg)] text-[var(--color-info-fg)] dark:text-[var(--color-info-bg)] hover:bg-[var(--color-info-bg)] hover:text-[var(--color-info-fg)]",
@@ -71,14 +71,14 @@ export const Button: React.FC<ButtonProps> = ({
 
   const ghostStyles: Record<string, string> = {
     brand:
-      "text-[var(--color-brand-bg)] hover:bg-[var(--color-brand-bg)] hover:text-[var(--color-brand-hover-fg)]",
+      "text-[var(--color-brand-fg)] hover:bg-[var(--color-brand-bg)] hover:text-[var(--color-brand-hover-fg)]",
     success:
-      "text-[var(--color-success-bg)] hover:bg-[var(--color-success-hover-bg)] hover:text-[var(--color-success-hover-fg)]",
-    info: "text-[var(--color-info-bg)] hover:bg-[var(--color-info-hover-bg)] hover:text-[var(--color-info-hover-fg)]",
+      "text-gray-700 dark:text-gray-300 hover:bg-[var(--color-success-hover-bg)] hover:text-[var(--color-success-hover-fg)]",
+    info: "text-gray-700 dark:text-gray-300 hover:bg-[var(--color-info-hover-bg)] hover:text-[var(--color-info-hover-fg)]",
     warning:
-      "text-[var(--color-warning-bg)] hover:bg-[var(--color-warning-hover-bg)] hover:text-[var(--color-warning-hover-fg)]",
+      "text-gray-700 dark:text-gray-300 hover:bg-[var(--color-warning-hover-bg)] hover:text-[var(--color-warning-hover-fg)]",
     danger:
-      "text-[var(--color-danger-bg)] hover:bg-[var(--color-danger-hover-bg)] hover:text-[var(--color-danger-hover-fg)]",
+      "text-gray-700 dark:text-gray-300 hover:bg-[var(--color-danger-hover-bg)] hover:text-[var(--color-danger-hover-fg)]",
   };
 
   const borderStyles: Record<string, string> = {
@@ -100,7 +100,7 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   const roundedStyles: Record<string, string> = {
-    na: "",
+    none: "",
     sm: "rounded-xs",
     md: "rounded-md",
     lg: "rounded-xl",
@@ -116,18 +116,24 @@ export const Button: React.FC<ButtonProps> = ({
   // Only apply background from colorStyles for solid; outline/ghost handle themselves
 
   return (
-    <button
-      className={clsx(
-        baseStyles,
-        variantStyles[variant],
-        borderStyles[variant],
-        roundedStyles[rounded],
-        sizeStyles[size],
-        className
+    <>
+      {color === "brand" ? (
+        <></>
+      ) : (
+        <button
+          className={clsx(
+            baseStyles,
+            variantStyles[variant],
+            borderStyles[variant],
+            roundedStyles[rounded],
+            sizeStyles[size],
+            className
+          )}
+          {...props}
+        >
+          {children}
+        </button>
       )}
-      {...props}
-    >
-      {children}
-    </button>
+    </>
   );
 };

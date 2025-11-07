@@ -29,13 +29,14 @@ export const Examples: Story = {
     children: "Example",
     size: "md",
     variant: "solid",
-    rounded: "sm",
+    rounded: "md",
   },
   argTypes: {
     size: { control: "select" },
-    variant: { control: "select" }, // <-- hides the color control
+    variant: { control: false, table: { disable: true } }, // <-- hides the color control
     color: { control: false, table: { disable: true } }, // <-- hides the color control
-    rounded: { control: "radio" },
+    rounded: { control: false, table: { disable: true } },
+    children: { control: false, table: { disable: true } },
   },
 
   render: (args) => {
@@ -49,13 +50,41 @@ export const Examples: Story = {
         >
           {args.children}
         </Button>
+
+        <Button
+          rounded={args.rounded}
+          color="info"
+          size={args.size}
+          variant="solid"
+        >
+          Primary
+        </Button>
+
+        <Button
+          rounded={args.rounded}
+          color="info"
+          size={args.size}
+          variant="outline"
+        >
+          Secondary
+        </Button>
+
+        <Button
+          rounded={args.rounded}
+          color="info"
+          size={args.size}
+          variant="ghost"
+        >
+          Tertiary
+        </Button>
+
         <Button
           rounded={args.rounded}
           color="info"
           size={args.size}
           variant={args.variant}
         >
-          {args.children}
+          Info
         </Button>
         <Button
           rounded={args.rounded}
@@ -63,7 +92,7 @@ export const Examples: Story = {
           size={args.size}
           variant={args.variant}
         >
-          {args.children}
+          Success
         </Button>
         <Button
           rounded={args.rounded}
@@ -71,7 +100,7 @@ export const Examples: Story = {
           size={args.size}
           variant={args.variant}
         >
-          {args.children}
+          Warning
         </Button>
         <Button
           rounded={args.rounded}
@@ -79,7 +108,7 @@ export const Examples: Story = {
           size={args.size}
           variant={args.variant}
         >
-          {args.children}
+          Danger
         </Button>
       </div>
     );
@@ -90,6 +119,7 @@ export const Solid: Story = {
   args: {
     children: "Button",
     variant: "solid",
+    rounded: "md",
   },
   argTypes: {
     children: { table: { disable: true } },
@@ -238,6 +268,7 @@ export const Outline: Story = {
   args: {
     children: "Button",
     variant: "outline",
+    rounded: "md",
   },
   argTypes: {
     children: { table: { disable: true } },
@@ -386,6 +417,7 @@ export const SemiOpaque: Story = {
   args: {
     children: "Button",
     variant: "semiOpaque",
+    rounded: "md",
   },
   argTypes: {
     children: { table: { disable: true } },
@@ -534,6 +566,7 @@ export const Ghost: Story = {
   args: {
     children: "Button",
     variant: "ghost",
+    rounded: "md",
   },
   argTypes: {
     children: { table: { disable: true } },
