@@ -1,0 +1,9 @@
+  items:
+  - name: 🔐 Keycloak Configuration
+    href: keycloak-configuration.md
+  
+  - name: 🕵🏽 Authentication Client Secret Setup
+    href: authentication-client-secret-setup.md
+
+  - name: 👤 Creating User Accounts
+    href: keycloak-create-account.md

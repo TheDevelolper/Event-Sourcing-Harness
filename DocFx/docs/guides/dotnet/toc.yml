@@ -1,0 +1,9 @@
+  items:
+    - name: 📦 .NET Central Package Management
+      href: managing-dotnet-packages.md
+
+    - name: 👷🏽‍♂️ Managing .NET Build Properties
+      href: managing-build-properties.md
+
+    - name: 🛠️ Controlling .NET SDK Versions
+      href: managing-sdk-versions.md

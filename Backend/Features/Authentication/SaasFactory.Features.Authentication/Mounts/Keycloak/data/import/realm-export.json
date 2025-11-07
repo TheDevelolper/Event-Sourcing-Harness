@@ -678,7 +678,6 @@
       "enabled": true,
       "alwaysDisplayInConsole": true,
       "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
       "redirectUris": [
         "https://localhost:7238/signin-oidc"
       ],
