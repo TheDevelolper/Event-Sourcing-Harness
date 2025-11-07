@@ -61,13 +61,13 @@ webApiProjectBuilder
     .WaitFor(postgres);
 
 
-builder.AddNpmApp("Storybook", workingDirectory: @"..\..\..\Frontend\", scriptName: "storybook")
+builder.AddNpmApp("Storybook", workingDirectory: @"..\..\..\Frontend\", scriptName: "aspirehost:storybook")
     .WithEnvironment("BROWSER", "none") // Disable opening browser on npm start
     .WithHttpEndpoint(env: "PORT", port: 4300, targetPort: 6006)
     .WithExternalHttpEndpoints()
     .PublishAsDockerFile();
 
-builder.AddNpmApp("Website", workingDirectory: @"..\..\..\Frontend\", scriptName: "dev:web")
+builder.AddNpmApp("Website", workingDirectory: @"..\..\..\Frontend\", scriptName: "aspirehost:web")
     .WithHttpEndpoint(env: "PORT", port: 4200, targetPort: 5173)
     .WithExternalHttpEndpoints()
     .PublishAsDockerFile();
