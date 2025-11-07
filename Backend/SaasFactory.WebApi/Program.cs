@@ -1,3 +1,5 @@
+using Ardalis.GuardClauses;
+
 using Modules.Examples.Bank.Account;
 using Modules.Examples.Restaurant.Menu;
 using SaasFactory.Features.Authentication;
@@ -18,8 +20,8 @@ builder.Configuration
     .Build();
 
 
-var eventsDbConnectionString = 
-    Environment.GetEnvironmentVariable("EVENTS_DB_CONNECTION") 
+var eventsDbConnectionString =
+    Environment.GetEnvironmentVariable("EVENTS_DB_CONNECTION")
     ?? throw new InvalidOperationException("Missing Postgres connection string");
 
 // TODO: Document as known issue (awaiting docFx Task completion)
@@ -35,16 +37,30 @@ List<IFeatureModule> featureModules = [
     new RestaurantMenuModule()
 ];
 
+var clientSecretEnvVar = builder.Configuration["Authentication:ClientSecretEnvironmentVar"] ?? string.Empty;
+
+
+Guard.Against.NullOrWhiteSpace(input: clientSecretEnvVar,
+    message: @"Client secret environment variable name is missing from configuration.
+    follow the authentication  Authentication Client Secret Setup for reference.");
+
+var clientSecret = Environment.GetEnvironmentVariable(clientSecretEnvVar) ?? string.Empty;
+Guard.Against.NullOrWhiteSpace(input: clientSecret,
+    message: @"Client secret environment variable is missing.
+        follow the authentication  Authentication Client Secret Setup for reference.");
+
 await builder
     .AddLoggingConfiguration()
     .AddServiceDefaults()
-    .AddAuthentication()
+    .AddAuthentication(clientSecret)
     .AddEventStore(eventsDbConnectionString)
     .AddFeatureModules(featureModules);
 
 builder.Services.AddControllers();
 
 var app = builder.Build();
+app.UseHttpsRedirection();     // critical if someone hits http:// first
+app.UseCookiePolicy();         // <-- required so the policy above is applied
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
