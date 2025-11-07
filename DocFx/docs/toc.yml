@@ -1,12 +1,5 @@
 - name: Introduction
   href: introduction.md
 
-
-
-
 - name: Guides
-  items:
-    - name: Theming
-      href: guides/theming/theming.md
-    - name: Managing DotNet Packages and Builds
-      href: managing-dotnet-packages.md
+  href: guides/toc.yml

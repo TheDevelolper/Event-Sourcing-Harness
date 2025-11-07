@@ -1,0 +1,7 @@
+  items:
+    - name: Authentication
+      href: authentication/toc.yml
+    - name: Theming
+      href: theming/toc.yml
+    - name: Dotnet
+      href: dotnet/toc.yml

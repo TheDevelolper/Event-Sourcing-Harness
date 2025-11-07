@@ -1,4 +1,4 @@
-# 🎨 Theme Color Usage Guide
+# 🎨 Theme Colour Usage
 
 When designing your UI with a theme, it’s important to assign colors consistent roles. This ensures clarity, hierarchy, and accessibility. Here’s a suggested mapping:
 

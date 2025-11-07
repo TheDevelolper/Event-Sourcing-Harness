@@ -1,63 +1,8 @@
-# .NET SDK Versions, Global Build Properties, and Package Management
+## 📦 .NET Central Package Management
 
-This guide explains how to control .NET SDK versions, global build properties, and package versions in a multi-project solution.
-
----
-
-## 1. Controlling .NET SDK Version
-
-The **`global.json`** file in your repo root ensures all projects use a specific SDK version.
-
-```
-{
-  "sdk": {
-    "version": "9.0.305",
-    "rollForward": "disable",
-    "allowPrerelease": false
-  }
-}
-```
-
-### Key Options
-
-- `version`: Pin the exact SDK version to use.
-- `rollForward`:
-  - `disable`: Only allow the exact version.
-  - `latestPatch`: Allow newer patch versions.
-  - `major`: Allow higher major versions if necessary.
-- `allowPrerelease`: `true` to allow prerelease SDKs, `false` to disallow.
+This guide explains how to control package versions in this multi-project solution.
 
 ---
-
-## 2. Global Build Properties
-
-You can define properties for all projects in a solution using **`Directory.Build.props`**:
-
-```
-<Project>
-  <PropertyGroup>
-    <!-- Target framework for all projects -->
-    <TargetFramework>net9.0</TargetFramework>
-    
-    <!-- Fallback for older frameworks -->
-    <AssetTargetFallback>net8.0;net7.0;net6.0</AssetTargetFallback>
-    
-    <!-- Optional restore flags -->
-    <RestoreIgnoreFailedSources>true</RestoreIgnoreFailedSources>
-    <RestoreNoCache>true</RestoreNoCache>
-  </PropertyGroup>
-</Project>
-```
-
-### Benefits
-
-- Avoid repeating the target framework in every project.
-- Set global restore and build behaviors.
-- Define fallback targets for compatibility with older packages.
-
----
-
-## 3. Central Package Management
 
 Instead of specifying versions in each `.csproj`, you can centrally manage package versions using **`Directory.Packages.props`**:
 
