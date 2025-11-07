@@ -1,9 +1,13 @@
 ﻿using Ardalis.GuardClauses;
 using Aspire.Hosting;
+using Serilog;
 using Aspire.Hosting.ApplicationModel;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.IdentityModel.Tokens;
 using SaasFactory.Features.Authentication.Utils;
+
+using ILogger = Serilog.ILogger;
 
 namespace SaasFactory.Features.Authentication;
 
@@ -20,10 +24,11 @@ public static class BuilderExtensions
             // Fix: Log into Keycloak goto client details then credentials
             // generate a client secret and set the environment variable.
             // see code in apphost where this variable is read.
-            logger.LogError(@"No auth client secret provided. Get one from keycloak and set environment var on the host.");
+            logger.Information(@"No auth client secret provided. Get one from keycloak and set environment var on the host.");
             
         }
 
+        logger.Information("Adding Keycloak Auth Server...");
         var keycloak =
             builder.AddKeycloak("keycloak", 8080)
                 .WithDataVolume()
@@ -93,9 +98,9 @@ public static class BuilderExtensions
     }
 
     public static IHostApplicationBuilder AddAuthentication(
-        this IHostApplicationBuilder builder, string authClientSecret)
+        this IHostApplicationBuilder builder, string authClientSecret, ILogger logger)
     {
-
+        logger.Information("Registering Authentication Module");
         builder.Services.AddCors(options =>
         {
             options.AddPolicy("AllowSpecificOrigin",
@@ -137,12 +142,37 @@ public static class BuilderExtensions
                 options.Scope.Add("email");
                 options.UsePkce = true; // keep PKCE enabled
                 options.PushedAuthorizationBehavior = PushedAuthorizationBehavior.Disable;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    NameClaimType = "preferred_username",
+                    RoleClaimType = "roles" // optional, if you want roles to map correctly too
+                };
                 options.Events = new OpenIdConnectEvents
                 {
                     OnRedirectToIdentityProvider = ctx =>
                     {
-                        Console.WriteLine("Redirect URI being sent to Keycloak:");
-                        Console.WriteLine(ctx.ProtocolMessage.RedirectUri ?? "<NULL>");
+                        logger.Information("Redirect URI being sent to Keycloak:");
+                        logger.Information(ctx.ProtocolMessage.RedirectUri ?? "<NULL>");
+                        return Task.CompletedTask;
+                    },
+                    
+                    // When the user successfully authenticates
+                    OnTokenValidated = ctx =>
+                    {
+                        var userName = ctx.Principal?.Identity?.Name ?? "<unknown>";
+                        var sub = ctx.Principal?.FindFirst("sub")?.Value;
+                        logger.Information("✅ User successfully logged in. Name: {UserName}, Sub: {Sub}", userName, sub);
+                        return Task.CompletedTask;
+                    },
+                    
+                    // When authentication fails
+                    OnAuthenticationFailed = ctx =>
+                    {
+                        logger.Error(ctx.Exception, "❌ User login failed: {Message}", ctx.Exception.Message);
+
+                        // Optional: Redirect to an error page
+                        ctx.Response.Redirect("/auth/error");
+                        ctx.HandleResponse(); // Prevents the default error handler from running
                         return Task.CompletedTask;
                     }
                 };

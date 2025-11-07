@@ -13,6 +13,7 @@
     <PackageReference Include="BouncyCastle.NetCoreSdk" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" />
     <PackageReference Include="Aspire.Hosting.Keycloak" />
+    <PackageReference Include="Serilog" />
   </ItemGroup>
 
   <ItemGroup>

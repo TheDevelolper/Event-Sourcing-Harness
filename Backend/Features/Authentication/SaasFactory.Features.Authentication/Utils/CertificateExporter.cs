@@ -2,6 +2,7 @@
 using System.Security.Cryptography.X509Certificates;
 using Org.BouncyCastle.OpenSsl;
 using Org.BouncyCastle.Pkcs;
+using ILogger = Serilog.ILogger;
 
 namespace SaasFactory.Features.Authentication.Utils;
 
@@ -30,7 +31,7 @@ public static class CertificateExporter
         if (File.Exists(keyPath))
             File.Delete(keyPath);
 
-        logger.LogInformation("Exporting dev certificate to PFX...");
+        logger.Information("Exporting dev certificate to PFX...");
         var proc = new Process
         {
             StartInfo = new ProcessStartInfo
@@ -52,7 +53,7 @@ public static class CertificateExporter
             throw new Exception($"dotnet dev-certs export failed: {error}");
         }
 
-        logger.LogInformation("Importing PFX with exportable keys...");
+        logger.Information("Importing PFX with exportable keys...");
         var cert = X509CertificateLoader.LoadPkcs12CollectionFromFile(tempPfxPath, tempPassword,
             X509KeyStorageFlags.Exportable | X509KeyStorageFlags.EphemeralKeySet);
 

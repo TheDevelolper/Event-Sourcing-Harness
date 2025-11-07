@@ -1,16 +1,33 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Projects;
 using SaasFactory.Features.Authentication;
 using SaasFactory.Shared.Config;
+using Serilog;
+using Serilog.Formatting.Display;
+using Serilog.Sinks.Grafana.Loki;
 
-var pgUsername = "postgres";
-var pgPassword = "postgres";
+const string pgUsername = "postgres";
+const string pgPassword = "postgres";
 
 var builder = DistributedApplication.CreateBuilder(args);
-using var loggerFactory = LoggerFactory.Create(logging => logging.AddConsole());
-var logger = loggerFactory.CreateLogger("Aspire logger");
+
+
+var textFormatter = new MessageTemplateTextFormatter("{Timestamp:HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}", null);
+const string lokiUrl = "http://localhost:3100";
+
+var logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.GrafanaLoki(
+        lokiUrl,
+        textFormatter: textFormatter, // ✅ render as plain text
+        labels:
+        [
+            new LokiLabel { Key = "app", Value = "saasfactory" },
+            new LokiLabel { Key = "env", Value = "dev" }
+        ])
+    .CreateLogger();
+
 
 builder.Services.AddHealthChecks();
 
@@ -18,6 +35,32 @@ builder.Configuration
     .UseSharedConfiguration()
     .AddJsonFile("appsettings.json", optional: true)
     .Build();
+
+// ======================
+// Logging with Loki and Graphana
+// ======================
+
+// Loki container
+var loki = builder.AddContainer("loki", "grafana/loki:3.1.1")
+    .WithVolume("loki_data", "/loki") // ✅ creates a Docker volume named loki_data
+    .WithEndpoint(3100, targetPort: 3100, scheme: "http")
+    .WithArgs("--config.file=/etc/loki/local-config.yaml");
+
+// Grafana container
+var grafana = builder.AddContainer("grafana", "grafana/grafana:11.1.0")
+    .WithEndpoint(3000, targetPort: 3000, scheme: "http")
+    .WithVolume("grafana_data", "/var/lib/grafana") // persist dashboards etc.
+    .WithEnvironment("GF_SECURITY_ADMIN_USER", "admin")
+    .WithEnvironment("GF_SECURITY_ADMIN_PASSWORD", "admin")
+    .WithEnvironment("GF_AUTH_ANONYMOUS_ENABLED", "true")
+    .WithEnvironment("GF_AUTH_ANONYMOUS_ORG_ROLE", "Admin")
+    .WithEnvironment("GF_DATASOURCES_DEFAULT_TYPE", "loki")
+    .WithEnvironment("GF_DATASOURCES_DEFAULT_URL", "http://loki:3100")
+    .WithExternalHttpEndpoints();
+
+// ======================
+// Create postgres database Server
+// ======================
 
 var postgres = builder.AddPostgres("postgres",
         userName: builder.AddParameter("username", pgUsername, secret: true),
@@ -41,7 +84,9 @@ var authClientSecret = Environment.GetEnvironmentVariable(clientSecretEnvVar) ??
 var keycloak = builder.AddKeycloakAuthServer(logger, authClientSecret);
 
 var webApiProjectBuilder = builder.AddProject<SaasFactory_WebApi>("WebApi")
-    .WithReference(keycloak);
+    .WithReference(keycloak)
+    .WithEnvironment(clientSecretEnvVar, authClientSecret)
+    .WithEnvironment("LOKI_URL", lokiUrl);
 
 eventsDb.OnConnectionStringAvailable(async (db, evt, ct) =>
 {
@@ -52,8 +97,6 @@ eventsDb.OnConnectionStringAvailable(async (db, evt, ct) =>
         .WithReference(postgres);
 });
 
-
-
 builder.AddExecutable("Documentation-PDF", "docfx", "../../../DocFx")
     .WithArgs("pdf");
 
@@ -62,6 +105,7 @@ builder.AddExecutable("Documentation-Site", "docfx", "../../../DocFx")
     .WithExternalHttpEndpoints();
 
 webApiProjectBuilder
+    .WaitFor(loki)
     .WaitFor(postgres);
 
 
