@@ -20,8 +20,8 @@
 @theme {
 
     /* Body */
-    --color-bg: light-dark(oklch(0.95 0.02 300), oklch(0.10 0.04 300));
-    --color-fg: light-dark(oklch(0.20 0.04 300), oklch(0.95 0.02 300));
+    --color-bg: light-dark(oklch(0.95 0.02 300), oklch(0.2 0.01 280));
+    --color-fg: light-dark(oklch(0.2 0.01 280), oklch(0.95 0.02 300));
 
     --brand-hue: 350;
     --brand-chroma-bg: 0.3;
@@ -49,10 +49,10 @@
     --chroma-fg: 0.2;
 
     --hover-lightness-bg: 0.95;
-    --hover-lightness-fg: 0.01;
+    --hover-lightness-fg: 0.3;
 
     --hover-chroma-bg: 0.12;
-    --hover-chroma-fg: 0.4;
+    --hover-chroma-fg: 0.2;
 
     --info-hue: 250;
     --color-info-bg: light-dark(oklch(var(--lightness-bg) var(--chroma-bg) var(--info-hue)), oklch(var(--lightness-bg) var(--chroma-bg) var(--info-hue)));
