@@ -1,7 +1,7 @@
 {
   "id": "8ee5156e-ee07-474f-a58b-ac7860128239",
-  "realm": "Menuota",
-  "displayName": "",
+  "realm": "saas-realm",
+  "displayName": "changeme",
   "displayNameHtml": "",
   "notBefore": 0,
   "defaultSignatureAlgorithm": "RS256",
@@ -51,7 +51,7 @@
     "realm": [
       {
         "id": "b5e5dabc-66e1-4071-af1b-fc16c7d4e465",
-        "name": "default-roles-Menuota",
+        "name": "super-user-role",
         "description": "${role_default-roles}",
         "composite": true,
         "composites": {
@@ -90,6 +90,7 @@
       }
     ],
     "client": {
+      "saas-dashboard": [],
       "realm-management": [
         {
           "id": "32060cef-e3cd-4206-9c9c-26fc43ed8dde",
@@ -302,7 +303,6 @@
           "attributes": {}
         }
       ],
-      "menu-management": [],
       "security-admin-console": [],
       "admin-cli": [],
       "account-console": [],
@@ -410,7 +410,7 @@
   "groups": [],
   "defaultRole": {
     "id": "b5e5dabc-66e1-4071-af1b-fc16c7d4e465",
-    "name": "default-roles-Menuota",
+    "name": "super-user-role",
     "description": "${role_default-roles}",
     "composite": true,
     "clientRole": false,
@@ -483,13 +483,13 @@
       "clientId": "account",
       "name": "${client_account}",
       "rootUrl": "${authBaseUrl}",
-      "baseUrl": "/realms/Menuota/account/",
+      "baseUrl": "/realms/changeme/account/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "/realms/Menuota/account/*"
+        "/realms/changeme/account/*"
       ],
       "webOrigins": [],
       "notBefore": 0,
@@ -529,13 +529,13 @@
       "clientId": "account-console",
       "name": "${client_account-console}",
       "rootUrl": "${authBaseUrl}",
-      "baseUrl": "/realms/Menuota/account/",
+      "baseUrl": "/realms/changeme/account/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "/realms/Menuota/account/*"
+        "/realms/changeme/account/*"
       ],
       "webOrigins": [],
       "notBefore": 0,
@@ -667,9 +667,51 @@
       ]
     },
     {
+      "id": "2896c502-ecd2-402e-af32-e093f6223256",
+      "clientId": "realm-management",
+      "name": "${client_realm-management}",
+      "surrogateAuthRequired": false,
+      "enabled": true,
+      "alwaysDisplayInConsole": false,
+      "clientAuthenticatorType": "client-secret",
+      "redirectUris": [],
+      "webOrigins": [],
+      "notBefore": 0,
+      "bearerOnly": true,
+      "consentRequired": false,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "publicClient": false,
+      "frontchannelLogout": false,
+      "protocol": "openid-connect",
+      "attributes": {
+        "realm_client": "true",
+        "post.logout.redirect.uris": "+"
+      },
+      "authenticationFlowBindingOverrides": {},
+      "fullScopeAllowed": false,
+      "nodeReRegistrationTimeout": 0,
+      "defaultClientScopes": [
+        "web-origins",
+        "acr",
+        "roles",
+        "profile",
+        "basic",
+        "email"
+      ],
+      "optionalClientScopes": [
+        "address",
+        "phone",
+        "offline_access",
+        "microprofile-jwt"
+      ]
+    },
+    {
       "id": "e8a6c92a-106f-4e55-b55b-601da69d9729",
-      "clientId": "menu-management",
-      "name": "menu-managment",
+      "clientId": "saas-dashboard",
+      "name": "saas-dashboard",
       "description": "",
       "rootUrl": "https://localhost:7238/",
       "adminUrl": "https://localhost:7238/",
@@ -678,8 +720,10 @@
       "enabled": true,
       "alwaysDisplayInConsole": true,
       "clientAuthenticatorType": "client-secret",
+      "secret": "**********",
       "redirectUris": [
-        "https://localhost:7238/signin-oidc"
+        "https://localhost:7238/signin-oidc",
+        "http://localhost:4200/*"
       ],
       "webOrigins": [
         "https://localhost:7238"
@@ -725,59 +769,17 @@
       ]
     },
     {
-      "id": "2896c502-ecd2-402e-af32-e093f6223256",
-      "clientId": "realm-management",
-      "name": "${client_realm-management}",
-      "surrogateAuthRequired": false,
-      "enabled": true,
-      "alwaysDisplayInConsole": false,
-      "clientAuthenticatorType": "client-secret",
-      "redirectUris": [],
-      "webOrigins": [],
-      "notBefore": 0,
-      "bearerOnly": true,
-      "consentRequired": false,
-      "standardFlowEnabled": true,
-      "implicitFlowEnabled": false,
-      "directAccessGrantsEnabled": false,
-      "serviceAccountsEnabled": false,
-      "publicClient": false,
-      "frontchannelLogout": false,
-      "protocol": "openid-connect",
-      "attributes": {
-        "realm_client": "true",
-        "post.logout.redirect.uris": "+"
-      },
-      "authenticationFlowBindingOverrides": {},
-      "fullScopeAllowed": false,
-      "nodeReRegistrationTimeout": 0,
-      "defaultClientScopes": [
-        "web-origins",
-        "acr",
-        "roles",
-        "profile",
-        "basic",
-        "email"
-      ],
-      "optionalClientScopes": [
-        "address",
-        "phone",
-        "offline_access",
-        "microprofile-jwt"
-      ]
-    },
-    {
       "id": "457be47c-0eb2-443e-b766-f9cac9e8dabc",
       "clientId": "security-admin-console",
       "name": "${client_security-admin-console}",
       "rootUrl": "${authAdminUrl}",
-      "baseUrl": "/admin/realms/Menuota/console/",
+      "baseUrl": "/admin/realms/changeme/console/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "/admin/realms/Menuota/console/*"
+        "/admin/realms/changeme/console/*"
       ],
       "webOrigins": [
         "+"
@@ -1809,7 +1811,7 @@
     },
     {
       "id": "8d40e78f-29fe-4129-affc-5a0a0b0d199c",
-      "alias": "Menuota - browser",
+      "alias": "Saas - browser",
       "description": "browser based authentication",
       "providerId": "basic-flow",
       "topLevel": true,
@@ -1844,14 +1846,14 @@
           "requirement": "ALTERNATIVE",
           "priority": 30,
           "autheticatorFlow": true,
-          "flowAlias": "Menuota - browser forms",
+          "flowAlias": "Saas - browser forms",
           "userSetupAllowed": false
         }
       ]
     },
     {
       "id": "58b16e94-c36d-46a7-a70b-9b2aabdf1394",
-      "alias": "Menuota - browser Browser - Conditional OTP",
+      "alias": "Saas - browser Browser - Conditional OTP",
       "description": "Flow to determine if the OTP is required for the authentication",
       "providerId": "basic-flow",
       "topLevel": false,
@@ -1877,7 +1879,7 @@
     },
     {
       "id": "a1c8445d-f1fd-446d-bd12-d3c8fcbac63c",
-      "alias": "Menuota - browser forms",
+      "alias": "Saas - browser forms",
       "description": "Username, password, otp and other auth forms.",
       "providerId": "basic-flow",
       "topLevel": false,
@@ -1896,7 +1898,7 @@
           "requirement": "REQUIRED",
           "priority": 20,
           "autheticatorFlow": true,
-          "flowAlias": "Menuota - browser Browser - Conditional OTP",
+          "flowAlias": "Saas - browser Browser - Conditional OTP",
           "userSetupAllowed": false
         }
       ]
@@ -2408,7 +2410,7 @@
       "config": {}
     }
   ],
-  "browserFlow": "Menuota - browser",
+  "browserFlow": "Saas - browser",
   "registrationFlow": "registration",
   "directGrantFlow": "direct grant",
   "resetCredentialsFlow": "reset credentials",
@@ -2426,6 +2428,7 @@
     "realmReusableOtpCode": "false",
     "cibaExpiresIn": "120",
     "oauth2DeviceCodeLifespan": "600",
+    "saml.signature.algorithm": "",
     "parRequestUriLifespan": "60",
     "clientSessionMaxLifespan": "0",
     "frontendUrl": "",
