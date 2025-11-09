@@ -27,7 +27,7 @@ and assign it the **client secret** from Keycloak.
 
 You can find this secret in **Keycloak** under:
 
-> Clients → _Your Client (e.g. `menu-management`)_ → **Credentials (Tab)** → Client Secret
+> Clients → _Your Client (e.g. `saas-dashboard`)_ → **Credentials (Tab)** → Client Secret
 
 #### 🪟 PowerShell (temporary for this session)
 ``` pwsh

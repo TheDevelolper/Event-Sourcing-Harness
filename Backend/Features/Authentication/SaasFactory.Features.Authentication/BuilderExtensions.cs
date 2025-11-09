@@ -25,7 +25,7 @@ public static class BuilderExtensions
             // generate a client secret and set the environment variable.
             // see code in apphost where this variable is read.
             logger.Information(@"No auth client secret provided. Get one from keycloak and set environment var on the host.");
-            
+
         }
 
         logger.Information("Adding Keycloak Auth Server...");
@@ -131,8 +131,8 @@ public static class BuilderExtensions
             })
             .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
             {
-                options.Authority = "https://localhost:8443/realms/Menuota"; // Keycloak server URL
-                options.ClientId = "menu-management";
+                options.Authority = "https://localhost:8443/realms/saas-realm"; // Keycloak server URL
+                options.ClientId = "saas-dashboard";
                 options.ClientSecret = authClientSecret; //TODO: From Keycloak Clients > Client details > Credentials (Tab)
                 options.ResponseType = "code";
                 options.SaveTokens = true;
@@ -155,7 +155,7 @@ public static class BuilderExtensions
                         logger.Information(ctx.ProtocolMessage.RedirectUri ?? "<NULL>");
                         return Task.CompletedTask;
                     },
-                    
+
                     // When the user successfully authenticates
                     OnTokenValidated = ctx =>
                     {
@@ -164,7 +164,7 @@ public static class BuilderExtensions
                         logger.Information("✅ User successfully logged in. Name: {UserName}, Sub: {Sub}", userName, sub);
                         return Task.CompletedTask;
                     },
-                    
+
                     // When authentication fails
                     OnAuthenticationFailed = ctx =>
                     {

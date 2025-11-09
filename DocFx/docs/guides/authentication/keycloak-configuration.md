@@ -38,6 +38,10 @@ After making changes through the UI, **export the updated realm configuration** 
 > Always use your environment's **secret management system** (or Environment Variables) to handle sensitive data securely.
 
 ---
+### 🧑🏽‍💻 Changing the Realm Name
+
+Try to avoid renaming the realm itself as it's not required. You can simply change the display name in the Keycloak UI.
+> To do this go to Realm Settings > Display Name
 
 ### 👤 Setting Up User Accounts
 
