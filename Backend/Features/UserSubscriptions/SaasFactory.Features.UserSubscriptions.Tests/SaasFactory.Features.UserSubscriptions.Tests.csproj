@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="coverlet.collector" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="Microsoft.Playwright.NUnit" />
+        <PackageReference Include="NUnit" />
+        <PackageReference Include="NUnit.Analyzers" />
+        <PackageReference Include="NUnit3TestAdapter" />
+        <PackageReference Include="TestStack.BDDfy" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="NUnit.Framework" />
+        <Using Include="System.Text.RegularExpressions" />
+        <Using Include="System.Threading.Tasks" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Architecture\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference
+            Include="..\..\..\Shared\SaasFactory.Shared.Testing\SaasFactory.Shared.Testing\SaasFactory.Shared.Testing.csproj" />
+    </ItemGroup>
+
+    <!-- post build step to install playwright -->
+    <Target Name="PlaywrightInstall" AfterTargets="Build">
+        <Exec Command="pwsh $(OutDir)playwright.ps1 install" />
+    </Target>
+
+</Project>
