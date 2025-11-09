@@ -1,4 +1,6 @@
   items:
+    - name: Testing
+      href: testing/toc.yml
     - name: Authentication
       href: authentication/toc.yml
     - name: Theming
