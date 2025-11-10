@@ -1,0 +1,95 @@
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using Moq;
+using Serilog;
+
+namespace SaasFactory.Features.UserSubscriptions.Tests.Specifications;
+
+public abstract class SpecsBase
+{
+    
+    private const string TestIssuer = "https://test-issuer";
+    private const string TestAudience = "test-audience";
+    private const string TestSigningKey = "super-secret-test-key-which-is-long"; // >= 32 chars
+    
+    protected readonly Mock<ILogger> mockLogger = new();
+    
+
+    protected static string GenerateTestJwt(string username, string email, TimeSpan lifetime)
+    {
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(TestSigningKey));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        var now = DateTime.UtcNow;
+
+        var token = new JwtSecurityToken(
+            issuer: TestIssuer,
+            audience: TestAudience,
+            claims: new[]
+            {
+                new Claim("preferred_username", username),
+                new Claim(ClaimTypes.Email, email),
+                new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString())
+            },
+            notBefore: now,
+            expires: now.Add(lifetime),
+            signingCredentials: creds);
+
+        return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    private static void ConfigureJwtForTests(JwtBearerOptions options)
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidIssuer = TestIssuer,
+            ValidAudience = TestAudience,
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(TestSigningKey)),
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.Zero,
+            NameClaimType = "preferred_username" // so User.Identity.Name works
+        };
+    }
+    
+    protected async Task<HttpClient> GetFakeHttpClientAsync()
+    {
+        var builder  = WebApplication.CreateBuilder();
+        builder.WebHost.UseTestServer();  
+        
+        builder.Services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(ConfigureJwtForTests);
+        
+        builder.Services.AddAuthorization();
+        RegisterServices(builder.Services);
+        
+        var app = builder.Build();
+        
+        MapEndpoints(app);
+        
+        await app.StartAsync();
+        var fakeHttpClient = app.GetTestClient();
+        
+        return fakeHttpClient;
+    }
+
+    protected virtual WebApplication MapEndpoints(WebApplication app)
+    {
+        return app;
+    }
+
+    protected virtual void RegisterServices(IServiceCollection services)
+    {
+        
+    }
+}
