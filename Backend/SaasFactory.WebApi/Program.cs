@@ -3,6 +3,7 @@ using Modules.Examples.Bank.Account;
 using Modules.Examples.Restaurant.Menu;
 using SaasFactory.Features.Authentication;
 using SaasFactory.EventSourcing.Marten;
+using SaasFactory.Features.UserSubscriptions;
 using SaasFactory.Modules.Common;
 using SaasFactory.ServiceDefaults;
 using SaasFactory.Shared.Config;
@@ -54,14 +55,11 @@ try
 
     Log.Information("Event store connection string found.");
 
-    // TODO: Document as known issue (awaiting docFx Task completion)
-    // connect and start listening, if this line hangs it's likely connectivity issues.
-    // It could also be that the featurehub volume was cleared and so the API key is not correct. 
-    // logger.LogDebug("Connecting to featureHub");
-    // await featureHubConfig.Init(); // Connect and start listening
-    // var featureHubCtx = await featureHubConfig.NewContext().Build();
-    // logger.LogDebug("Connecting to featureHub connected");
-
+    /* TODO: This is overkill! 
+      I think we could move features into modules/features. As they ARE actually modules.
+      The domain modules should sit under modules/domain. Also this registration stuff is just being 
+      too clever, maybe instead just register the services and endpoints in the usual way.
+    */
     List<IFeatureModule> featureModules =
     [
         new BankAccountModule(),
@@ -102,7 +100,12 @@ try
     app.UseCookiePolicy(); // <-- required so the policy above is applied
     app.UseAuthentication();
     app.UseAuthorization();
+    
+    // Map Endpoints
+    Log.Information("Mapping module endpoints...");
+    app.MapUserSubscriptionEndpoints(logger);
     app.MapControllers();
+    
     await app.AddFeatureMiddleware(featureModules);
     Log.Information("Middleware configured.");
 

@@ -29,6 +29,7 @@
       Include="..\Features\Event Sourcing\SaasFactory.EventSourcing.Contracts\SaasFactory.EventSourcing.Contracts.csproj" />
     <ProjectReference
       Include="..\Features\Event Sourcing\SaasFactory.EventSourcing.Marten\SaasFactory.EventSourcing.Marten.csproj" />
+    <ProjectReference Include="..\Features\UserSubscriptions\SaasFactory.Features.UserSubscriptions\SaasFactory.Features.UserSubscriptions.csproj" />
     <ProjectReference
       Include="..\Modules\Examples\Feature Slicing\Modules.Examples.Restaurant.Menu\Modules.Examples.Restaurant.Menu.csproj" />
     <ProjectReference
