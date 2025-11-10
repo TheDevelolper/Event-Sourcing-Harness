@@ -35,7 +35,8 @@
     <ItemGroup>
         <ProjectReference
             Include="..\..\..\Shared\SaasFactory.Shared.Testing\SaasFactory.Shared.Testing\SaasFactory.Shared.Testing.csproj" />
-        <ProjectReference Include="..\SaasFactory.Features.UserSubscriptions\SaasFactory.Features.UserSubscriptions.csproj" />
+        <ProjectReference
+            Include="..\SaasFactory.Features.UserSubscriptions\SaasFactory.Features.UserSubscriptions.csproj" />
     </ItemGroup>
 
     <!-- post build step to install playwright -->
