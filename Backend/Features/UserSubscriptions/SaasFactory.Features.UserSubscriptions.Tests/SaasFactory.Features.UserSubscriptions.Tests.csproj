@@ -9,23 +9,39 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="coverlet.collector"/>
-        <PackageReference Include="Microsoft.NET.Test.Sdk"/>
-        <PackageReference Include="Microsoft.Playwright.NUnit"/>
-        <PackageReference Include="NUnit"/>
-        <PackageReference Include="NUnit.Analyzers"/>
-        <PackageReference Include="NUnit3TestAdapter"/>
+        <PackageReference Include="coverlet.collector" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="Microsoft.Playwright.NUnit" />
+        <PackageReference Include="Moq" />
+        <PackageReference Include="NUnit" />
+        <PackageReference Include="NUnit.Analyzers" />
+        <PackageReference Include="NUnit3TestAdapter" />
+        <PackageReference Include="Serilog" />
         <PackageReference Include="TestStack.BDDfy" />
     </ItemGroup>
 
     <ItemGroup>
-        <Using Include="NUnit.Framework"/>
-        <Using Include="System.Text.RegularExpressions"/>
-        <Using Include="System.Threading.Tasks"/>
+        <Using Include="NUnit.Framework" />
+        <Using Include="System.Text.RegularExpressions" />
+        <Using Include="System.Threading.Tasks" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Architecture\" />
+        <Folder Include="Architecture\" />
     </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference
+            Include="..\..\..\Shared\SaasFactory.Shared.Testing\SaasFactory.Shared.Testing\SaasFactory.Shared.Testing.csproj" />
+        <ProjectReference
+            Include="..\SaasFactory.Features.UserSubscriptions\SaasFactory.Features.UserSubscriptions.csproj" />
+    </ItemGroup>
+
+    <!-- post build step to install playwright -->
+    <Target Name="PlaywrightInstall" AfterTargets="Build">
+        <Exec Command="pwsh $(OutDir)playwright.ps1 install" />
+    </Target>
 
 </Project>
