@@ -42,7 +42,7 @@ builder.Configuration
 
 // Loki container
 var loki = builder.AddContainer("loki", "grafana/loki:3.1.1")
-    .WithVolume("loki_data", "/loki") // ✅ creates a Docker volume named loki_data
+    .WithVolume("loki_data", "/var/loki") // ✅ creates a Docker volume named loki_data
     .WithEndpoint(3100, targetPort: 3100, scheme: "http")
     .WithArgs("--config.file=/etc/loki/local-config.yaml");
 
