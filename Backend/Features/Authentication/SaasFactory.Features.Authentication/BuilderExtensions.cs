@@ -97,11 +97,13 @@ public static class BuilderExtensions
         return (crtPath, keyPath);
     }
 
-    public static IHostApplicationBuilder AddAuthentication(
-        this IHostApplicationBuilder builder, string authClientSecret, ILogger logger)
+    public static IServiceCollection AddAuthentication(
+        this IServiceCollection services, 
+        string authClientSecret, 
+        ILogger logger)
     {
         logger.Information("Registering Authentication Module");
-        builder.Services.AddCors(options =>
+        services.AddCors(options =>
         {
             options.AddPolicy("AllowSpecificOrigin",
                 builder =>
@@ -115,9 +117,9 @@ public static class BuilderExtensions
                 });
         });
 
-        builder.Services.AddAuthorization();
+        services.AddAuthorization();
         // Configure the authentication services with OpenID Connect
-        builder.Services.AddAuthentication(options =>
+        services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme; // Use Cookies as the default scheme
                 options.DefaultChallengeScheme =
@@ -185,6 +187,6 @@ public static class BuilderExtensions
                 options.CallbackPath = "/signin-oidc"; // Ensure this matches the redirect URI in Keycloak
             });
 
-        return builder;
+        return services;
     }
 }

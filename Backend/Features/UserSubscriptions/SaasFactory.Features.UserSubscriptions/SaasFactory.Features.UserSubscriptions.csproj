@@ -11,7 +11,14 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Marten" />
+      <PackageReference Include="Mediator.Net" />
       <PackageReference Include="Serilog" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Modules\Common\SaasFactory.Modules.Common\SaasFactory.Modules.Common.csproj" />
+      <ProjectReference Include="..\SaasFactory.Features.UserSubscriptions.Contracts\SaasFactory.Features.UserSubscriptions.Contracts.csproj" />
     </ItemGroup>
     
     

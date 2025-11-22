@@ -22,14 +22,13 @@ public static class Extensions
     {
         builder.ConfigureOpenTelemetry();
 
-        // Use builder.Services to configure logging if you want custom sinks:
+        // TODO: Evaluate whether or not this actually benefits us now that we're using loki and graphana?
         builder.Services.AddLogging(logging =>
         {
             logging.ClearProviders(); // optional: if you want to remove defaults
             logging.AddConsole();
             logging.SetMinimumLevel(LogLevel.Information);
         });
-
 
         builder.AddDefaultHealthChecks();
 
@@ -49,6 +48,7 @@ public static class Extensions
         // {
         //     options.AllowedSchemes = ["https"];
         // });
+
 
         return builder;
     }

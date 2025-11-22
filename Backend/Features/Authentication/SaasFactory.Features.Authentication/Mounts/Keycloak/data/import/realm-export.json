@@ -723,7 +723,8 @@
       "secret": "**********",
       "redirectUris": [
         "https://localhost:7238/signin-oidc",
-        "http://localhost:4200/*"
+        "http://localhost:4200/*",
+        "https://localhost:4200/*"
       ],
       "webOrigins": [
         "https://localhost:7238"
@@ -732,7 +733,7 @@
       "bearerOnly": false,
       "consentRequired": false,
       "standardFlowEnabled": true,
-      "implicitFlowEnabled": false,
+      "implicitFlowEnabled": true,
       "directAccessGrantsEnabled": false,
       "serviceAccountsEnabled": false,
       "publicClient": false,
@@ -741,9 +742,10 @@
       "attributes": {
         "realm_client": "false",
         "oidc.ciba.grant.enabled": "false",
-        "client.secret.creation.time": "1762512352",
+        "client.secret.creation.time": "1762686609",
         "backchannel.logout.session.required": "true",
         "standard.token.exchange.enabled": "false",
+        "login_theme": "keycloakify-starter",
         "post.logout.redirect.uris": "+",
         "frontchannel.logout.session.required": "true",
         "oauth2.device.authorization.grant.enabled": "false",
@@ -1533,14 +1535,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
+            "saml-user-property-mapper",
             "oidc-usermodel-attribute-mapper",
-            "saml-user-attribute-mapper",
             "oidc-sha256-pairwise-sub-mapper",
             "saml-role-list-mapper",
-            "oidc-usermodel-property-mapper",
-            "saml-user-property-mapper",
+            "saml-user-attribute-mapper",
             "oidc-full-name-mapper",
-            "oidc-address-mapper"
+            "oidc-address-mapper",
+            "oidc-usermodel-property-mapper"
           ]
         }
       },
@@ -1576,14 +1578,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
-            "oidc-sha256-pairwise-sub-mapper",
-            "oidc-address-mapper",
-            "oidc-usermodel-property-mapper",
-            "saml-user-property-mapper",
-            "oidc-usermodel-attribute-mapper",
-            "saml-role-list-mapper",
             "oidc-full-name-mapper",
-            "saml-user-attribute-mapper"
+            "saml-role-list-mapper",
+            "oidc-usermodel-property-mapper",
+            "oidc-usermodel-attribute-mapper",
+            "oidc-sha256-pairwise-sub-mapper",
+            "saml-user-attribute-mapper",
+            "saml-user-property-mapper",
+            "oidc-address-mapper"
           ]
         }
       },
@@ -1810,6 +1812,32 @@
       ]
     },
     {
+      "id": "767d2edd-3c6d-43a7-9af6-794acbaf0f1f",
+      "alias": "Reset - Conditional OTP",
+      "description": "Flow to determine if the OTP should be reset or not. Set to REQUIRED to force.",
+      "providerId": "basic-flow",
+      "topLevel": false,
+      "builtIn": true,
+      "authenticationExecutions": [
+        {
+          "authenticator": "conditional-user-configured",
+          "authenticatorFlow": false,
+          "requirement": "REQUIRED",
+          "priority": 10,
+          "autheticatorFlow": false,
+          "userSetupAllowed": false
+        },
+        {
+          "authenticator": "reset-otp",
+          "authenticatorFlow": false,
+          "requirement": "REQUIRED",
+          "priority": 20,
+          "autheticatorFlow": false,
+          "userSetupAllowed": false
+        }
+      ]
+    },
+    {
       "id": "8d40e78f-29fe-4129-affc-5a0a0b0d199c",
       "alias": "Saas - browser",
       "description": "browser based authentication",
@@ -1899,32 +1927,6 @@
           "priority": 20,
           "autheticatorFlow": true,
           "flowAlias": "Saas - browser Browser - Conditional OTP",
-          "userSetupAllowed": false
-        }
-      ]
-    },
-    {
-      "id": "767d2edd-3c6d-43a7-9af6-794acbaf0f1f",
-      "alias": "Reset - Conditional OTP",
-      "description": "Flow to determine if the OTP should be reset or not. Set to REQUIRED to force.",
-      "providerId": "basic-flow",
-      "topLevel": false,
-      "builtIn": true,
-      "authenticationExecutions": [
-        {
-          "authenticator": "conditional-user-configured",
-          "authenticatorFlow": false,
-          "requirement": "REQUIRED",
-          "priority": 10,
-          "autheticatorFlow": false,
-          "userSetupAllowed": false
-        },
-        {
-          "authenticator": "reset-otp",
-          "authenticatorFlow": false,
-          "requirement": "REQUIRED",
-          "priority": 20,
-          "autheticatorFlow": false,
           "userSetupAllowed": false
         }
       ]

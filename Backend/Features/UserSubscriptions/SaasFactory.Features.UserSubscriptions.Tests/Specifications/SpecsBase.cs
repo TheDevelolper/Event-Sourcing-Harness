@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,8 +20,8 @@ public abstract class SpecsBase
     private const string TestAudience = "test-audience";
     private const string TestSigningKey = "super-secret-test-key-which-is-long"; // >= 32 chars
     
+    protected WebApplicationBuilder builder;
     protected readonly Mock<ILogger> mockLogger = new();
-    
 
     protected static string GenerateTestJwt(string username, string email, TimeSpan lifetime)
     {
@@ -63,7 +64,8 @@ public abstract class SpecsBase
     
     protected async Task<HttpClient> GetFakeHttpClientAsync()
     {
-        var builder  = WebApplication.CreateBuilder();
+        builder = WebApplication.CreateBuilder();
+        builder.Environment.EnvironmentName = "Testing";
         builder.WebHost.UseTestServer();  
         
         builder.Services
@@ -83,9 +85,9 @@ public abstract class SpecsBase
         return fakeHttpClient;
     }
 
-    protected virtual WebApplication MapEndpoints(WebApplication app)
+    protected virtual void MapEndpoints(WebApplication app)
     {
-        return app;
+        
     }
 
     protected virtual void RegisterServices(IServiceCollection services)

@@ -30,7 +30,6 @@ export const KeycloakProvider = ({ children }: KeycloakProviderProps) => {
         .init({
           onLoad: "check-sso",
           checkLoginIframe: false,
-          // redirectUri: window.location.href,
           flow: "implicit",
         })
         .then(() => {

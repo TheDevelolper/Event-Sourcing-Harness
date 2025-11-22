@@ -10,6 +10,9 @@
 
     <ItemGroup>
         <PackageReference Include="coverlet.collector" />
+        <PackageReference Include="Marten" />
+        <PackageReference Include="Mediator.Net" />
+        <PackageReference Include="Mediator.Net.MicrosoftDependencyInjection" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" />
@@ -36,12 +39,11 @@
         <ProjectReference
             Include="..\..\..\Shared\SaasFactory.Shared.Testing\SaasFactory.Shared.Testing\SaasFactory.Shared.Testing.csproj" />
         <ProjectReference
+            Include="..\..\Event Sourcing\SaasFactory.EventSourcing.Marten\SaasFactory.EventSourcing.Marten.csproj" />
+        <ProjectReference
+            Include="..\SaasFactory.Features.UserSubscriptions.Contracts\SaasFactory.Features.UserSubscriptions.Contracts.csproj" />
+        <ProjectReference
             Include="..\SaasFactory.Features.UserSubscriptions\SaasFactory.Features.UserSubscriptions.csproj" />
     </ItemGroup>
-
-    <!-- post build step to install playwright -->
-    <Target Name="PlaywrightInstall" AfterTargets="Build">
-        <Exec Command="pwsh $(OutDir)playwright.ps1 install" />
-    </Target>
 
 </Project>

@@ -11,6 +11,9 @@
     <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="9.4.2" />
     <!-- Feature/Module Tests -->
     <PackageVersion Include="coverlet.collector" Version="6.0.2" />
+    <PackageVersion Include="Mediator.Net" Version="4.9.0" />
+    <PackageVersion Include="Mediator.Net.MicrosoftDependencyInjection" Version="4.9.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="9.0.11" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
     <PackageVersion Include="Microsoft.Playwright.NUnit" Version="1.49.0" />
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.10" />
@@ -27,6 +30,7 @@
     <!-- todo these conflict Remove NETCORE SDK -->
     <PackageVersion Include="Portable.BouncyCastle" Version="1.9.0" />
     <PackageVersion Include="BouncyCastle.NetCoreSdk" Version="1.9.7" />
+    <PackageVersion Include="Scalar.AspNetCore" Version="2.10.3" />
     <PackageVersion Include="Semver" Version="3.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="9.7.0" />
     <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="9.4.2" />
@@ -37,17 +41,13 @@
     <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.12.0" />
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="9.0.9" />
     <PackageVersion Include="Aspire.Hosting.Keycloak" Version="9.4.2-preview.1.25428.12" />
-    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions"
-      Version="10.0.0-preview.7.25380.108" />
-    <!-- todo Remove MasTransit From Modules.Common and here -->
-    <PackageVersion Include="MassTransit" Version="8.5.3" />
-    <PackageVersion Include="MassTransit.Abstractions" Version="8.5.3" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.0-preview.7.25380.108" />
     <PackageVersion Include="Marten" Version="8.13.1" />
     <PackageVersion Include="Marten.AspNetCore" Version="8.13.1" />
     <PackageVersion Include="coverlet.collector" Version="6.0.2" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
     <PackageVersion Include="Microsoft.Playwright.NUnit" Version="1.49.0" />
-    <PackageVersion Include="Serilog" Version="4.3.0" />
+    <PackageVersion Include="Serilog" Version="4.3.1-dev-02395" />
     <PackageVersion Include="Serilog.AspNetCore" Version="9.0.0" />
     <PackageVersion Include="Serilog.Sinks.Console" Version="6.1.1" />
     <PackageVersion Include="Serilog.Sinks.Grafana.Loki" Version="8.3.1" />
@@ -63,11 +63,8 @@
     <PackageVersion Include="Aspire.Hosting" Version="9.4.2" />
     <PackageVersion Include="Aspire.Hosting.RabbitMQ" Version="9.4.2" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.8" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration"
-      Version="10.0.0-preview.7.25380.108" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.FileExtensions"
-      Version="10.0.0-preview.7.25380.108" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.Json"
-      Version="10.0.0-preview.7.25380.108" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="10.0.0-preview.7.25380.108" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.FileExtensions" Version="10.0.0-preview.7.25380.108" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="10.0.0-preview.7.25380.108" />
   </ItemGroup>
 </Project>
