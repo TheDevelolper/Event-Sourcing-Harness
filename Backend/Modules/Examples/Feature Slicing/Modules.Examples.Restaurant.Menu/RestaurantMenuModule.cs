@@ -1,5 +1,4 @@
-﻿using MassTransit;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Hosting;
 using Modules.Examples.Restaurant.Menu.Features.Menu;
 using SaasFactory.Modules.Common;

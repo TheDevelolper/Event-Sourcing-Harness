@@ -3,17 +3,22 @@
   <PropertyGroup>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>13</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Ardalis.GuardClauses" />
     <PackageReference Include="Marten.AspNetCore" />
+    <PackageReference Include="Mediator.Net" />
+    <PackageReference Include="Mediator.Net.MicrosoftDependencyInjection" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+    <PackageReference Include="Scalar.AspNetCore" />
     <PackageReference Include="Serilog" />
     <PackageReference Include="Serilog.AspNetCore" />
     <PackageReference Include="Serilog.Sinks.Console" />
@@ -21,8 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference
-      Include="..\Aspire\SaasFactory.ServiceDefaults\SaasFactory.ServiceDefaults.csproj" />
     <ProjectReference
       Include="..\Features\Authentication\SaasFactory.Features.Authentication\SaasFactory.Features.Authentication.csproj" />
     <ProjectReference

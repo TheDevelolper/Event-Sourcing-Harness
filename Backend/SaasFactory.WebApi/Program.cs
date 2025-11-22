@@ -1,40 +1,29 @@
-using Ardalis.GuardClauses;
-using Modules.Examples.Bank.Account;
-using Modules.Examples.Restaurant.Menu;
-using SaasFactory.Features.Authentication;
-using SaasFactory.EventSourcing.Marten;
-using SaasFactory.Features.UserSubscriptions;
-using SaasFactory.Modules.Common;
-using SaasFactory.ServiceDefaults;
-using SaasFactory.Shared.Config;
-using SaasFactory.WebApi.Extensions;
 using Serilog;
 using Serilog.Debugging;
 using Serilog.Formatting.Display;
 using Serilog.Sinks.Grafana.Loki;
+using SaasFactory.Features.UserSubscriptions;
+using SaasFactory.WebApi.Extensions;
+using SaasFactory.Shared.Config;
+using Ardalis.GuardClauses;
+using Mediator.Net;
+using Mediator.Net.MicrosoftDependencyInjection;
+using SaasFactory.EventSourcing.Marten;
+using SaasFactory.Features.Authentication;
+using SaasFactory.Modules.Common;
+using Scalar.AspNetCore;
+using Serilog.Core;
+using ILogger = Serilog.ILogger;
 
 try
 {
     // Enable Serilog internal diagnostics
     SelfLog.Enable(Console.Error);
-
-    var lokiUrl = Environment.GetEnvironmentVariable("LOKI_URL");
-    var textFormatter = new MessageTemplateTextFormatter("{Timestamp:HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}", null);
-
-    var logger = new LoggerConfiguration()
-        .WriteTo.Console()
-        .WriteTo.GrafanaLoki(
-            lokiUrl,
-            textFormatter: textFormatter, // ✅ render as plain text
-            labels: new[]
-            {
-                new LokiLabel { Key = "app", Value = "saasfactory" },
-                new LokiLabel { Key = "env", Value = "dev" }
-            })
-        .CreateLogger();
+    
+    var logger = CommonLoggerFactory.CreateLogger("SaasFactory WebApi");
 
     Log.Logger = logger;
-    
+
     Log.Information("Bootstrapping WebApi...");
 
     var builder = WebApplication.CreateBuilder(args);
@@ -55,19 +44,7 @@ try
 
     Log.Information("Event store connection string found.");
 
-    /* TODO: This is overkill! 
-      I think we could move features into modules/features. As they ARE actually modules.
-      The domain modules should sit under modules/domain. Also this registration stuff is just being 
-      too clever, maybe instead just register the services and endpoints in the usual way.
-    */
-    List<IFeatureModule> featureModules =
-    [
-        new BankAccountModule(),
-        new RestaurantMenuModule()
-    ];
-
     var clientSecretEnvVar = builder.Configuration["Authentication:ClientSecretEnvironmentVar"] ?? string.Empty;
-
 
     Guard.Against.NullOrWhiteSpace(input: clientSecretEnvVar,
         message: @"CLIENT SECRET ENVIRONMENT VARIABLE NAME IS MISSING FROM CONFIGURATION.
@@ -84,29 +61,55 @@ try
     Log.Information("Authentication client secret env var key found ✅");
 
     Log.Information("Configuring services...");
-    await builder
-        .AddLoggingConfiguration()
-        .AddServiceDefaults()
-        .AddAuthentication(clientSecret, logger)
-        .AddEventStore(eventsDbConnectionString)
-        .AddFeatureModules(featureModules);
-    Log.Information("Services configured.");
 
-    builder.Services.AddControllers();
+    builder.Logging
+        .ClearProviders()
+        .AddConsole()
+        .SetMinimumLevel(LogLevel.Debug);
+
+    var mediaBuilder = new MediatorBuilder();
+    mediaBuilder.RegisterHandlers(
+        typeof(Program).Assembly,
+        typeof(IUserSubscriptionMarker).Assembly
+        ).Build();
+    
+    builder.Services
+        .RegisterMediator(mediaBuilder)
+        .AddUserSubscriptionServices()
+        .AddAuthentication(clientSecret, logger)
+        .AddEventStore(builder, eventsDbConnectionString)
+        .AddControllers();
+
+    // Development only services
+    if (builder.Environment.IsDevelopment())
+    {
+        builder.Services.AddOpenApi();
+    }
+
+    Log.Information("Services configured.");
 
     Log.Information("Building middleware pipeline...");
     var app = builder.Build();
-    app.UseHttpsRedirection(); // critical if someone hits http:// first
-    app.UseCookiePolicy(); // <-- required so the policy above is applied
-    app.UseAuthentication();
-    app.UseAuthorization();
-    
+    app.UseHttpsRedirection() // IMPORTANT if someone hits http:// first
+        .UseCookiePolicy() // <-- required so the policy above is applied
+        .UseAuthentication()
+        .UseAuthorization();
+
     // Map Endpoints
-    Log.Information("Mapping module endpoints...");
+    Log.Information("Mapping endpoints...");
     app.MapUserSubscriptionEndpoints(logger);
     app.MapControllers();
-    
-    await app.AddFeatureMiddleware(featureModules);
+    Log.Information("Added endpoints");
+
+    // Development only middleware
+    if (app.Environment.IsDevelopment())
+    {
+        Log.Information("Adding swagger");
+        app.MapOpenApi();
+        app.MapScalarApiReference();
+        Log.Information("Swagger added");
+    }
+
     Log.Information("Middleware configured.");
 
     // Lifecycle hooks

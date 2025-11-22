@@ -55,7 +55,7 @@ public static class CertificateExporter
 
         logger.Information("Importing PFX with exportable keys...");
         var cert = X509CertificateLoader.LoadPkcs12CollectionFromFile(tempPfxPath, tempPassword,
-            X509KeyStorageFlags.Exportable | X509KeyStorageFlags.EphemeralKeySet);
+            X509KeyStorageFlags.Exportable | X509KeyStorageFlags.MachineKeySet);
 
         ExportPfxToPemWithBouncyCastle(tempPfxPath, tempPassword, certPath, keyPath);
 

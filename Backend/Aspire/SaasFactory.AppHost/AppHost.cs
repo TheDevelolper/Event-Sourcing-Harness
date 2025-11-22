@@ -83,16 +83,16 @@ var authClientSecret = Environment.GetEnvironmentVariable(clientSecretEnvVar) ??
 
 var keycloak = builder.AddKeycloakAuthServer(logger, authClientSecret);
 
-var webApiProjectBuilder = builder.AddProject<SaasFactory_WebApi>("WebApi")
+var webApiResourceBuilder = builder.AddProject<SaasFactory_WebApi>("WebApi")
     .WithReference(keycloak)
     .WithEnvironment(clientSecretEnvVar, authClientSecret)
     .WithEnvironment("LOKI_URL", lokiUrl);
-
+    
 eventsDb.OnConnectionStringAvailable(async (db, evt, ct) =>
 {
     var connStr = await postgres.Resource.ConnectionStringExpression.GetValueAsync(ct);
 
-    webApiProjectBuilder
+    webApiResourceBuilder
         .WithEnvironment("EVENTS_DB_CONNECTION", connStr)
         .WithReference(postgres);
 });
@@ -104,7 +104,7 @@ builder.AddExecutable("Documentation-Site", "docfx", "../../../DocFx")
     .WithArgs("build", "--serve", "-p", "4400")
     .WithExternalHttpEndpoints();
 
-webApiProjectBuilder
+webApiResourceBuilder
     .WaitFor(loki)
     .WaitFor(postgres);
 

@@ -1,7 +1,8 @@
 ## 🔐 Authentication Client Secret Setup
 
 This document explains how to configure the **authentication client secret** for the application.  
-The app expects to read the client secret from an environment variable specified in its settings.
+
+The app expects to read the client secret from an environment variable on the host machine.
 
 ---
 
@@ -29,17 +30,13 @@ You can find this secret in **Keycloak** under:
 
 > Clients → _Your Client (e.g. `saas-dashboard`)_ → **Credentials (Tab)** → Client Secret
 
-#### 🪟 PowerShell (temporary for this session)
-``` pwsh
-$env:AUTH_CLIENT_SECRET = "paste-your-keycloak-client-secret-here"
-```
-
 #### 🪟 PowerShell (permanent for current user)
 ``` pwsh
 [System.Environment]::SetEnvironmentVariable('AUTH_CLIENT_SECRET', 'paste-your-keycloak-client-secret-here', 'User')
 ```
 
-#### 🧑‍💻 Bash / Linux
+#### 🧑‍💻 Bash / Linux (permanent)
+Put the client secret in your profile startup (e.g. .bashrc or .zshrc)
 ``` bash
 export AUTH_CLIENT_SECRET="paste-your-keycloak-client-secret-here"
 ```

@@ -1,21 +1,34 @@
-﻿using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.Hosting;
+﻿using Marten;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.DependencyInjection;
+using SaasFactory.Features.UserSubscriptions.Contracts.Events;
+using SaasFactory.Modules.Common;
 using Serilog;
 
 namespace SaasFactory.Features.UserSubscriptions;
 
 public static class BuilderExtensions
 {
-    public static IHostApplicationBuilder AddUserSubscriptionServices(this IHostApplicationBuilder builder)
+    public static IServiceCollection AddUserSubscriptionServices(this IServiceCollection services)
     {
+        var logger = CommonLoggerFactory.CreateLogger("User Subscription");
+        
         // services go here
-        return builder;
+        services.AddSingleton<ILogger>(logger);
+        
+        services.ConfigureMarten(options =>
+        {
+            options.Events.AddEventType(typeof(SubscriptionPendingEvent));
+        });
+        
+        return services;
     }
     
-    public static void MapUserSubscriptionEndpoints(this IEndpointRouteBuilder routes, ILogger logger)
+    public static IEndpointRouteBuilder MapUserSubscriptionEndpoints(this IEndpointRouteBuilder routes, ILogger logger)
     {
         logger.Information("Adding UserSubscription endpoints");
         routes.MapEndpoints(logger);
         logger.Information("UserSubscription endpoints mapped");
+        return routes;
     }
 }
