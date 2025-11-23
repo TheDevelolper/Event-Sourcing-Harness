@@ -52,7 +52,7 @@ public static class BuilderExtensions
             var keycloakConfigMountPath = Path.Combine(fileMountsPath, "Keycloak", "data", "import");
             var jarSource = Path.Combine(basePath, "Mounts", "Keycloak", "providers", "keycloak-theme-for-kc-all-other-versions.jar");
 
-            if (File.Exists(jarSource) == false) throw new Exception("OOOOf");
+            if (File.Exists(jarSource) == false) throw new Exception("JAR file for Keycloak theme not found at: " + jarSource);
 
             keycloak
                 .WithEnvironment("KEYCLOAK_THEME_CACHE", "none")
@@ -67,7 +67,7 @@ public static class BuilderExtensions
         keycloak.WithEnvironment("QUARKUS_HTTP_HTTP2", "false")
             .WithArgs(cb =>
             {
-                cb.Args.Add("start");
+                cb.Args.Add("start-dev");
                 cb.Args.Add("--https-certificate-file=/etc/x509/https/tls.crt");
                 cb.Args.Add("--https-certificate-file=/etc/x509/https/tls.crt");
                 cb.Args.Add("--https-certificate-key-file=/etc/x509/https/tls.key");
