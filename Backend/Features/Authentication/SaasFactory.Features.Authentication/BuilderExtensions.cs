@@ -55,26 +55,33 @@ public static class BuilderExtensions
             if (File.Exists(jarSource) == false) throw new Exception("JAR file for Keycloak theme not found at: " + jarSource);
 
             keycloak
+                .WithEnvironment("KC_HOSTNAME_STRICT", "false")
+                .WithEnvironment("KC_HEALTH_ENABLED", "true")
+                .WithEnvironment("KC_HTTPS_CERTIFICATE_FILE", "/etc/x509/https/tls.crt")
+                .WithEnvironment("KC_HTTPS_CERTIFICATE_KEY_FILE", "/etc/x509/https/tls.key")
+                .WithEnvironment("KC_HTTPS_PORT", "8443")
+                
                 .WithEnvironment("KEYCLOAK_THEME_CACHE", "none")
                 .WithEnvironment("KC_SPI_THEME_STATIC_MAX_AGE", "1") // fix theme cache preventing changes showing.
                 .WithEnvironment("KC_BOOTSTRAP_ADMIN_USERNAME", "admin")
                 .WithEnvironment("KC_BOOTSTRAP_ADMIN_PASSWORD", "admin")
+                
                 .WithBindMount(keycloakConfigMountPath, "/opt/keycloak/data/import")
                 .WithBindMount(jarSource, "/opt/keycloak/providers/keycloak-theme.jar");
         }
 
         // Configuration
-        keycloak.WithEnvironment("QUARKUS_HTTP_HTTP2", "false")
-            .WithArgs(cb =>
-            {
-                cb.Args.Add("start-dev");
-                cb.Args.Add("--https-certificate-file=/etc/x509/https/tls.crt");
-                cb.Args.Add("--https-certificate-file=/etc/x509/https/tls.crt");
-                cb.Args.Add("--https-certificate-key-file=/etc/x509/https/tls.key");
-                cb.Args.Add("--https-port=8443");
-                cb.Args.Add("--health-enabled=true");
-                cb.Args.Add("--hostname-strict=false");
-            }).WithEntrypoint("/opt/keycloak/bin/kc.sh");
+        keycloak.WithEnvironment("QUARKUS_HTTP_HTTP2", "false");
+            // .WithArgs(cb =>
+            // {
+            //     cb.Args.Add("start-dev");
+            //     cb.Args.Add("--https-certificate-file=/etc/x509/https/tls.crt");
+            //     cb.Args.Add("--https-certificate-file=/etc/x509/https/tls.crt");
+            //     cb.Args.Add("--https-certificate-key-file=/etc/x509/https/tls.key");
+            //     cb.Args.Add("--https-port=8443");
+            //     cb.Args.Add("--health-enabled=true");
+            //     cb.Args.Add("--hostname-strict=false");
+            // }).WithEntrypoint("/opt/keycloak/bin/kc.sh");
 
         return keycloak;
     }

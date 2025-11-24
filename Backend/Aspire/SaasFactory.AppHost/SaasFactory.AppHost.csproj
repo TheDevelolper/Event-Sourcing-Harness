@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <Sdk Name="Aspire.AppHost.Sdk" Version="9.4.2" />
+    <Sdk Name="Aspire.AppHost.Sdk" Version="13.0.0" />
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
@@ -23,20 +23,12 @@
 
 
     <ItemGroup>
-        <ProjectReference
-            Include="..\..\Features\Authentication\SaasFactory.Features.Authentication\SaasFactory.Features.Authentication.csproj"
-            IsAspireProjectResource="false" />
-        <ProjectReference
-            Include="..\..\Modules\Common\SaasFactory.Modules.Common\SaasFactory.Modules.Common.csproj"
-            IsAspireProjectResource="false" />
-        <ProjectReference
-            Include="..\..\Shared\SaasFactory.Shared.Config\SaasFactory.Shared.Config.csproj"
-            IsAspireProjectResource="false">
+        <ProjectReference Include="..\..\Features\Authentication\SaasFactory.Features.Authentication\SaasFactory.Features.Authentication.csproj" IsAspireProjectResource="false" />
+        <ProjectReference Include="..\..\Modules\Common\SaasFactory.Modules.Common\SaasFactory.Modules.Common.csproj" IsAspireProjectResource="false" />
+        <ProjectReference Include="..\..\Shared\SaasFactory.Shared.Config\SaasFactory.Shared.Config.csproj" IsAspireProjectResource="false">
             <Private>true</Private>
         </ProjectReference>
-        <ProjectReference
-            Include="..\SaasFactory.ServiceDefaults\SaasFactory.ServiceDefaults.csproj"
-            IsAspireProjectResource="false" />
+        <ProjectReference Include="..\SaasFactory.ServiceDefaults\SaasFactory.ServiceDefaults.csproj" IsAspireProjectResource="false" />
 
     </ItemGroup>
 
