@@ -32,20 +32,20 @@ public static class SubscriptionEndpoints
             await mediator.SendAsync(new InitiateSubscriptionCommand(username));
             logger.Information("User {0}, made a subscription request", username);
             
-            return Results.Ok($"User {username}, subscribed to thing");
+            return Results.Ok($"User {username}, subscribed");
         });
     }
 }
 
-public class SubscribeUserCommandHandler(ILogger logger, IDocumentStore store) : ICommandHandler<InitiateSubscriptionCommand>
+public class SubscribeUserCommandHandler(ILogger logger, IMediator mediator, IDocumentStore store) : ICommandHandler<InitiateSubscriptionCommand>
 {
     public async Task Handle(IReceiveContext<InitiateSubscriptionCommand> context, CancellationToken cancellationToken)
     {
         var transactionId = Guid.CreateVersion7();
         await using var session = store.LightweightSession(IsolationLevel.ReadCommitted);
-        var subscriptionPendingEvent = new SubscriptionPendingEvent();
-        session.Events.StartStream(transactionId, subscriptionPendingEvent);
+        session.Events.StartStream(transactionId, new SubscriptionPendingEvent());
         await session.SaveChangesAsync(cancellationToken);
-        logger.Information("User Sub");
+        await mediator.SendAsync(new PlaceOrderCommand(), cancellationToken);
+        logger.Information("User Subscription Initiated, TransactionId: {TransactionId}", transactionId);
     }
 }
