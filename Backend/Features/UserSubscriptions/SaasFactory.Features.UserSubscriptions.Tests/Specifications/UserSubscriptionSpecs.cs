@@ -3,21 +3,25 @@ using System.Net.Http.Headers;
 using Marten;
 using Marten.Events;
 using Mediator.Net;
+using Mediator.Net.Binding;
 using Mediator.Net.MicrosoftDependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
+using SaasFactory.Features.UserSubscriptions.Contracts.Commands;
 using SaasFactory.Features.UserSubscriptions.Contracts.Events;
-using Serilog;
+using SaasFactory.Features.UserSubscriptions.Tests.Specifications;
+using Shouldly;
 using TestStack.BDDfy;
 
-namespace SaasFactory.Features.UserSubscriptions.Tests.Specifications;
+namespace SaasFactory.Features.UserSubscriptions.Tests.Helpers.Fakes;
 
 [TestFixture]
 public class UserSubscriptionSpecs : SpecsBase
 {
     private HttpClient _httpClient;
     private readonly Mock<IEventStoreOperations> _mockEvents = new();
+    private readonly FakePlaceOrderCommandHandler fakePlaceOrderCommandHandler = new();
     private readonly Mock<IDocumentSession> _mockMartenDocumentSession = new();
     private readonly Mock<IDocumentStore> _mockMartenDocumentStore = new();
 
@@ -30,7 +34,7 @@ public class UserSubscriptionSpecs : SpecsBase
             .Setup(e => e.StartStream(
                 It.IsAny<Guid>(),
                 It.IsAny<SubscriptionPendingEvent>()));
-
+    
         _mockMartenDocumentSession
             .Setup(s => s.Events)
             .Returns(_mockEvents.Object);
@@ -67,10 +71,22 @@ public class UserSubscriptionSpecs : SpecsBase
         //     SubscriptionActivatedEvent
         //   CreateSubscriptionResponse
 
+        FakePlaceOrderCommandHandler.Reset();
+
         this.Given(_ => ARegisteredUser())
             .When(_ => TheUserSubscribesToAPlan())
-            .Then(_ => TheSubscriptionIsPending())
+            .Then(_ => TheSubscriptionWasPlacedIntoAPendingState())
+            .And(_ => AnOrderWasRaised())
             .BDDfy("Starting the subscription process");
+
+        // this.Given(_ => ARegisteredUser())
+        //     .And(_ => TheUserSubscribesToAPlan())
+        //     .When(_ => TheOrderWasCompleted())
+        //     .Then(_ => TheSubscriptionIsActivated())
+        //     .And(_ => TheSubscriptionActivatedResponseWasSent())
+
+            // .BDDfy("Starting the subscription process");
+ 
     }
 
     private void ARegisteredUser()
@@ -92,25 +108,22 @@ public class UserSubscriptionSpecs : SpecsBase
             m.Information("User {0}, made a subscription request", "jane.doe"), Times.Once);
     }
 
-    private Task TheSubscriptionIsPending()
+    private Task TheSubscriptionWasPlacedIntoAPendingState()
     {
         _mockEvents.Verify(m =>
                 m.StartStream(It.IsAny<Guid>(), It.IsAny<SubscriptionPendingEvent>()),
                 Times.Once);
 
-        _mockMartenDocumentSession.Verify(m =>
+        _mockMartenDocumentSession.Verify((m) =>
             m.SaveChangesAsync(It.IsAny<CancellationToken>()),
             Times.Once);
 
         return Task.CompletedTask;
     }
 
-    private void ThePaymentIsProcessedSuccessfully()
+    private void AnOrderWasRaised()
     {
-    }
-
-    private void TheUserSubscriptionShouldBeActivated()
-    {
+        FakePlaceOrderCommandHandler.CallCount.ShouldBe(1);
     }
 
     protected override void RegisterServices(IServiceCollection services)
@@ -118,8 +131,13 @@ public class UserSubscriptionSpecs : SpecsBase
         services.AddSingleton(mockLogger.Object);
         services.AddSingleton(_mockMartenDocumentStore.Object);
 
-        var mediaBuilder = new MediatorBuilder();
-        mediaBuilder.RegisterHandlers(typeof(IUserSubscriptionMarker).Assembly).Build();
+        var mediaBuilder = new MediatorBuilder()
+        .RegisterHandlers(() => new List<MessageBinding>()
+        {
+            new(typeof(PlaceOrderCommand), typeof(FakePlaceOrderCommandHandler)),
+            new(typeof(InitiateSubscriptionCommand), typeof(SubscribeUserCommandHandler)),
+        });
+
         services.RegisterMediator(mediaBuilder);
     }
 
@@ -129,12 +147,6 @@ public class UserSubscriptionSpecs : SpecsBase
     }
 }
 
-public class Currency
-{
-    public const string USD = nameof(USD);
-    public const string GBP = nameof(GBP);
-    public const string EUR = nameof(EUR);
-}
 
 // CreatePendingSubscriptionOrderCommandb
 // subscription:
