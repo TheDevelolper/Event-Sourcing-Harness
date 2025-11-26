@@ -110,9 +110,10 @@ public class UserSubscriptionSpecs : SpecsBase
 
     private Task TheSubscriptionWasPlacedIntoAPendingState()
     {
-        _mockEvents.Verify(m =>
-                m.StartStream(It.IsAny<Guid>(), It.IsAny<SubscriptionPendingEvent>()),
-                Times.Once);
+        _mockEvents.Verify(static m => m.StartStream(
+            It.IsAny<Guid>(), 
+            It.IsAny<SubscriptionPendingEvent>()),
+            Times.Once);
 
         _mockMartenDocumentSession.Verify((m) =>
             m.SaveChangesAsync(It.IsAny<CancellationToken>()),
