@@ -61,7 +61,6 @@ var grafana = builder.AddContainer("grafana", "grafana/grafana:11.1.0")
 // ======================
 // Create postgres database Server
 // ======================
-
 var postgres = builder.AddPostgres("postgres",
         userName: builder.AddParameter("username", pgUsername, secret: true),
         password: builder.AddParameter("password", pgPassword, secret: true))
@@ -79,7 +78,8 @@ var eventsDb = postgres.AddDatabase("events");
 // ======================
 
 var clientSecretEnvVar = builder.Configuration["Authentication:ClientSecretEnvironmentVar"] ?? string.Empty;
-var authClientSecret = Environment.GetEnvironmentVariable(clientSecretEnvVar) ?? string.Empty;
+var authClientSecret = Environment.GetEnvironmentVariable(clientSecretEnvVar) ?? string.Empty; 
+// Possibly overwritten by realm settings import
 
 var keycloak = builder.AddKeycloakAuthServer(logger, authClientSecret);
 
