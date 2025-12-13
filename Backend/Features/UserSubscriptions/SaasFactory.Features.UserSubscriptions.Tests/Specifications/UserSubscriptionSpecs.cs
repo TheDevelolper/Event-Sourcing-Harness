@@ -100,7 +100,7 @@ public class UserSubscriptionSpecs : SpecsBase
             new AuthenticationHeaderValue("Bearer", fakeJwt);
     }
 
-    private async Task TheUserSubscribesToAPlan()
+    private void TheUserSubscribesToAPlan()
     {
         _httpClient.GetAsync("/subscribe").Result.EnsureSuccessStatusCode();
 

@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Modules\Examples\MVC Controllers\Modules.Examples.Bank.Account\Modules.Examples.Bank.Account.csproj" />
     <ProjectReference
       Include="..\Features\Authentication\SaasFactory.Features.Authentication\SaasFactory.Features.Authentication.csproj" />
     <ProjectReference
@@ -33,10 +34,6 @@
     <ProjectReference
       Include="..\Features\Event Sourcing\SaasFactory.EventSourcing.Marten\SaasFactory.EventSourcing.Marten.csproj" />
     <ProjectReference Include="..\Features\UserSubscriptions\SaasFactory.Features.UserSubscriptions\SaasFactory.Features.UserSubscriptions.csproj" />
-    <ProjectReference
-      Include="..\Modules\Examples\Feature Slicing\Modules.Examples.Restaurant.Menu\Modules.Examples.Restaurant.Menu.csproj" />
-    <ProjectReference
-      Include="..\Modules\Examples\MVC Controllers\Modules.Examples.Bank.Account\Modules.Examples.Bank.Account.csproj" />
     <ProjectReference Include="..\Shared\SaasFactory.Shared.Config\SaasFactory.Shared.Config.csproj" />
   </ItemGroup>
 

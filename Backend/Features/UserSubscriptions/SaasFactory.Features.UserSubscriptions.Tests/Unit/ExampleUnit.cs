@@ -5,7 +5,7 @@
 public class ExampleUnit
 {
     [Test]
-    public async Task OnePlusTwoEqualsThree()
+    public void OnePlusTwoEqualsThree()
     {
         const int one = 1;
         const int two = 2;

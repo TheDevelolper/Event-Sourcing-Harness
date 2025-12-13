@@ -1,9 +1,6 @@
 using Serilog;
 using Serilog.Debugging;
-using Serilog.Formatting.Display;
-using Serilog.Sinks.Grafana.Loki;
 using SaasFactory.Features.UserSubscriptions;
-using SaasFactory.WebApi.Extensions;
 using SaasFactory.Shared.Config;
 using Ardalis.GuardClauses;
 using Mediator.Net;
@@ -12,8 +9,7 @@ using SaasFactory.EventSourcing.Marten;
 using SaasFactory.Features.Authentication;
 using SaasFactory.Modules.Common;
 using Scalar.AspNetCore;
-using Serilog.Core;
-using ILogger = Serilog.ILogger;
+using Modules.Examples.Bank.Account;
 
 try
 {
@@ -72,6 +68,10 @@ try
         typeof(Program).Assembly,
         typeof(IUserSubscriptionMarker).Assembly
         ).Build();
+
+
+    IFeatureModule bankAccontModule = new BankAccountModule();
+    await bankAccontModule.AddModule(builder);    //Todo: Fix this crap
     
     builder.Services
         .RegisterMediator(mediaBuilder)
@@ -95,6 +95,10 @@ try
         .UseAuthentication()
         .UseAuthorization();
 
+    //Todo: Fix this crap
+    await bankAccontModule.AddModuleMiddleware(app);
+    
+    
     // Map Endpoints
     Log.Information("Mapping endpoints...");
     app.MapUserSubscriptionEndpoints(logger);

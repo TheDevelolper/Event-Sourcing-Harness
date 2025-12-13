@@ -12,9 +12,9 @@
 
   <ItemGroup>
     <ProjectReference
-      Include="..\..\..\..\Features\Event Sourcing\SaasFactory.EventSourcing.Contracts\SaasFactory.EventSourcing.Contracts.csproj" />
+      Include="..\..\..\..\Backend\Features\Event Sourcing\SaasFactory.EventSourcing.Contracts\SaasFactory.EventSourcing.Contracts.csproj" />
     <ProjectReference
-      Include="..\..\..\..\Features\Event Sourcing\SaasFactory.EventSourcing.Marten\SaasFactory.EventSourcing.Marten.csproj" />
+      Include="..\..\..\..\Backend\Features\Event Sourcing\SaasFactory.EventSourcing.Marten\SaasFactory.EventSourcing.Marten.csproj" />
     <ProjectReference
       Include="..\..\..\Common\SaasFactory.Modules.Common\SaasFactory.Modules.Common.csproj" />
   </ItemGroup>
