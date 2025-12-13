@@ -5,7 +5,7 @@ using SaasFactory.Modules.Common;
 
 namespace Modules.Examples.Restaurant.Menu;
 
-public class RestaurantMenuModule() : IFeatureModule
+public class RestaurantMenuModule : IFeatureModule
 {
     public Task<IHostApplicationBuilder> AddModule(IHostApplicationBuilder builder) => Task.FromResult(builder);
 

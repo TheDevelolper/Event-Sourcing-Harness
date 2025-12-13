@@ -8,7 +8,7 @@ using SaasFactory.Modules.Common;
 
 namespace Modules.Examples.Bank.Account;
 
-public class BankAccountModule(): IFeatureModule
+public class BankAccountModule: IFeatureModule
 {
 
     public Task<IHostApplicationBuilder> AddModule(IHostApplicationBuilder builder)
