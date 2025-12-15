@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { KeycloakContext } from "./auth/keycloak-provider";
-import { Routes, Route, Link } from "react-router-dom";
-import { ProtectedRoute } from "./auth/protexted-route";
+import { ProtectedRoute } from "./auth/protected-route";
 import Admin from "./Pages/Admin";
 import Home from "./Pages/Home";
 
