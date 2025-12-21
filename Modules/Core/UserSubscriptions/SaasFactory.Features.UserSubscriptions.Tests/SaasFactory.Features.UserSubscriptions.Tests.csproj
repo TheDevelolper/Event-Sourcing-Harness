@@ -37,8 +37,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\Shared\SaasFactory.Shared.Testing\SaasFactory.Shared.Testing\SaasFactory.Shared.Testing.csproj" />
-        <ProjectReference Include="..\..\Event Sourcing\SaasFactory.EventSourcing.Marten\SaasFactory.EventSourcing.Marten.csproj" />
+        <ProjectReference Include="..\..\..\..\Backend\Shared\SaasFactory.Shared.Testing\SaasFactory.Shared.Testing\SaasFactory.Shared.Testing.csproj" />
+        <ProjectReference Include="..\..\EventSourcing\SaasFactory.EventSourcing.Marten\SaasFactory.EventSourcing.Marten.csproj" />
         <ProjectReference Include="..\SaasFactory.Features.UserSubscriptions.Contracts\SaasFactory.Features.UserSubscriptions.Contracts.csproj" />
         <ProjectReference Include="..\SaasFactory.Features.UserSubscriptions\SaasFactory.Features.UserSubscriptions.csproj" />
     </ItemGroup>

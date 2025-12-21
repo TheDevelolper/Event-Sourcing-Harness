@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using SaasFactory.Features.UserSubscriptions.Contracts.Events;
-using SaasFactory.Modules.Common;
+using SaasFactory.Modules.Core.Logging;
 using Serilog;
 
 namespace SaasFactory.Features.UserSubscriptions;

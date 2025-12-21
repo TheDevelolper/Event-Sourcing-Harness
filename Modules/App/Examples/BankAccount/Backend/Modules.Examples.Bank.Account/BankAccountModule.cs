@@ -10,7 +10,6 @@ namespace Modules.Examples.Bank.Account;
 
 public class BankAccountModule: IFeatureModule
 {
-
     public Task<IHostApplicationBuilder> AddModule(IHostApplicationBuilder builder)
     {
         builder.Services.ConfigureMarten(options =>
@@ -23,5 +22,4 @@ public class BankAccountModule: IFeatureModule
     }
 
     public Task<WebApplication> AddModuleMiddleware(WebApplication app) => Task.FromResult(app);
-
 }

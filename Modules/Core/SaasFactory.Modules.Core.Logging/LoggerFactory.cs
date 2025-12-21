@@ -3,7 +3,7 @@ using Serilog.Core;
 using Serilog.Formatting.Display;
 using Serilog.Sinks.Grafana.Loki;
 
-namespace SaasFactory.Modules.Common;
+namespace SaasFactory.Modules.Core.Logging;
 
 public static class CommonLoggerFactory
 {
