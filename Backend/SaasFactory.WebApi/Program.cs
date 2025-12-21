@@ -5,11 +5,12 @@ using SaasFactory.Shared.Config;
 using Ardalis.GuardClauses;
 using Mediator.Net;
 using Mediator.Net.MicrosoftDependencyInjection;
-using SaasFactory.EventSourcing.Marten;
 using SaasFactory.Features.Authentication;
 using SaasFactory.Modules.Common;
 using Scalar.AspNetCore;
 using Modules.Examples.Bank.Account;
+using SaasFactory.EventSourcing.Marten;
+using SaasFactory.Modules.Core.Logging;
 
 try
 {
@@ -17,9 +18,7 @@ try
     SelfLog.Enable(Console.Error);
     
     var logger = CommonLoggerFactory.CreateLogger("SaasFactory WebApi");
-
     Log.Logger = logger;
-
     Log.Information("Bootstrapping WebApi...");
 
     var builder = WebApplication.CreateBuilder(args);
@@ -70,9 +69,14 @@ try
         ).Build();
 
 
-    IFeatureModule bankAccontModule = new BankAccountModule();
-    await bankAccontModule.AddModule(builder);    //Todo: Fix this crap
-    
+    List<IFeatureModule> modules = new List<IFeatureModule>()
+    { 
+        new BankAccountModule()
+    };
+
+    // register module
+    modules.ForEach(async module => await module.AddModule(builder));
+
     builder.Services
         .RegisterMediator(mediaBuilder)
         .AddUserSubscriptionServices()
@@ -87,16 +91,16 @@ try
     }
 
     Log.Information("Services configured.");
-
     Log.Information("Building middleware pipeline...");
+    
     var app = builder.Build();
     app.UseHttpsRedirection() // IMPORTANT if someone hits http:// first
         .UseCookiePolicy() // <-- required so the policy above is applied
         .UseAuthentication()
         .UseAuthorization();
 
-    //Todo: Fix this crap
-    await bankAccontModule.AddModuleMiddleware(app);
+     // register module services
+     modules.ForEach(async module => await module.AddModuleMiddleware(app));
     
     
     // Map Endpoints

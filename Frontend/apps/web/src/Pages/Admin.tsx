@@ -21,6 +21,28 @@ const navigation = [
   { name: "Media", href: "/admin/media", icon: UsersIcon },
 ];
 
+// manifest.types.ts
+// export interface DashboardView {
+//   name: string
+//   view: string
+// }
+
+
+
+// Assuming this is in your main entry file
+// const manifests : Record<string, ModuleManifest>= import.meta.glob('@modules/*/manifest.json', { eager: true })
+
+// for (const [path, module] of Object.entries(manifests))
+// {
+//     if(module.dashboard) {
+//       navigation.push( 
+//         { 
+//           name: module.dashboard.name,
+          
+//         });
+//     }
+// }
+
 export default function Admin() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { currentPage, setCurrentPage } = useAdminDashboardStore();

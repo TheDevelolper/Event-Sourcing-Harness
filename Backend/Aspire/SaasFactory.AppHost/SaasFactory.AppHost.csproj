@@ -23,7 +23,7 @@
 
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Features\Authentication\SaasFactory.Features.Authentication\SaasFactory.Features.Authentication.csproj" IsAspireProjectResource="false" />
+        <ProjectReference Include="..\..\..\Modules\Core\Authentication\SaasFactory.Features.Authentication\SaasFactory.Features.Authentication.csproj" IsAspireProjectResource="false"/>
         <ProjectReference Include="..\..\Shared\SaasFactory.Shared.Config\SaasFactory.Shared.Config.csproj" IsAspireProjectResource="false">
             <Private>true</Private>
         </ProjectReference>
