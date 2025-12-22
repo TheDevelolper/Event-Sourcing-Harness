@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\Core\EventSourcing\SaasFactory.EventSourcing.Contracts\SaasFactory.EventSourcing.Contracts.csproj" />
-    <ProjectReference Include="..\..\..\..\..\Core\SaasFactory.Modules.Common\SaasFactory.Modules.Common.csproj" />
+    <ProjectReference Include="..\..\..\..\..\CoreFeatures\EventSourcing\SaasFactory.EventSourcing.Contracts\SaasFactory.EventSourcing.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\..\..\CoreFeatures\Common\SaasFactory.Modules.Common\SaasFactory.Modules.Common.csproj" />
   </ItemGroup>
 
 </Project>

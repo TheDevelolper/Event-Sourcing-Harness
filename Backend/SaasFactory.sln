@@ -31,29 +31,29 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Examples.Bank.Accou
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Examples.Bank.Account.Tests", "..\Modules\App\Examples\BankAccount\Backend\Modules.Examples.Bank.Account.Tests\Modules.Examples.Bank.Account.Tests.csproj", "{E63AC671-73FB-4D90-A28A-133D64FF46E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.EventSourcing.Contracts", "..\Modules\Core\EventSourcing\SaasFactory.EventSourcing.Contracts\SaasFactory.EventSourcing.Contracts.csproj", "{E0DC9384-5DB3-4B38-B5B5-CC4693A215F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.EventSourcing.Contracts", "..\Modules\CoreFeatures\EventSourcing\SaasFactory.EventSourcing.Contracts\SaasFactory.EventSourcing.Contracts.csproj", "{E0DC9384-5DB3-4B38-B5B5-CC4693A215F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.EventSourcing.Marten", "..\Modules\Core\EventSourcing\SaasFactory.EventSourcing.Marten\SaasFactory.EventSourcing.Marten.csproj", "{787A5460-886A-46BE-A76A-48FA45EDC31B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.EventSourcing.Marten", "..\Modules\CoreFeatures\EventSourcing\SaasFactory.EventSourcing.Marten\SaasFactory.EventSourcing.Marten.csproj", "{787A5460-886A-46BE-A76A-48FA45EDC31B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{CB977973-36BC-4CC5-B741-B5BA751D42D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.Modules.Common", "..\Modules\Core\SaasFactory.Modules.Common\SaasFactory.Modules.Common.csproj", "{AE6D8E06-BF0B-4DDB-B3C9-6B201515E62C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common\SaasFactory.Modules.Common", "..\Modules\CoreFeatures\Common\SaasFactory.Modules.Common\SaasFactory.Modules.Common.csproj", "{AE6D8E06-BF0B-4DDB-B3C9-6B201515E62C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{0408D7C4-3248-4A18-9B39-691221342E97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.Features.Authentication", "..\Modules\Core\Authentication\SaasFactory.Features.Authentication\SaasFactory.Features.Authentication.csproj", "{35BA268D-BF97-4B67-B417-82FD7B9DCE42}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.Authentication", "..\Modules\CoreFeatures\Authentication\SaasFactory.Authentication\SaasFactory.Authentication.csproj", "{35BA268D-BF97-4B67-B417-82FD7B9DCE42}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserSubscriptions", "UserSubscriptions", "{95745006-6944-4641-9D35-C15971D19C1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.Features.UserSubscriptions", "..\Modules\Core\UserSubscriptions\SaasFactory.Features.UserSubscriptions\SaasFactory.Features.UserSubscriptions.csproj", "{BEF09375-0BD0-431D-BE53-06BB476E68BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.Features.UserSubscriptions", "..\Modules\CoreFeatures\UserSubscriptions\SaasFactory.Features.UserSubscriptions\SaasFactory.Features.UserSubscriptions.csproj", "{BEF09375-0BD0-431D-BE53-06BB476E68BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.Features.UserSubscriptions.Contracts", "..\Modules\Core\UserSubscriptions\SaasFactory.Features.UserSubscriptions.Contracts\SaasFactory.Features.UserSubscriptions.Contracts.csproj", "{AF9AB241-CA8F-4874-805A-15C766B8040E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.Features.UserSubscriptions.Contracts", "..\Modules\CoreFeatures\UserSubscriptions\SaasFactory.Features.UserSubscriptions.Contracts\SaasFactory.Features.UserSubscriptions.Contracts.csproj", "{AF9AB241-CA8F-4874-805A-15C766B8040E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.Features.UserSubscriptions.Tests", "..\Modules\Core\UserSubscriptions\SaasFactory.Features.UserSubscriptions.Tests\SaasFactory.Features.UserSubscriptions.Tests.csproj", "{D4DB9EE4-82D7-485B-A42F-502E44683163}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.Features.UserSubscriptions.Tests", "..\Modules\CoreFeatures\UserSubscriptions\SaasFactory.Features.UserSubscriptions.Tests\SaasFactory.Features.UserSubscriptions.Tests.csproj", "{D4DB9EE4-82D7-485B-A42F-502E44683163}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{0C0A5B02-AE78-48B8-910D-A8258E9B1A6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.Modules.Core.Logging", "..\Modules\Core\SaasFactory.Modules.Core.Logging\SaasFactory.Modules.Core.Logging.csproj", "{2FB9C4A9-0F92-4DC5-8190-8C89FD21140F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.Modules.Core.Logging", "..\Modules\CoreFeatures\Logging\SaasFactory.Modules.Core.Logging\SaasFactory.Modules.Core.Logging.csproj", "{2FB9C4A9-0F92-4DC5-8190-8C89FD21140F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

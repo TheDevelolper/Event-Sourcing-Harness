@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Projects;
-using SaasFactory.Features.Authentication;
+using SaasFactory.Authentication;
 using SaasFactory.Shared.Config;
 using Serilog;
 using Serilog.Formatting.Display;
