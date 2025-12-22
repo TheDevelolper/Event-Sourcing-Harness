@@ -5,11 +5,11 @@ using Aspire.Hosting.ApplicationModel;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
-using SaasFactory.Features.Authentication.Utils;
+using SaasFactory.Authentication.Utils;
 
 using ILogger = Serilog.ILogger;
 
-namespace SaasFactory.Features.Authentication;
+namespace SaasFactory.Authentication;
 
 public static class BuilderExtensions
 {

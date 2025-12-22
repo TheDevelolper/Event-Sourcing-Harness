@@ -4,7 +4,7 @@ using Org.BouncyCastle.OpenSsl;
 using Org.BouncyCastle.Pkcs;
 using ILogger = Serilog.ILogger;
 
-namespace SaasFactory.Features.Authentication.Utils;
+namespace SaasFactory.Authentication.Utils;
 
 public static class CertificateExporter
 {

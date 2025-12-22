@@ -5,10 +5,10 @@ using SaasFactory.Shared.Config;
 using Ardalis.GuardClauses;
 using Mediator.Net;
 using Mediator.Net.MicrosoftDependencyInjection;
-using SaasFactory.Features.Authentication;
+using SaasFactory.Authentication;
 using SaasFactory.Modules.Common;
 using Scalar.AspNetCore;
-using Modules.Examples.Bank.Account;
+using Modules.Examples.Bank.Account; // Todo standardize module namespaces probably should be SaasFactory.Modules.Examples.Bank.Account
 using SaasFactory.EventSourcing.Marten;
 using SaasFactory.Modules.Core.Logging;
 
