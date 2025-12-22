@@ -10,20 +10,19 @@ using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using SaasFactory.Features.UserSubscriptions.Contracts.Commands;
 using SaasFactory.Features.UserSubscriptions.Contracts.Events;
-using SaasFactory.Features.UserSubscriptions.Tests.Specifications;
 using Shouldly;
 using TestStack.BDDfy;
 
-namespace SaasFactory.Features.UserSubscriptions.Tests.Helpers.Fakes;
+namespace SaasFactory.Features.UserSubscriptions.Tests.Specifications;
 
 [TestFixture]
 public class UserSubscriptionSpecs : SpecsBase
 {
     private HttpClient _httpClient;
     private readonly Mock<IEventStoreOperations> _mockEvents = new();
-    private readonly FakePlaceOrderCommandHandler fakePlaceOrderCommandHandler = new();
     private readonly Mock<IDocumentSession> _mockMartenDocumentSession = new();
     private readonly Mock<IDocumentStore> _mockMartenDocumentStore = new();
+    private readonly FakePlaceOrderCommandHandler _fakePlaceOrderCommandHandler = new();
 
     [SetUp]
     public async Task SetUpAsync()
@@ -103,9 +102,9 @@ public class UserSubscriptionSpecs : SpecsBase
     private void TheUserSubscribesToAPlan()
     {
         _httpClient.GetAsync("/subscribe").Result.EnsureSuccessStatusCode();
-
-        mockLogger.Verify(m =>
-            m.Information("User {0}, made a subscription request", "jane.doe"), Times.Once);
+        MockLogger.Verify(
+            m => m.Information("User {0}, made a subscription request", "jane.doe"), 
+            Times.Once);
     }
 
     private Task TheSubscriptionWasPlacedIntoAPendingState()
@@ -129,7 +128,7 @@ public class UserSubscriptionSpecs : SpecsBase
 
     protected override void RegisterServices(IServiceCollection services)
     {
-        services.AddSingleton(mockLogger.Object);
+        services.AddSingleton(MockLogger.Object);
         services.AddSingleton(_mockMartenDocumentStore.Object);
 
         var mediaBuilder = new MediatorBuilder()
@@ -144,7 +143,7 @@ public class UserSubscriptionSpecs : SpecsBase
 
     protected override void MapEndpoints(WebApplication app)
     {
-        app.MapUserSubscriptionEndpoints(mockLogger.Object);
+        app.MapUserSubscriptionEndpoints(MockLogger.Object);
     }
 }
 
