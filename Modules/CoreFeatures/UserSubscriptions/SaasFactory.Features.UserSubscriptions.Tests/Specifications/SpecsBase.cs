@@ -15,13 +15,11 @@ namespace SaasFactory.Features.UserSubscriptions.Tests.Specifications;
 
 public abstract class SpecsBase
 {
-    
     private const string TestIssuer = "https://test-issuer";
     private const string TestAudience = "test-audience";
     private const string TestSigningKey = "super-secret-test-key-which-is-long"; // >= 32 chars
-    
-    protected WebApplicationBuilder builder;
-    protected readonly Mock<ILogger> mockLogger = new();
+    private WebApplicationBuilder _builder;
+    protected readonly Mock<ILogger> MockLogger = new();
 
     protected static string GenerateTestJwt(string username, string email, TimeSpan lifetime)
     {
@@ -33,12 +31,12 @@ public abstract class SpecsBase
         var token = new JwtSecurityToken(
             issuer: TestIssuer,
             audience: TestAudience,
-            claims: new[]
-            {
+            claims:
+            [
                 new Claim("preferred_username", username),
                 new Claim(ClaimTypes.Email, email),
                 new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString())
-            },
+            ],
             notBefore: now,
             expires: now.Add(lifetime),
             signingCredentials: creds);
@@ -53,10 +51,10 @@ public abstract class SpecsBase
             ValidIssuer = TestIssuer,
             ValidAudience = TestAudience,
             ValidateIssuer = true,
+            ValidateLifetime = true,
             ValidateAudience = true,
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(TestSigningKey)),
-            ValidateLifetime = true,
             ClockSkew = TimeSpan.Zero,
             NameClaimType = "preferred_username" // so User.Identity.Name works
         };
@@ -64,18 +62,18 @@ public abstract class SpecsBase
     
     protected async Task<HttpClient> GetFakeHttpClientAsync()
     {
-        builder = WebApplication.CreateBuilder();
-        builder.Environment.EnvironmentName = "Testing";
-        builder.WebHost.UseTestServer();  
+        _builder = WebApplication.CreateBuilder();
+        _builder.Environment.EnvironmentName = "Testing";
+        _builder.WebHost.UseTestServer();
         
-        builder.Services
+        _builder.Services
             .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(ConfigureJwtForTests);
         
-        builder.Services.AddAuthorization();
-        RegisterServices(builder.Services);
+        _builder.Services.AddAuthorization();
+        RegisterServices(_builder.Services);
         
-        var app = builder.Build();
+        var app = _builder.Build();
         
         MapEndpoints(app);
         

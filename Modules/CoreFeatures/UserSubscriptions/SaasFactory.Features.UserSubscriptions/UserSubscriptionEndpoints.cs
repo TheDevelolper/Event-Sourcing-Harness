@@ -38,7 +38,9 @@ public static class SubscriptionEndpoints
             var username = user.Identity?.Name
                         ?? user.FindFirst("preferred_username")?.Value
                         ?? "unknown";
-
+            
+            // tests depend on this log statement.
+            logger.Information("User {0}, made a subscription request", username);
             await mediator.SendAsync(new InitiateSubscriptionCommand(username, resultStream));
  
             return GetResultStream(resultStream);

@@ -126,7 +126,7 @@ try
         Log.Information("WebApi started. Environment: {Environment}. ContentRoot: {ContentRoot}",
             app.Environment.EnvironmentName, app.Environment.ContentRootPath);
     });
-    app.Lifetime.ApplicationStopping.Register(() => { Log.Information("WebApi stopping..."); });
+    app.Lifetime.ApplicationStopping.Register(() => Log.Information("WebApi stopping..."));
     app.Lifetime.ApplicationStopped.Register(() =>
     {
         Log.Information("WebApi stopped. Flushing logs...");
