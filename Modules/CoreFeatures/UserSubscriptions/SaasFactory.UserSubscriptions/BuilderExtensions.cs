@@ -1,11 +1,11 @@
 ﻿using Marten;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
-using SaasFactory.Features.UserSubscriptions.Contracts.Events;
-using SaasFactory.Modules.Core.Logging;
+using SaasFactory.UserSubscriptions.Contracts.Events;
+using SaasFactory.Logging;
 using Serilog;
 
-namespace SaasFactory.Features.UserSubscriptions;
+namespace SaasFactory.UserSubscriptions;
 
 public static class BuilderExtensions
 {

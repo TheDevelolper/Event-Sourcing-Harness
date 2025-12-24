@@ -1,4 +1,4 @@
-﻿namespace SaasFactory.Features.UserSubscriptions;
+﻿namespace SaasFactory.UserSubscriptions;
 
 /// <summary>
 /// Module Assembly Marker

@@ -3,11 +3,10 @@ using Serilog.Core;
 using Serilog.Formatting.Display;
 using Serilog.Sinks.Grafana.Loki;
 
-namespace SaasFactory.Modules.Core.Logging;
+namespace SaasFactory.Logging;
 
 public static class CommonLoggerFactory
 {
-    
     public static Logger CreateLogger(string moduleName)
     {
         var lokiUrl = new Uri(Environment.GetEnvironmentVariable("LOKI_URL")!);
@@ -20,12 +19,12 @@ public static class CommonLoggerFactory
             .WriteTo.GrafanaLoki(
                 lokiUrl.ToString(),
                 textFormatter: textFormatter, // ✅ render as plain text
-                labels: new[]
-                {
+                labels:
+                [
                     new LokiLabel { Key = "app", Value = "Saas Factory" },
                     new LokiLabel { Key = "service_name", Value = moduleName },
                     new LokiLabel { Key = "env", Value = "dev" }
-                })
+                ])
             .CreateLogger();
         return logger1;
     }

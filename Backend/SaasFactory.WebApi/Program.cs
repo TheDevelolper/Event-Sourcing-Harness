@@ -1,6 +1,6 @@
 using Serilog;
 using Serilog.Debugging;
-using SaasFactory.Features.UserSubscriptions;
+using SaasFactory.UserSubscriptions;
 using SaasFactory.Shared.Config;
 using Ardalis.GuardClauses;
 using Mediator.Net;
@@ -10,7 +10,7 @@ using SaasFactory.Modules.Common;
 using Scalar.AspNetCore;
 using Modules.Examples.Bank.Account; // Todo standardize module namespaces probably should be SaasFactory.Modules.Examples.Bank.Account
 using SaasFactory.EventSourcing.Marten;
-using SaasFactory.Modules.Core.Logging;
+using SaasFactory.Logging;
 
 try
 {
@@ -67,14 +67,12 @@ try
         typeof(Program).Assembly,
         typeof(IUserSubscriptionMarker).Assembly
         ).Build();
-
-
-    List<IFeatureModule> modules = new List<IFeatureModule>()
-    { 
-        new BankAccountModule()
-    };
-
+    
     // register module
+    List<IFeatureModule> modules = [
+        new BankAccountModule()
+    ];
+
     modules.ForEach(async module => await module.AddModule(builder));
 
     builder.Services

@@ -10,12 +10,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using SaasFactory.Features.UserSubscriptions.Contracts.Commands;
-using SaasFactory.Features.UserSubscriptions.Contracts.Events;
+using SaasFactory.UserSubscriptions.Contracts.Commands;
+using SaasFactory.UserSubscriptions.Contracts.Events;
 using Serilog;
 
 
-namespace SaasFactory.Features.UserSubscriptions;
+namespace SaasFactory.UserSubscriptions;
 
 // Todo: Versioning
 // Todo: Validation

@@ -17,8 +17,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Logging\SaasFactory.Modules.Core.Logging\SaasFactory.Modules.Core.Logging.csproj" />
-      <ProjectReference Include="..\SaasFactory.Features.UserSubscriptions.Contracts\SaasFactory.Features.UserSubscriptions.Contracts.csproj" />
+      <ProjectReference Include="..\..\Logging\SaasFactory.Logging\SaasFactory.Logging.csproj" />
+      <ProjectReference Include="..\SaasFactory.UserSubscriptions.Contracts\SaasFactory.UserSubscriptions.Contracts.csproj" />
     </ItemGroup>
     
     
