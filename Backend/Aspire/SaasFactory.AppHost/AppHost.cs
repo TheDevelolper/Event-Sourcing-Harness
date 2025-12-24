@@ -10,7 +10,7 @@ using Serilog.Sinks.Grafana.Loki;
 const string pgUsername = "postgres";
 const string pgPassword = "postgres";
 
-var builder = DistributedApplication.CreateBuilder(args);
+var builder = DistributedApplication.CreateBuilder(args); 
 
 
 var textFormatter = new MessageTemplateTextFormatter("{Timestamp:HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}", null);
@@ -78,9 +78,9 @@ var eventsDb = postgres.AddDatabase("events");
 // ======================
 
 var clientSecretEnvVar = builder.Configuration["Authentication:ClientSecretEnvironmentVar"] ?? string.Empty;
-var authClientSecret = Environment.GetEnvironmentVariable(clientSecretEnvVar) ?? string.Empty; 
-// Possibly overwritten by realm settings import
 
+string devClientSecret = "**********";
+var authClientSecret = Environment.GetEnvironmentVariable(clientSecretEnvVar) ?? devClientSecret; 
 var keycloak = builder.AddKeycloakAuthServer(logger, authClientSecret);
 
 var webApiResourceBuilder = builder.AddProject<SaasFactory_WebApi>("WebApi")
