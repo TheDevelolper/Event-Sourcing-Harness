@@ -12,7 +12,8 @@ export default defineConfig({
       "@micro-frontends": path.resolve(__dirname, "libs/micro-frontends/src"),
       "@ui-models": path.resolve(__dirname, "libs/ui-models/src"),
       "@ui-components": path.resolve(__dirname, "libs/ui-components/src"),
-      "@modules": path.resolve(__dirname, "../Modules/Examples")
+      "@modules": path.resolve(__dirname, "../Modules/App"),
+      "@modules-common": path.resolve(__dirname, "../Modules/CoreFeatures/Common")
     },
   },
   optimizeDeps: {

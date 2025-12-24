@@ -1,16 +1,5 @@
-import {BankView, ProtectedView } from "./Views/bank-view";
-
-type AppView = {
-  route: string
-  component: React.ComponentType<any> // or more specific if you want
-  auth?: boolean
-}
-
-export type ModuleConfig = {
-  views: {
-     app: AppView[]
-  }
-}
+import { ModuleConfig, AppView } from "@modules-common";
+import { BankView, ProtectedView } from "./Views/bank-view";
 
 export const moduleConfig: ModuleConfig = {
   views: {
@@ -20,4 +9,3 @@ export const moduleConfig: ModuleConfig = {
     ],
   },
 };
-

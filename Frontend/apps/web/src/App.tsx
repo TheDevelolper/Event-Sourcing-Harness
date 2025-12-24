@@ -4,8 +4,7 @@ import { KeycloakContext } from "./auth/keycloak-provider";
 import { ProtectedRoute } from "./auth/protected-route";
 import Admin from "./Pages/Admin";
 import Home from "./Pages/Home";
-
-import { ModuleConfig } from "../../../../Modules/Examples/BankAccount/Frontend/module.config";
+import { ModuleConfig } from "@modules-common";
 import "./App.css";
 
 
@@ -16,6 +15,7 @@ type DynamicRoute = {
 };
 
 // moduleConfig (outside project, via alias)
+// @ts-ignore
 const moduleConfig: Record<string, { moduleConfig:ModuleConfig }> = import.meta.glob(
   "@modules/**/module.config.ts",
   { eager: true }
@@ -48,7 +48,6 @@ function App() {
     <Suspense fallback={<div>Loading…</div>}>
       <Routes>
         <Route path="/" element={<Home />} />
-
         <Route
           path="/admin/*"
           element={

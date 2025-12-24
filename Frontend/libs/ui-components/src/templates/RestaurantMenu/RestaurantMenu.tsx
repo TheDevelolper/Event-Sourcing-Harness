@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "../../atoms/Button/Button";
 import { CardLayout } from "../../organisms/CardLayout/CardLayout";
 import { Card } from "../../molecules/Card/Card";
-import { MenuItem } from "../../../../ui-models/src";
+import { MenuItem } from "@ui-models";
 
 export interface RestaurantMenuCardProps {
   item: MenuItem;
@@ -39,7 +39,7 @@ export const RestaurantMenuCard: React.FC<RestaurantMenuCardProps> = ({
       </div>
 
       <div className="absolute right-4 bottom-4">
-        <Button variant="primary">More</Button>
+        <Button variant="solid" rounded={"none"}>More</Button>
       </div>
     </Card>
   );
