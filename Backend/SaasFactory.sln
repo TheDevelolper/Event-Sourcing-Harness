@@ -45,15 +45,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.Authentication"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserSubscriptions", "UserSubscriptions", "{95745006-6944-4641-9D35-C15971D19C1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.Features.UserSubscriptions", "..\Modules\CoreFeatures\UserSubscriptions\SaasFactory.Features.UserSubscriptions\SaasFactory.Features.UserSubscriptions.csproj", "{BEF09375-0BD0-431D-BE53-06BB476E68BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.UserSubscriptions", "..\Modules\CoreFeatures\UserSubscriptions\SaasFactory.UserSubscriptions\SaasFactory.UserSubscriptions.csproj", "{BEF09375-0BD0-431D-BE53-06BB476E68BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.Features.UserSubscriptions.Contracts", "..\Modules\CoreFeatures\UserSubscriptions\SaasFactory.Features.UserSubscriptions.Contracts\SaasFactory.Features.UserSubscriptions.Contracts.csproj", "{AF9AB241-CA8F-4874-805A-15C766B8040E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.UserSubscriptions.Contracts", "..\Modules\CoreFeatures\UserSubscriptions\SaasFactory.UserSubscriptions.Contracts\SaasFactory.UserSubscriptions.Contracts.csproj", "{AF9AB241-CA8F-4874-805A-15C766B8040E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.Features.UserSubscriptions.Tests", "..\Modules\CoreFeatures\UserSubscriptions\SaasFactory.Features.UserSubscriptions.Tests\SaasFactory.Features.UserSubscriptions.Tests.csproj", "{D4DB9EE4-82D7-485B-A42F-502E44683163}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.UserSubscriptions.Tests", "..\Modules\CoreFeatures\UserSubscriptions\SaasFactory.UserSubscriptions.Tests\SaasFactory.UserSubscriptions.Tests.csproj", "{D4DB9EE4-82D7-485B-A42F-502E44683163}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{0C0A5B02-AE78-48B8-910D-A8258E9B1A6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.Modules.Core.Logging", "..\Modules\CoreFeatures\Logging\SaasFactory.Modules.Core.Logging\SaasFactory.Modules.Core.Logging.csproj", "{2FB9C4A9-0F92-4DC5-8190-8C89FD21140F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasFactory.Logging", "..\Modules\CoreFeatures\Logging\SaasFactory.Logging\SaasFactory.Logging.csproj", "{2FB9C4A9-0F92-4DC5-8190-8C89FD21140F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

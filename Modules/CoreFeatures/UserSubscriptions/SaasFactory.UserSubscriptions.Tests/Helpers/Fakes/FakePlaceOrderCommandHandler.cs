@@ -1,8 +1,8 @@
 using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using SaasFactory.Features.UserSubscriptions.Contracts.Commands;
+using SaasFactory.UserSubscriptions.Contracts.Commands;
 
-namespace SaasFactory.Features.UserSubscriptions.Tests.Specifications;
+namespace SaasFactory.UserSubscriptions.Tests.Specifications;
 
 internal class FakePlaceOrderCommandHandler : ICommandHandler<PlaceOrderCommand>
 {

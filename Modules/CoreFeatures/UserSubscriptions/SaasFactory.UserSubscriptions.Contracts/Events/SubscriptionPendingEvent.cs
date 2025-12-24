@@ -1,6 +1,6 @@
 ﻿using SaasFactory.EventSourcing.Contracts;
 
-namespace SaasFactory.Features.UserSubscriptions.Contracts.Events;
+namespace SaasFactory.UserSubscriptions.Contracts.Events;
 
 /// <summary>
 /// Event raised when a subscription creation process

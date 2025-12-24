@@ -11,7 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using Moq;
 using Serilog;
 
-namespace SaasFactory.Features.UserSubscriptions.Tests.Specifications;
+namespace SaasFactory.UserSubscriptions.Tests.Specifications;
 
 public abstract class SpecsBase
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Playwright.NUnit;
 using TestStack.BDDfy;
 
-namespace SaasFactory.Features.UserSubscriptions.Tests.Integration;
+namespace SaasFactory.UserSubscriptions.Tests.Integration;
 
 [Parallelizable(ParallelScope.Self)]
 [TestFixture]

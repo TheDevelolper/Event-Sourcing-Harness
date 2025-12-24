@@ -1,6 +1,6 @@
 ﻿using Mediator.Net.Contracts;
 
-namespace SaasFactory.Features.UserSubscriptions.Contracts.Commands;
+namespace SaasFactory.UserSubscriptions.Contracts.Commands;
 
 /// <summary>
 /// Command used to create a new subscription.

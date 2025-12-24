@@ -8,12 +8,12 @@ using Mediator.Net.MicrosoftDependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
-using SaasFactory.Features.UserSubscriptions.Contracts.Commands;
-using SaasFactory.Features.UserSubscriptions.Contracts.Events;
+using SaasFactory.UserSubscriptions.Contracts.Commands;
+using SaasFactory.UserSubscriptions.Contracts.Events;
 using Shouldly;
 using TestStack.BDDfy;
 
-namespace SaasFactory.Features.UserSubscriptions.Tests.Specifications;
+namespace SaasFactory.UserSubscriptions.Tests.Specifications;
 
 [TestFixture]
 public class UserSubscriptionSpecs : SpecsBase

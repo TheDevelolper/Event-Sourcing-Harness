@@ -1,4 +1,4 @@
-namespace SaasFactory.Features.UserSubscriptions.Contracts.Commands;
+namespace SaasFactory.UserSubscriptions.Contracts.Commands;
 
 /// <summary>
 /// Command to place an order as part of the subscription process.

@@ -1,4 +1,4 @@
-﻿namespace SaasFactory.Features.UserSubscriptions.Tests.Integration;
+﻿namespace SaasFactory.UserSubscriptions.Tests.Integration;
 
 [Parallelizable(ParallelScope.Self)]
 [TestFixture]
