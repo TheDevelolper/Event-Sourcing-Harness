@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { useAdminDashboardStore } from "../store/useAdminDashboardStore";
+import {Pages, useAdminDashboardStore} from "../store/useAdminDashboardStore";
 import { useAuthStore } from "../store/useAuthStore";
 
 import { HomeIcon, UsersIcon } from "@heroicons/react/24/outline";
@@ -21,34 +21,13 @@ const navigation = [
   { name: "Media", href: "/admin/media", icon: UsersIcon },
 ];
 
-// manifest.types.ts
-// export interface DashboardView {
-//   name: string
-//   view: string
-// }
-
-
-
-// Assuming this is in your main entry file
-// const manifests : Record<string, ModuleManifest>= import.meta.glob('@modules/*/manifest.json', { eager: true })
-
-// for (const [path, module] of Object.entries(manifests))
-// {
-//     if(module.dashboard) {
-//       navigation.push( 
-//         { 
-//           name: module.dashboard.name,
-          
-//         });
-//     }
-// }
-
 export default function Admin() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { currentPage, setCurrentPage } = useAdminDashboardStore();
   const { user } = useAuthStore();
 
   useEffect(() => {
+    //todo: perhaps routes could be a store and we could set that from modules?
     const routes: Record<string, string> = {
       "/admin": "dashboard",
       "/admin/menu-items": "menu items",
@@ -56,8 +35,12 @@ export default function Admin() {
       "/admin/media": "media",
     };
 
-    setCurrentPage(routes[location.pathname] ?? "dashboard");
+    setCurrentPage(routes[location.pathname] as Pages ?? "Dashboard");
   }, [location.pathname, setCurrentPage]);
+
+  if(user == null) {
+    return("<div>Could not find user info</div>");
+  }
 
   return (
     <div>
