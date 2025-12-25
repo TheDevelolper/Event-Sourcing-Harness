@@ -9,3 +9,4 @@ export const moduleConfig: ModuleConfig = {
     ],
   },
 };
+
