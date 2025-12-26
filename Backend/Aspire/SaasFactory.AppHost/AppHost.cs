@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Projects;
-using SaasFactory.Features.Authentication;
+using SaasFactory.Authentication;
 using SaasFactory.Shared.Config;
 using Serilog;
 using Serilog.Formatting.Display;
@@ -10,7 +10,7 @@ using Serilog.Sinks.Grafana.Loki;
 const string pgUsername = "postgres";
 const string pgPassword = "postgres";
 
-var builder = DistributedApplication.CreateBuilder(args);
+var builder = DistributedApplication.CreateBuilder(args); 
 
 
 var textFormatter = new MessageTemplateTextFormatter("{Timestamp:HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}", null);
@@ -61,7 +61,6 @@ var grafana = builder.AddContainer("grafana", "grafana/grafana:11.1.0")
 // ======================
 // Create postgres database Server
 // ======================
-
 var postgres = builder.AddPostgres("postgres",
         userName: builder.AddParameter("username", pgUsername, secret: true),
         password: builder.AddParameter("password", pgPassword, secret: true))
@@ -79,8 +78,9 @@ var eventsDb = postgres.AddDatabase("events");
 // ======================
 
 var clientSecretEnvVar = builder.Configuration["Authentication:ClientSecretEnvironmentVar"] ?? string.Empty;
-var authClientSecret = Environment.GetEnvironmentVariable(clientSecretEnvVar) ?? string.Empty;
 
+string devClientSecret = "**********";
+var authClientSecret = Environment.GetEnvironmentVariable(clientSecretEnvVar) ?? devClientSecret; 
 var keycloak = builder.AddKeycloakAuthServer(logger, authClientSecret);
 
 var webApiResourceBuilder = builder.AddProject<SaasFactory_WebApi>("WebApi")

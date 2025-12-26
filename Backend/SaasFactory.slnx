@@ -1,0 +1,41 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Aspire/">
+    <Project Path="Aspire/SaasFactory.AppHost/SaasFactory.AppHost.csproj" />
+    <Project Path="Aspire/SaasFactory.ServiceDefaults/SaasFactory.ServiceDefaults.csproj" />
+  </Folder>
+  <Folder Name="/Modules/" />
+  <Folder Name="/Modules/App/" />
+  <Folder Name="/Modules/App/Examples/">
+    <Project Path="../Modules/App/Examples/BankAccount/Backend/Modules.Examples.Bank.Account.Tests/Modules.Examples.Bank.Account.Tests.csproj" />
+    <Project Path="../Modules/App/Examples/BankAccount/Backend/Modules.Examples.Bank.Account/Modules.Examples.Bank.Account.csproj" />
+  </Folder>
+  <Folder Name="/Modules/Core/" />
+  <Folder Name="/Modules/Core/Authentication/">
+    <Project Path="../Modules/CoreFeatures/Authentication/SaasFactory.Authentication/SaasFactory.Authentication.csproj" />
+  </Folder>
+  <Folder Name="/Modules/Core/Common/">
+    <Project Path="../Modules/CoreFeatures/Common/SaasFactory.Modules.Common/SaasFactory.Modules.Common.csproj" />
+  </Folder>
+  <Folder Name="/Modules/Core/EventSourcing/">
+    <Project Path="../Modules/CoreFeatures/EventSourcing/SaasFactory.EventSourcing.Contracts/SaasFactory.EventSourcing.Contracts.csproj" />
+    <Project Path="../Modules/CoreFeatures/EventSourcing/SaasFactory.EventSourcing.Marten/SaasFactory.EventSourcing.Marten.csproj" />
+  </Folder>
+  <Folder Name="/Modules/Core/Logging/">
+    <Project Path="../Modules/CoreFeatures/Logging/SaasFactory.Logging/SaasFactory.Logging.csproj" />
+  </Folder>
+  <Folder Name="/Modules/Core/UserSubscriptions/">
+    <Project Path="../Modules/CoreFeatures/UserSubscriptions/SaasFactory.UserSubscriptions.Contracts/SaasFactory.UserSubscriptions.Contracts.csproj" />
+    <Project Path="../Modules/CoreFeatures/UserSubscriptions/SaasFactory.UserSubscriptions.Tests/SaasFactory.UserSubscriptions.Tests.csproj" />
+    <Project Path="../Modules/CoreFeatures/UserSubscriptions/SaasFactory.UserSubscriptions/SaasFactory.UserSubscriptions.csproj" />
+  </Folder>
+  <Folder Name="/Shared/">
+    <Project Path="Shared/SaasFactory.Shared.Config/SaasFactory.Shared.Config.csproj" />
+    <Project Path="Shared/SaasFactory.Shared.Testing/SaasFactory.Shared.Testing/SaasFactory.Shared.Testing.csproj" />
+  </Folder>
+  <Project Path="SaasFactory.WebApi/SaasFactory.WebApi.csproj" />
+</Solution>

@@ -1,28 +1,9 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@ui-models": [
-        "./libs/ui-models/src/"
-      ],
-      "@micro-frontends": [
-        "./libs/micro-frontends/src/"
-      ],
-      "@ui-components": [
-        "./libs/ui-components/src/"
-      ]
-    },
-    "jsx": "react-jsx",
-    "module": "ESNext",
-    "target": "ESNext",
-    "esModuleInterop": true,
-    "moduleResolution": "bundler",
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
     "types": [
-      "node",
-      "jest"
+      "jest",
+      "node"
     ]
   },
   "include": [

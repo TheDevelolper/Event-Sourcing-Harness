@@ -30,7 +30,7 @@ export function decodeToken(token: string) {
  */
 export function getTokenData() {
   // Use the ID token for user info
-  return decodeToken(keycloak.idToken);
+  return decodeToken(keycloak.idToken ?? '');
 }
 
 export default keycloak;

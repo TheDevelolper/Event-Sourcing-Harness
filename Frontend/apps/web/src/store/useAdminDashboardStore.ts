@@ -1,8 +1,16 @@
 import { create } from "zustand";
 
-export const useAdminDashboardStore = create((set) => ({
-  currentPage: "Dashboard | MenuItems | Menus | Media",
+export type Pages =
+    | "Dashboard"
+    | "MenuItems"
+    | "Menus"
+    | "Media";
 
-  // Actions
-  setCurrentPage: (page: string) => set({ currentPage: page }),
+export type AdminDashboardStoreState = {
+  currentPage: Pages;
+  setCurrentPage: (page: Pages) => void;
+}
+export const useAdminDashboardStore= create<AdminDashboardStoreState>((set) => ({
+  currentPage: "Dashboard",
+  setCurrentPage: (page: Pages) => set({ currentPage: page }),
 }));

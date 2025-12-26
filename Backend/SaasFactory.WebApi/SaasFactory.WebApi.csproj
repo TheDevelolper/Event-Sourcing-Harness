@@ -26,17 +26,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference
-      Include="..\Features\Authentication\SaasFactory.Features.Authentication\SaasFactory.Features.Authentication.csproj" />
-    <ProjectReference
-      Include="..\Features\Event Sourcing\SaasFactory.EventSourcing.Contracts\SaasFactory.EventSourcing.Contracts.csproj" />
-    <ProjectReference
-      Include="..\Features\Event Sourcing\SaasFactory.EventSourcing.Marten\SaasFactory.EventSourcing.Marten.csproj" />
-    <ProjectReference Include="..\Features\UserSubscriptions\SaasFactory.Features.UserSubscriptions\SaasFactory.Features.UserSubscriptions.csproj" />
-    <ProjectReference
-      Include="..\Modules\Examples\Feature Slicing\Modules.Examples.Restaurant.Menu\Modules.Examples.Restaurant.Menu.csproj" />
-    <ProjectReference
-      Include="..\Modules\Examples\MVC Controllers\Modules.Examples.Bank.Account\Modules.Examples.Bank.Account.csproj" />
+    <ProjectReference Include="..\..\Modules\App\Examples\BankAccount\Backend\Modules.Examples.Bank.Account\Modules.Examples.Bank.Account.csproj" />
+    <ProjectReference Include="..\..\Modules\CoreFeatures\Authentication\SaasFactory.Authentication\SaasFactory.Authentication.csproj" />
+    <ProjectReference Include="..\..\Modules\CoreFeatures\EventSourcing\SaasFactory.EventSourcing.Contracts\SaasFactory.EventSourcing.Contracts.csproj" />
+    <ProjectReference Include="..\..\Modules\CoreFeatures\EventSourcing\SaasFactory.EventSourcing.Marten\SaasFactory.EventSourcing.Marten.csproj" />
+    <ProjectReference Include="..\..\Modules\CoreFeatures\Common\SaasFactory.Modules.Common\SaasFactory.Modules.Common.csproj" />
+    <ProjectReference Include="..\..\Modules\CoreFeatures\UserSubscriptions\SaasFactory.UserSubscriptions.Contracts\SaasFactory.UserSubscriptions.Contracts.csproj" />
+    <ProjectReference Include="..\..\Modules\CoreFeatures\UserSubscriptions\SaasFactory.UserSubscriptions\SaasFactory.UserSubscriptions.csproj" />
     <ProjectReference Include="..\Shared\SaasFactory.Shared.Config\SaasFactory.Shared.Config.csproj" />
   </ItemGroup>
 
