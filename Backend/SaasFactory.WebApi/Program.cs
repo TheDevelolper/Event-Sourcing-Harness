@@ -1,19 +1,16 @@
 using Serilog;
 using Serilog.Debugging;
-using Serilog.Formatting.Display;
-using Serilog.Sinks.Grafana.Loki;
-using SaasFactory.Features.UserSubscriptions;
-using SaasFactory.WebApi.Extensions;
+using SaasFactory.UserSubscriptions;
 using SaasFactory.Shared.Config;
 using Ardalis.GuardClauses;
 using Mediator.Net;
 using Mediator.Net.MicrosoftDependencyInjection;
-using SaasFactory.EventSourcing.Marten;
-using SaasFactory.Features.Authentication;
+using SaasFactory.Authentication;
 using SaasFactory.Modules.Common;
 using Scalar.AspNetCore;
-using Serilog.Core;
-using ILogger = Serilog.ILogger;
+using Modules.Examples.Bank.Account; // Todo standardize module namespaces probably should be SaasFactory.Modules.Examples.Bank.Account
+using SaasFactory.EventSourcing.Marten;
+using SaasFactory.Logging;
 
 try
 {
@@ -21,9 +18,7 @@ try
     SelfLog.Enable(Console.Error);
     
     var logger = CommonLoggerFactory.CreateLogger("SaasFactory WebApi");
-
     Log.Logger = logger;
-
     Log.Information("Bootstrapping WebApi...");
 
     var builder = WebApplication.CreateBuilder(args);
@@ -73,6 +68,13 @@ try
         typeof(IUserSubscriptionMarker).Assembly
         ).Build();
     
+    // register module
+    List<IFeatureModule> modules = [
+        new BankAccountModule()
+    ];
+
+    modules.ForEach(async module => await module.AddModule(builder));
+
     builder.Services
         .RegisterMediator(mediaBuilder)
         .AddUserSubscriptionServices()
@@ -87,14 +89,18 @@ try
     }
 
     Log.Information("Services configured.");
-
     Log.Information("Building middleware pipeline...");
+    
     var app = builder.Build();
     app.UseHttpsRedirection() // IMPORTANT if someone hits http:// first
         .UseCookiePolicy() // <-- required so the policy above is applied
         .UseAuthentication()
         .UseAuthorization();
 
+     // register module services
+     modules.ForEach(async module => await module.AddModuleMiddleware(app));
+    
+    
     // Map Endpoints
     Log.Information("Mapping endpoints...");
     app.MapUserSubscriptionEndpoints(logger);
@@ -118,7 +124,7 @@ try
         Log.Information("WebApi started. Environment: {Environment}. ContentRoot: {ContentRoot}",
             app.Environment.EnvironmentName, app.Environment.ContentRootPath);
     });
-    app.Lifetime.ApplicationStopping.Register(() => { Log.Information("WebApi stopping..."); });
+    app.Lifetime.ApplicationStopping.Register(() => Log.Information("WebApi stopping..."));
     app.Lifetime.ApplicationStopped.Register(() =>
     {
         Log.Information("WebApi stopped. Flushing logs...");

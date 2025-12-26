@@ -18,7 +18,7 @@ Please follow the guide below for detailed steps:
 
 The Keycloak realm configuration is defined in:
 
-`Backend/Features/Authentication/SaasFactory.Features.Authentication/Mounts/Keycloak/data/import/realm-export.json`
+`Backend/Features/Authentication/SaasFactory.Authentication/Mounts/Keycloak/data/import/realm-export.json`
 
 When Aspire launches, this file is automatically loaded into Keycloak, initializing the realm configuration.  
 You can modify realm settings in **two ways**:

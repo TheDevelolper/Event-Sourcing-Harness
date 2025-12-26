@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "target": "ESNext",
+    "esModuleInterop": true,
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "paths": {
+      "@ui-models": [
+        "./Frontend/libs/ui-models/src/"
+      ],
+      "@micro-frontends": [
+        "./Frontend/libs/micro-frontends/src/"
+      ],
+      "@ui-components": [
+        "./Frontend/libs/ui-components/src/"
+      ],
+      "@modules-common": [
+        "./Modules/CoreFeatures/Common/"
+      ]
+    }
+  }
+}

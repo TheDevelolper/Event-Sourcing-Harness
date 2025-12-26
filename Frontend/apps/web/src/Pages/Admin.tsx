@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { useAdminDashboardStore } from "../store/useAdminDashboardStore";
+import {Pages, useAdminDashboardStore} from "../store/useAdminDashboardStore";
 import { useAuthStore } from "../store/useAuthStore";
 
 import { HomeIcon, UsersIcon } from "@heroicons/react/24/outline";
@@ -27,6 +27,7 @@ export default function Admin() {
   const { user } = useAuthStore();
 
   useEffect(() => {
+    //todo: perhaps routes could be a store and we could set that from modules?
     const routes: Record<string, string> = {
       "/admin": "dashboard",
       "/admin/menu-items": "menu items",
@@ -34,8 +35,12 @@ export default function Admin() {
       "/admin/media": "media",
     };
 
-    setCurrentPage(routes[location.pathname] ?? "dashboard");
+    setCurrentPage(routes[location.pathname] as Pages ?? "Dashboard");
   }, [location.pathname, setCurrentPage]);
+
+  if(user == null) {
+    return("<div>Could not find user info</div>");
+  }
 
   return (
     <div>
