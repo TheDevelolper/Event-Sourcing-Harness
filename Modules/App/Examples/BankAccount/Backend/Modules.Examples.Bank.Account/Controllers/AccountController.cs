@@ -2,18 +2,24 @@ using Marten;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+
+using Modules.Examples.Bank.Account.Options;
 using Modules.Examples.Bank.Account.Commands;
 using Modules.Examples.Bank.Account.Events;
 using Modules.Examples.Bank.Account.Models;
+
 using SaasFactory.EventSourcing.Contracts;
 
 namespace Modules.Examples.Bank.Account.Controllers;
+
 
 [ApiController]
 [Route("api/accounts")]
 public class AccountController(
     IEventStore eventStore,
     IDocumentStore documentStore,
+    IOptionsSnapshot<BankAccountModuleOptions> options,
     ILogger<AccountController> logger) : ControllerBase
 {
     [HttpPost("deposit")]
@@ -43,6 +49,13 @@ public class AccountController(
     [Authorize]
     public async Task<IActionResult> GetBalance(string accountId)
     {
+
+        if (options.Value.GetBalanceDisabled ?? false)
+        {
+            logger.LogWarning("Get balance is disabled via configuration.");
+            return Forbid();
+        }
+
         logger.LogDebug("Getting account balance.");
         
         // access the pre-built AccountState document directly

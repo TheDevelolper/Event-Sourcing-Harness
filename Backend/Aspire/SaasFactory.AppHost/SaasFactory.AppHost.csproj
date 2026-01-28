@@ -39,4 +39,8 @@
       <Folder Include="Constants\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="Microsoft.Extensions.Configuration" />
+    </ItemGroup>
+
 </Project>
