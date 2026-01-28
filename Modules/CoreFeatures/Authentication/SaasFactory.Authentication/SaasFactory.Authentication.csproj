@@ -1,25 +1,75 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <OutputType>Library</OutputType>
-    <Nullable>enable</Nullable>
-    <AssemblyName>SaasFactory.Authentication</AssemblyName>
-    <RootNamespace>SaasFactory.Authentication</RootNamespace>
-  </PropertyGroup>
+    <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <OutputType>Library</OutputType>
+        <Nullable>enable</Nullable>
+        <AssemblyName>SaasFactory.Authentication</AssemblyName>
+        <RootNamespace>SaasFactory.Authentication</RootNamespace>
+        <Title>SaasFactory.Authentication</Title>
 
-  <ItemGroup>
-    <PackageReference Include="Ardalis.GuardClauses" />
-    <PackageReference Include="BouncyCastle.NetCoreSdk" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" />
-    <PackageReference Include="Aspire.Hosting.Keycloak" />
-    <PackageReference Include="Serilog" />
-  </ItemGroup>
+        <Version>1.0.19</Version>
+        <AssemblyVersion>1.0.7</AssemblyVersion>
+        <FileVersion>1.0.7</FileVersion>
 
-  <ItemGroup>
-    <None Include="Mounts\**\*.*">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+        <Description>This module adds authentiction to the SaasFactory Project</Description> <!-- not used by github -->
+        <PackageDescription>This module adds authentiction to the SaasFactory Project</PackageDescription>
+
+
+        <PackageOutputPath>../../../../Packages</PackageOutputPath>
+
+        <RepositoryUrl>https://github.com/TheDevelolper/Saas-Factory</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageProjectUrl>https://github.com/TheDevelolper/Saas-Factory</PackageProjectUrl>
+
+        <Authors>Kiran Randhawa</Authors>
+        <PackageTags>authentication;saas;saas-factory</PackageTags>
+
+        <IsPackable>true</IsPackable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Authors>Kiran Randhawa</Authors>
+
+        <EnableDefaultContentItems>false</EnableDefaultContentItems>
+   
+        
+        
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <ModuleFolder>Authentication</ModuleFolder>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Ardalis.GuardClauses"/>
+        <PackageReference Include="BouncyCastle.NetCoreSdk"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect"/>
+        <PackageReference Include="Aspire.Hosting.Keycloak"/>
+        <PackageReference Include="Serilog"/>
+        
+    </ItemGroup>
+
+
+    <ItemGroup>
+    
+    </ItemGroup>
+    
+    <ItemGroup>
+        <!-- send to Modules/Authentication/** in the consuming project -->
+        <Content Include="Mounts/**"
+                 Pack="true"
+                 CopyToOutputDirectory="Always"
+                 PackagePath="contentFiles/any/any/Modules/$(ModuleFolder)/Mounts/%(RecursiveDir)%(Filename)%(Extension)"/>
+
+        <!-- Embed all web assets inside the assembly -->
+        <EmbeddedResource Include="Web\**\*" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Common\SaasFactory.Modules.Common\SaasFactory.Modules.Common.csproj" />
+    </ItemGroup>
+
+<!--    <ItemGroup>-->
+<!--        <None Include="buildTransitive\SaasFactory.Authentication.targets.OLD" Pack="true" PackagePath="buildTransitive/SaasFactory.Authentication.targets" />-->
+<!--    </ItemGroup>-->
 
 </Project>

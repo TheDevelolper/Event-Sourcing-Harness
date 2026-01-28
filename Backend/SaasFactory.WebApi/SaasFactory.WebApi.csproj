@@ -12,12 +12,14 @@
     <PackageReference Include="Mediator.Net" />
     <PackageReference Include="Mediator.Net.MicrosoftDependencyInjection" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+    <PackageReference Include="saasfactory.authentication" />
     <PackageReference Include="Scalar.AspNetCore" />
     <PackageReference Include="Serilog" />
     <PackageReference Include="Serilog.AspNetCore" />
@@ -27,13 +29,16 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Modules\App\Examples\BankAccount\Backend\Modules.Examples.Bank.Account\Modules.Examples.Bank.Account.csproj" />
-    <ProjectReference Include="..\..\Modules\CoreFeatures\Authentication\SaasFactory.Authentication\SaasFactory.Authentication.csproj" />
     <ProjectReference Include="..\..\Modules\CoreFeatures\EventSourcing\SaasFactory.EventSourcing.Contracts\SaasFactory.EventSourcing.Contracts.csproj" />
     <ProjectReference Include="..\..\Modules\CoreFeatures\EventSourcing\SaasFactory.EventSourcing.Marten\SaasFactory.EventSourcing.Marten.csproj" />
     <ProjectReference Include="..\..\Modules\CoreFeatures\Common\SaasFactory.Modules.Common\SaasFactory.Modules.Common.csproj" />
     <ProjectReference Include="..\..\Modules\CoreFeatures\UserSubscriptions\SaasFactory.UserSubscriptions.Contracts\SaasFactory.UserSubscriptions.Contracts.csproj" />
     <ProjectReference Include="..\..\Modules\CoreFeatures\UserSubscriptions\SaasFactory.UserSubscriptions\SaasFactory.UserSubscriptions.csproj" />
     <ProjectReference Include="..\Shared\SaasFactory.Shared.Config\SaasFactory.Shared.Config.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

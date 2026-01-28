@@ -24,7 +24,7 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
     Log.Information("Loading configuration...");
-
+    
     builder.Configuration
         .UseSharedConfiguration()
         .AddJsonFile("appsettings.json", optional: true)
@@ -70,15 +70,17 @@ try
     
     // register module
     List<IFeatureModule> modules = [
+        // core modules
+        new AuthenticationModule(clientSecret, logger),
+        // domain modules
         new BankAccountModule()
     ];
-
+    
     modules.ForEach(async module => await module.AddModule(builder));
 
     builder.Services
         .RegisterMediator(mediaBuilder)
         .AddUserSubscriptionServices()
-        .AddAuthentication(clientSecret, logger)
         .AddEventStore(builder, eventsDbConnectionString)
         .AddControllers();
 
@@ -96,11 +98,15 @@ try
         .UseCookiePolicy() // <-- required so the policy above is applied
         .UseAuthentication()
         .UseAuthorization();
-
+    
      // register module services
-     modules.ForEach(async module => await module.AddModuleMiddleware(app));
-    
-    
+     foreach (var module in modules)
+     {
+         await module.AddModuleMiddleware(app);
+     }
+     
+     app.UseStaticFiles();
+     
     // Map Endpoints
     Log.Information("Mapping endpoints...");
     app.MapUserSubscriptionEndpoints(logger);
@@ -114,6 +120,10 @@ try
         app.MapOpenApi();
         app.MapScalarApiReference();
         Log.Information("Swagger added");
+        
+        Log.Information("Adding SPA Proxy");
+        app.UseSpa(cfg => cfg.UseProxyToSpaDevelopmentServer("http://localhost:4200"));
+        Log.Information("SPA Proxy added");
     }
 
     Log.Information("Middleware configured.");

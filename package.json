@@ -9,6 +9,9 @@
     "aspirehost:web": "pnpm --filter web dev",
     "aspirehost:storybook": "pnpm --filter ui-components storybook",
     "build:web": "pnpm --filter web build",
+    "build:api": "cd Backend/SaasFactory.WebApi/ && dotnet build -c release",
+    "build:backend:packages": "rm -rf ./Packages && cd Modules/CoreFeatures/Authentication/SaasFactory.Authentication/ && dotnet build -c release",
+    "publish:backend:packages": "pnpm run build:backend:packages && cd Packages && dotnet nuget push \"SaasFactory.Authentication.*.nupkg\" --source \"github\"",
     "preview:web": "pnpm --filter web preview",
     "lint": "eslint ."
   },

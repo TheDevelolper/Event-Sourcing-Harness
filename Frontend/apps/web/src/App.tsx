@@ -58,11 +58,15 @@ function App() {
         />
 
         {dynamicRoutes.map(({ path, Component, auth }) => (
+          <>
+                    {path}
           <Route
             key={path}
             path={`/${path}`}
             element={(auth ? <ProtectedRoute><Component/></ProtectedRoute>: <Component />)}
           />
+          </>
+
         ))}
 
       </Routes>
