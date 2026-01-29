@@ -28,7 +28,7 @@
     <!-- todo these conflict Remove NETCORE SDK -->
     <PackageVersion Include="Portable.BouncyCastle" Version="1.9.0" />
     <PackageVersion Include="BouncyCastle.NetCoreSdk" Version="1.9.7" />
-    <PackageVersion Include="saasfactory.authentication" Version="1.0.18" />
+    <PackageVersion Include="saasfactory.authentication" Version="1.0.0" />
     <PackageVersion Include="Scalar.AspNetCore" Version="2.10.3" />
     <PackageVersion Include="Semver" Version="3.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="9.7.0" />

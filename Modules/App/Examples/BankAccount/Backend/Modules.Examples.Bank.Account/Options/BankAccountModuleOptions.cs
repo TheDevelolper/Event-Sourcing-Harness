@@ -1,14 +1,11 @@
 
 using System.ComponentModel.DataAnnotations;
+using SaasFactory.Modules.Common;
 
 namespace Modules.Examples.Bank.Account.Options;
 
-public class BankAccountModuleOptions
+public class BankAccountModuleOptions: ModuleOptionsBase
 {
     [Required]
     public bool? GetBalanceDisabled { get; set; }
-
-    [MinLength(6)]
-    public string ExampleStringOptionGT5Chars { get; set; } = default!;
-
 }

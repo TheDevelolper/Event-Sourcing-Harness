@@ -4,20 +4,17 @@ using Serilog.Core;
 
 namespace SaasFactory.Authentication;
 
-public static class AuthenticationConfig
+public class AuthenticationModule(string clientSecret, Logger logger): FeatureModule<AuthenticationOptions>(logger)
 {
-    public const string SectionName = "Modules:Authentication";
-}
+    protected override string ModuleName => nameof(AuthenticationModule);
 
-public class AuthenticationModule(string clientSecret, Logger logger) : IFeatureModule
-{
-    public Task<IHostApplicationBuilder> AddModule(IHostApplicationBuilder builder)
+    public override Task<IHostApplicationBuilder> AddModule(IHostApplicationBuilder builder)
     {
         builder.Services.AddAuthentication(clientSecret, logger);
         return Task.FromResult(builder);
     }
 
-    public Task<WebApplication> AddModuleMiddleware(WebApplication app)
+    public override Task<WebApplication> AddModuleMiddleware(WebApplication app)
     {
         var assembly = typeof(AuthenticationModule).Assembly;
 
@@ -33,4 +30,10 @@ public class AuthenticationModule(string clientSecret, Logger logger) : IFeature
 
         return Task.FromResult(app);
     }
+    
+}
+
+public class AuthenticationOptions: ModuleOptionsBase
+{
+    
 }

@@ -49,7 +49,6 @@ public class AccountController(
     [Authorize]
     public async Task<IActionResult> GetBalance(string accountId)
     {
-
         if (options.Value.GetBalanceDisabled ?? false)
         {
             logger.LogWarning("Get balance is disabled via configuration.");

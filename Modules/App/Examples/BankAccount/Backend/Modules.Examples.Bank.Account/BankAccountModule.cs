@@ -3,28 +3,21 @@ using Marten;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Modules.Examples.Bank.Account.Events;
 using Modules.Examples.Bank.Account.Options;
 using Modules.Examples.Bank.Account.Projections;
 using SaasFactory.Modules.Common;
+using Serilog.Core;
 
 namespace Modules.Examples.Bank.Account;
 
-
-public static class BankAccountConfig
+public class BankAccountModule(Logger logger) : FeatureModule<BankAccountModuleOptions>(logger)
 {
-    public const string SectionName = "Modules:Examples:BankAccount";
-}
+    protected override string ModuleName => nameof(BankAccountModule);
 
-public class BankAccountModule: IFeatureModule
-{
-    public Task<IHostApplicationBuilder> AddModule(IHostApplicationBuilder builder)
+    public override Task<IHostApplicationBuilder> AddModule(IHostApplicationBuilder builder)
     {
-        builder.Services.AddOptions<BankAccountModuleOptions>()
-            .BindConfiguration(BankAccountConfig.SectionName)
-            .ValidateDataAnnotations()
-            .ValidateOnStart();
-
         builder.Services.ConfigureMarten(options =>
         {
             options.Projections.Add<AccountStateProjection>(ProjectionLifecycle.Async);
@@ -34,6 +27,6 @@ public class BankAccountModule: IFeatureModule
         return Task.FromResult(builder);
     }
 
-    public Task<WebApplication> AddModuleMiddleware(WebApplication app) => Task.FromResult(app);
+    public override Task<WebApplication> AddModuleMiddleware(WebApplication app) => Task.FromResult(app);
 }
 

@@ -73,10 +73,11 @@ try
         // core modules
         new AuthenticationModule(clientSecret, logger),
         // domain modules
-        new BankAccountModule()
+        new BankAccountModule(logger)
     ];
     
-    modules.ForEach(async module => await module.AddModule(builder));
+    // todo: Registration should return a result type and we should handle failure with a log.
+    modules.ForEach(async module => await module.RegisterModule(builder));
 
     builder.Services
         .RegisterMediator(mediaBuilder)
