@@ -77,7 +77,9 @@ var eventsDb = postgres.AddDatabase("events");
 // Create containers
 // ======================
 
-var clientSecretEnvVar = builder.Configuration["Authentication:ClientSecretEnvironmentVar"] ?? string.Empty;
+
+
+var clientSecretEnvVar = builder.Configuration["Modules:Authentication:ClientSecretEnvironmentVar"] ?? string.Empty;
 
 string devClientSecret = "**********";
 var authClientSecret = Environment.GetEnvironmentVariable(clientSecretEnvVar) ?? devClientSecret; 

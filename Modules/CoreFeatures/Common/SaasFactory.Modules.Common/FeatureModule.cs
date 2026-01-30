@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog.Core;
@@ -15,14 +16,18 @@ public abstract class FeatureModule<TModuleOptions>(Logger logger): IFeatureModu
     where TModuleOptions : ModuleOptionsBase
 {
     protected abstract string ModuleName { get; }
-
+    public TModuleOptions? Options { get; private set; }
+    
     public Task<IHostApplicationBuilder> RegisterModule(IHostApplicationBuilder builder)
     {
         logger.Information("Registering module {ModuleName}", ModuleName);
-        builder.Services.AddOptions<TModuleOptions>()
-            .BindConfiguration($"Modules:{ModuleName}")
+        var configurationSectionName = $"Modules:{ModuleName}";
+        var optionsBuilder = builder.Services.AddOptions<TModuleOptions>()
+            .BindConfiguration(configurationSectionName)
             .ValidateDataAnnotations()
             .ValidateOnStart();
+
+        builder.Configuration.GetSection(configurationSectionName).Bind(Options);
 
         var result =  AddModule(builder); 
         logger.Information("Module {ModuleName} successfully registered", ModuleName);

@@ -38,23 +38,7 @@ try
         ?? throw new InvalidOperationException("Missing Postgres connection string");
 
     Log.Information("Event store connection string found.");
-
-    var clientSecretEnvVar = builder.Configuration["Authentication:ClientSecretEnvironmentVar"] ?? string.Empty;
-
-    Guard.Against.NullOrWhiteSpace(input: clientSecretEnvVar,
-        message: @"CLIENT SECRET ENVIRONMENT VARIABLE NAME IS MISSING FROM CONFIGURATION.
-    follow the Authentication Client Secret Setup for reference.
-    http://localhost:4400/docs/guides/authentication/authentication-client-secret-setup.html#1-add-the-configuration-setting");
-
-    var clientSecret = Environment.GetEnvironmentVariable(clientSecretEnvVar) ?? string.Empty;
-    Guard.Against.NullOrWhiteSpace(input: clientSecret,
-        message: @$"CLIENT SECRET ENVIRONMENT VARIABLE IS MISSING.
-    Environment Variable Name: {clientSecretEnvVar}
-    follow the Authentication Client Secret Setup for reference:
-    http://localhost:4400/docs/guides/authentication/authentication-client-secret-setup.html#2-set-the-environment-variable-on-the-host-system");
-
-    Log.Information("Authentication client secret env var key found ✅");
-
+    
     Log.Information("Configuring services...");
 
     builder.Logging
@@ -71,7 +55,7 @@ try
     // register module
     List<IFeatureModule> modules = [
         // core modules
-        new AuthenticationModule(clientSecret, logger),
+        new AuthenticationModule(logger),
         // domain modules
         new BankAccountModule(logger)
     ];
