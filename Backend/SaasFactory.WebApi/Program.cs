@@ -53,14 +53,22 @@ try
         ).Build();
     
     // register module
-    List<IFeatureModule> modules = [
-        // core modules
-        new AuthenticationModule(logger),
-        // domain modules
+    List<IFeatureModule> coreModules =
+    [
+        new AuthenticationModule(logger)
+    ];
+    
+    List<IFeatureModule> domainModules =
+    [
         new BankAccountModule(logger)
     ];
     
-    // todo: Registration should return a result type and we should handle failure with a log.
+    List<IFeatureModule> modules = [];
+    modules.AddRange(coreModules);
+    modules.AddRange(domainModules);
+    
+    // todo: Registration should return a
+    // result type and we should handle failure with a log.
     modules.ForEach(async module => await module.RegisterModule(builder));
 
     builder.Services
