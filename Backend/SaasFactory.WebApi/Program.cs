@@ -102,6 +102,7 @@ try
      
     // Map Endpoints
     Log.Information("Mapping endpoints...");
+    
     app.MapUserSubscriptionEndpoints(logger);
     app.MapControllers();
     Log.Information("Added endpoints");
@@ -113,10 +114,6 @@ try
         app.MapOpenApi();
         app.MapScalarApiReference();
         Log.Information("Swagger added");
-        
-        Log.Information("Adding SPA Proxy");
-        app.UseSpa(cfg => cfg.UseProxyToSpaDevelopmentServer("http://localhost:4200"));
-        Log.Information("SPA Proxy added");
     }
 
     Log.Information("Middleware configured.");
