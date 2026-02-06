@@ -14,6 +14,9 @@ export function ProtectedRoute({ children }) {
   }
 
   // Authenticated → update store and render the protected content
-  useAuthStore.getState().setUser(keycloak.idToken);
+  if(keycloak.idToken) {
+      useAuthStore.getState().setUserToken(keycloak.idToken);
+  }
+  
   return children;
 }

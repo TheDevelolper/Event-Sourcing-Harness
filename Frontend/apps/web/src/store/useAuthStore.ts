@@ -4,7 +4,7 @@ import { decodeToken } from "../auth/authentication-service";
 // Define the Zustand store type
 export interface AuthStore {
   user: UserData | null;
-  setUser: (token: string) => void;
+  setUserToken: (token: string) => void;
   clearUser: () => void;
 }
 
@@ -23,6 +23,6 @@ export interface UserData {
 
 export const useAuthStore = create<AuthStore>((set) => ({
   user: null,
-  setUser: (token: string) => set({ user: decodeToken(token) }),
+  setUserToken: (token: string) => set({ user: decodeToken(token) }),
   clearUser: () => set({ user: null }),
 }));
